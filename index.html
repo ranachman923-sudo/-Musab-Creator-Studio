@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="ur" dir="rtl" id="htmlRoot">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>رانا 313 - POS Pro</title>
+    <title id="appTitle">OmniPOS Pro Ultimate - ایڈوانسڈ بلنگ و کھاتا سسٹم</title>
+    <!-- بارکوڈ اسکیننگ کے لیے QuaggaJS لائبریری -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
     <style>
         :root {
-            --primary: #00ff88;
+            --primary: #00f2fe;
             --secondary: #0f172a;
-            --accent: #ffcc00;
-            --bg-grad: linear-gradient(135deg, #020617, #0f172a, #1e1b4b);
+            --accent: #4facfe;
+            --bg-grad: linear-gradient(135deg, #0f172a, #1e1b4b, #020617);
             --card-bg: rgba(15, 23, 42, 0.95);
             --text-color: #f8fafc;
             --border-color: rgba(255, 255, 255, 0.15);
@@ -17,9 +19,9 @@
         }
 
         .light-mode {
-            --primary: #059669;
+            --primary: #0284c7;
             --secondary: #f1f5f9;
-            --accent: #d97706;
+            --accent: #0284c7;
             --bg-grad: linear-gradient(135deg, #f8fafc, #e2e8f0, #cbd5e1);
             --card-bg: rgba(255, 255, 255, 0.95);
             --text-color: #0f172a;
@@ -39,10 +41,9 @@
             background: var(--bg-grad);
             color: var(--text-color);
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
         }
 
-        /* لاگ ان اسکرین */
         #loginOverlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -61,7 +62,7 @@
             width: 90%;
             max-width: 400px;
             text-align: center;
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
         }
 
         .login-card h2 {
@@ -77,57 +78,56 @@
 
         header {
             text-align: center;
-            padding: 20px;
+            padding: 15px;
             background: var(--card-bg);
             border-radius: 20px;
             border: 2px solid var(--border-color);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             box-shadow: 0 0 20px rgba(0,0,0,0.3);
-            position: relative;
         }
 
         .header-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .app-logo {
-            width: 70px;
-            height: 70px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             border: 2px solid var(--primary);
             object-fit: cover;
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
         }
 
         header h1 {
             color: var(--primary);
-            font-size: 2.2rem;
-            margin-bottom: 2px;
+            font-size: 1.8rem;
         }
 
-        /* بٹنوں کو اوپر صاف ستھرا سیٹ کرنے کا انداز */
         .top-controls {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            align-items: center;
+            gap: 8px;
             flex-wrap: wrap;
-            margin-top: 12px;
-            padding-top: 10px;
+            margin-top: 10px;
+            padding-top: 8px;
             border-top: 1px solid var(--border-color);
         }
 
-        .icon-btn {
+        .icon-btn, select.icon-btn {
             background: var(--input-bg);
             border: 1px solid var(--border-color);
             color: var(--text-color);
-            padding: 6px 14px;
+            padding: 6px 12px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: bold;
+            outline: none;
         }
 
         .icon-btn:hover {
@@ -137,7 +137,7 @@
         .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
+            gap: 20px;
         }
 
         @media (max-width: 900px) {
@@ -150,44 +150,44 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 20px;
-            padding: 25px;
+            padding: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            margin-bottom: 25px;
-            max-height: 700px;
+            margin-bottom: 20px;
+            max-height: 750px;
             overflow-y: auto;
         }
 
         .panel h3 {
             color: var(--accent);
-            font-size: 1.2rem;
-            margin-bottom: 15px;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
             border-right: 4px solid var(--accent);
-            padding-right: 10px;
+            padding-right: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .input-group {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .input-group label {
             display: block;
-            margin-bottom: 6px;
-            font-size: 0.95rem;
+            margin-bottom: 4px;
+            font-size: 0.9rem;
             opacity: 0.9;
         }
 
-        input, select {
+        input, select, textarea {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             background: var(--input-bg);
             color: var(--text-color);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             outline: none;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         input:focus {
@@ -195,14 +195,14 @@
         }
 
         .btn {
-            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
             color: #020617;
             border: none;
-            padding: 12px 20px;
+            padding: 10px 15px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 0.95rem;
             width: 100%;
             transition: 0.3s;
         }
@@ -212,40 +212,39 @@
             opacity: 0.9;
         }
 
-        /* ملٹیپل پروڈکٹ سیو کرنے کے لیے سکرولنگ فارಮ್ */
         .bulk-rows-container {
-            max-height: 200px;
+            max-height: 180px;
             overflow-y: auto;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 10px;
-            margin-bottom: 15px;
+            padding: 8px;
+            margin-bottom: 10px;
         }
 
         .bulk-row {
             display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
+            gap: 8px;
+            margin-bottom: 8px;
         }
 
-        /* اسٹاک ڈبے */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 10px;
-            max-height: 180px;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 8px;
+            max-height: 160px;
             overflow-y: auto;
-            margin-top: 10px;
-            padding: 5px;
+            margin-top: 8px;
+            padding: 4px;
         }
 
         .mini-box {
             background: var(--input-bg);
             border: 1px solid var(--border-color);
-            padding: 10px;
+            padding: 8px;
             border-radius: 8px;
             text-align: center;
             cursor: pointer;
+            position: relative;
         }
 
         .mini-box:hover {
@@ -254,16 +253,15 @@
 
         .mini-box h4 {
             color: var(--primary);
-            font-size: 0.9rem;
-            margin-bottom: 4px;
+            font-size: 0.85rem;
+            margin-bottom: 2px;
         }
 
         .mini-box p {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             opacity: 0.8;
         }
 
-        /* ماڈلز (پاپ اپ ونڈوز) */
         .secret-modal {
             display: none;
             position: fixed;
@@ -277,19 +275,18 @@
         .secret-content {
             background: var(--card-bg);
             border: 2px solid var(--accent);
-            padding: 25px;
+            padding: 20px;
             border-radius: 15px;
             width: 90%;
-            max-width: 550px;
-            max-height: 80vh;
+            max-width: 600px;
+            max-height: 85vh;
             overflow-y: auto;
         }
 
-        /* بل ٹیبل */
         .table-responsive {
-            max-height: 180px;
+            max-height: 160px;
             overflow-y: auto;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             border: 1px solid var(--border-color);
             border-radius: 8px;
         }
@@ -303,32 +300,44 @@
         th {
             background: var(--input-bg);
             color: var(--accent);
-            padding: 10px;
-            font-size: 0.9rem;
+            padding: 8px;
+            font-size: 0.85rem;
             position: sticky;
             top: 0;
         }
 
         td {
-            padding: 10px;
+            padding: 8px;
             border-bottom: 1px solid var(--border-color);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .del-btn {
             background: #ff4444;
             color: white;
             border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 4px 8px;
+            border-radius: 4px;
             cursor: pointer;
+            font-size: 0.75rem;
+        }
+
+        .edit-btn {
+            background: #f59e0b;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            margin-left: 4px;
         }
 
         .total-box {
             background: var(--input-bg);
             border: 2px solid var(--primary);
             border-radius: 12px;
-            padding: 15px;
+            padding: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -336,43 +345,52 @@
 
         .total-box h2 {
             color: var(--primary);
-            font-size: 1.4rem;
+            font-size: 1.2rem;
         }
 
         .action-btns-group {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
         .print-btn {
             background: var(--accent);
             color: #020617;
-            padding: 10px 15px;
+            padding: 8px 12px;
             border-radius: 8px;
             font-weight: bold;
             border: none;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .whatsapp-btn {
             background: #25d366;
             color: white;
-            padding: 10px 15px;
+            padding: 8px 12px;
             border-radius: 8px;
             font-weight: bold;
             border: none;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
-        /* پرنٹ اسٹائل */
+        .badge-low {
+            background: #ef4444;
+            color: white;
+            font-size: 0.65rem;
+            padding: 2px 5px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 2px;
+        }
+
         .print-invoice-header { display: none; }
         @media print {
             body { background: white !important; color: black !important; padding: 0; }
-            .dashboard-grid, header, .panel:not(:last-child), .action-btns-group, .del-btn, .input-group, button { display: none !important; }
+            .dashboard-grid, header, .panel:not(:last-child), .action-btns-group, .del-btn, .edit-btn, .input-group, button { display: none !important; }
             .panel:last-child { background: white !important; border: none !important; padding: 0 !important; width: 100% !important; max-height: none !important; }
-            .print-invoice-header { display: block !important; text-align: center; margin-bottom: 20px; border-bottom: 2px dashed #333; padding-bottom: 15px; }
+            .print-invoice-header { display: block !important; text-align: center; margin-bottom: 15px; border-bottom: 2px dashed #333; padding-bottom: 10px; }
             table, th, td { border: 1px solid #333 !important; color: black !important; }
             th { background: #eee !important; }
             .total-box { background: #fff !important; border: 2px solid #000 !important; color: black !important; }
@@ -381,13 +399,13 @@
 </head>
 <body>
 
-    <!-- نام سے لاگ ان کرنے کی اسکرین -->
+    <!-- لاگ ان اسکرین -->
     <div id="loginOverlay">
         <div class="login-card">
-            <h2>رانا 313 POS پرو</h2>
-            <p style="margin-bottom: 15px; font-size: 0.9rem; opacity: 0.8;">سسٹم استعمال کرنے کے لیے اپنا نام درج کریں:</p>
-            <input type="text" id="loginNameInput" placeholder="اپنا نام لکھیں (مثلاً: رانا چمن)" style="margin-bottom: 15px;">
-            <button class="btn" onclick="loginUser()">سسٹم میں داخل ہوں</button>
+            <h2>OmniPOS Pro Ultimate</h2>
+            <p id="loginTextLabel" style="margin-bottom: 15px; font-size: 0.9rem; opacity: 0.8;">دکان یا بزنس کا نام درج کریں:</p>
+            <input type="text" id="loginNameInput" placeholder="اپنا یا دکان کا نام لکھیں" style="margin-bottom: 15px;">
+            <button class="btn" id="loginBtnText" onclick="loginUser()">سسٹم میں داخل ہوں</button>
         </div>
     </div>
 
@@ -396,96 +414,110 @@
         
         <header>
             <div class="header-content">
-                <!-- زبردست ایپ لوگو تصویر -->
-                <img src="https://images.unsplash.com/photo-1556742049-0a67d553c2a5?w=150&h=150&fit=crop" alt="Rana 313 Logo" class="app-logo">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=150&h=150&fit=crop" alt="OmniPOS Logo" class="app-logo">
                 <div>
-                    <h1>رانا 313 POS پرو</h1>
-                    <p style="font-size:0.9rem; opacity:0.8;">الٹیمیٹ بلنگ اور اسٹاک سسٹم | دکاندار: <span id="displayShopkeeper"></span></p>
+                    <h1 id="mainHeading">OmniPOS Pro Ultimate</h1>
+                    <p style="font-size:0.85rem; opacity:0.8;"><span id="subHeaderDesc">ایڈوانسڈ بلنگ، ادھار کھاتا اور اسمارٹ اسکینر سسٹم</span> | <span id="operatorLabel">آپریٹر</span>: <span id="displayShopkeeper"></span></p>
                 </div>
             </div>
             
-            <!-- صاف ستھرے ترتیب دیے گئے ٹاپ بٹن -->
             <div class="top-controls">
+                <select id="langSelector" class="icon-btn" onchange="changeLanguage(this.value)">
+                    <option value="ur">اردو (Urdu)</option>
+                    <option value="en">English</option>
+                    <option value="pa">پنجابی (Punjabi)</option>
+                    <option value="ar">العربية (Arabic)</option>
+                    <option value="hi">हिन्दी (Hindi)</option>
+                </select>
+
                 <button class="icon-btn" onclick="toggleDarkMode()">🌓 تھیم</button>
-                <button class="icon-btn" onclick="installAppPrompt()">📥 انسٹال</button>
+                <button class="icon-btn" onclick="openScannerModal()">📷 بارکوڈ اسکینر</button>
+                <button class="icon-btn" onclick="openLedgerModal()">📒 ادھار کھاتا</button>
+                <button class="icon-btn" onclick="openReportsModal()">📊 رپورٹس & منافع</button>
+                <button class="icon-btn" onclick="openExpenseModal()">💸 اخراجات</button>
                 <button class="icon-btn" onclick="openHistoryModal()">🧾 ہسٹری</button>
-                <button class="icon-btn" onclick="openSecretModal()">👁️ ویو لاگ</button>
             </div>
         </header>
 
         <div class="dashboard-grid">
             
-            <!-- بائیں سائیڈ: ملٹیپل پروڈکٹ (Bulk) سیو کرنے کا سسٹم -->
+            <!-- بائیں سائیڈ: پروڈکٹ اور اسٹاک مینجمنٹ -->
             <div class="panel">
-                <h3>متعدد پروڈکٹس ایک ساتھ محفوظ کریں (Bulk Entry)</h3>
-                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">نیچے خانوں میں نام اور ریٹ لکھیں، جتنے مرضی خانے استعمال کریں:</p>
+                <h3>متعدد پروڈکٹس اور اسٹاک درج کریں (Bulk Entry)</h3>
+                <p style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 10px;">سامان کا نام، ریٹ، بارکوڈ اور بچی ہوئی تعداد (Stock) درج کریں:</p>
                 
-                <div class="bulk-rows-container" id="bulkRowsContainer">
-                    <!-- ڈائنامک روز یہاں آئیں گی -->
-                </div>
+                <div class="bulk-rows-container" id="bulkRowsContainer"></div>
 
-                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                <div style="display: flex; gap: 8px; margin-bottom: 12px;">
                     <button class="icon-btn" onclick="addBulkRow()" style="flex: 1; background: var(--input-bg);">＋ مزید خانہ جوڑیں</button>
                     <button class="btn" onclick="saveBulkProducts()" style="flex: 1;">تمام پروڈکٹس سیو کریں</button>
                 </div>
 
-                <div style="margin-top: 15px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                        <h3 style="margin:0; border:none; padding:0; font-size:1rem;">کل رجسٹرڈ پروڈکٹس: <span id="totalProductCount" style="color:var(--primary);">0</span></h3>
+                <div style="margin-top: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <h3 style="margin:0; border:none; padding:0; font-size:0.95rem;">کل رجسٹرڈ اشیاء: <span id="totalProductCount" style="color:var(--primary);">0</span></h3>
                     </div>
                     
-                    <div class="input-group" style="margin-bottom: 10px;">
+                    <div class="input-group" style="margin-bottom: 8px;">
                         <input type="text" id="searchStock" placeholder="🔍 اسٹاک میں سرچ کریں..." onkeyup="filterStock()">
                     </div>
 
                     <div id="inventorySection">
                         <div class="products-grid" id="productsGridContainer">
-                            <p style="text-align: center; grid-column: span 2; padding: 15px; opacity: 0.6;">کوئی پروڈکٹ موجود نہیں۔</p>
+                            <p id="noProductText" style="text-align: center; grid-column: span 2; padding: 15px; opacity: 0.6;">کوئی پروڈکٹ موجود نہیں۔</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- دائیں سائیڈ: فروخت اور واٹس ایپ والا بلنگ سسٹم -->
+            <!-- دائیں سائیڈ: فروخت، بلنگ اور کھاتا سلیکشن -->
             <div class="panel">
-                <h3>گاہک کی فروخت اور واٹس ایپ رسید</h3>
+                <h3>فروخت، بلنگ اور کھاتا سسٹم</h3>
                 
+                <div class="input-group">
+                    <label>بل کی قسم:</label>
+                    <select id="billTypeSelector" onchange="toggleCustomerLedgerInput()">
+                        <option value="cash">نقد بل (Cash Sale)</option>
+                        <option value="credit">کھاتے میں جمع کریں (Customer Credit)</option>
+                    </select>
+                </div>
+
                 <div class="input-group">
                     <label>گاہک کا نام:</label>
                     <input type="text" id="customerName" placeholder="گاہک کا نام لکھیں">
                 </div>
 
                 <div class="input-group">
-                    <label>گاہک کا واٹس ایپ نمبر (بغیر صفر یا ود کنٹری کوڈ، مثلاً 923...):</label>
+                    <label>گاہک کا واٹس ایپ نمبر (مثلاً: 923...):</label>
                     <input type="text" id="customerPhone" placeholder="مثلاً: 923001234567">
                 </div>
 
                 <div class="input-group">
                     <label>پروڈکٹ کا نام (ریٹ خود آئے گا):</label>
-                    <input type="text" id="saleName" placeholder="نام لکھیں..." onkeyup="autoFetchRate()">
+                    <input type="text" id="saleName" placeholder="نام لکھیں یا اسکین کریں..." onkeyup="autoFetchRate()">
                 </div>
 
                 <div class="input-group">
-                    <label>ریٹ (خودکار ڈبہ):</label>
+                    <label>فی ریٹ (تبدیل بھی کیا جا سکتا ہے):</label>
                     <input type="number" id="saleRate" placeholder="ریٹ خود آئے گا">
                 </div>
 
                 <div class="input-group">
-                    <label>مقدار / تعداد (مثلاً: 3 یا 250 گرام):</label>
+                    <label>مقدار / تعداد (Quantity):</label>
                     <input type="text" id="saleQty" value="1" placeholder="مقدار">
                 </div>
 
                 <button class="btn" onclick="addToBill()">بل میں جمع کریں (Add)</button>
 
                 <!-- بل لسٹ -->
-                <div style="margin-top: 20px;">
+                <div style="margin-top: 15px;">
                     <div class="print-invoice-header" id="printHeaderInfo">
-                        <h2 id="receiptShopName">رانا 313 جنرل اسٹور</h2>
-                        <p><strong>دکاندار:</strong> <span id="receiptSeller"></span> | <strong>گاہک:</strong> <span id="receiptCustomer"></span></p>
+                        <h2 id="receiptShopName">OmniPOS Pro بلنگ</h2>
+                        <p><strong>آپریٹر:</strong> <span id="receiptSeller"></span> | <strong>گاہک:</strong> <span id="receiptCustomer"></span></p>
                         <p><strong>تاریخ و وقت:</strong> <span id="receiptDateTime"></span></p>
                     </div>
 
-                    <h3 style="border:none; padding:0; margin-bottom:10px;">موجودہ بل</h3>
+                    <h3 style="border:none; padding:0; margin-bottom:8px;">موجودہ بل</h3>
                     <div class="table-responsive">
                         <table>
                             <thead>
@@ -499,7 +531,7 @@
                             </thead>
                             <tbody id="billBody">
                                 <tr>
-                                    <td colspan="5" style="text-align: center; opacity: 0.6; padding: 20px;">کوئی آئٹم شامل نہیں۔</td>
+                                    <td colspan="5" style="text-align: center; opacity: 0.6; padding: 15px;">کوئی آئٹم شامل نہیں۔</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -507,12 +539,12 @@
 
                     <div class="total-box">
                         <div>
-                            <span style="font-size: 0.85rem; opacity: 0.8;">کل واجب الادا:</span>
+                            <span style="font-size: 0.8rem; opacity: 0.8;">کل واجب الادا:</span>
                             <h2 id="grandTotalText">0.00 روپے</h2>
                         </div>
                         <div class="action-btns-group">
                             <button class="print-btn" onclick="triggerPrint()">پرنٹ</button>
-                            <button class="whatsapp-btn" onclick="sendWhatsAppInvoice()">💬 واٹس ایپ</button>
+                            <button class="whatsapp-btn" onclick="saveAndSendWhatsApp()">💬 واٹس ایپ</button>
                         </div>
                     </div>
                 </div>
@@ -522,29 +554,74 @@
 
     </div>
 
-    <!-- خفیہ آنکھ والا ماڈل (View Log) -->
-    <div class="secret-modal" id="secretModal">
-        <div class="secret-content">
-            <h3 style="color: var(--accent); margin-bottom: 10px;">👁️ ویو لاگ ہسٹری</h3>
-            <div id="viewLogList" style="max-height: 200px; overflow-y: auto; margin-bottom: 15px; font-size: 0.9rem;"></div>
-            <button class="btn" onclick="closeSecretModal()" style="background: var(--accent); color: #020617;">بند کریں</button>
+    <!-- بارکوڈ اسکینر ماڈل -->
+    <div class="secret-modal" id="scannerModal">
+        <div class="secret-content" style="text-align: center;">
+            <h3 style="color: var(--accent); margin-bottom: 10px;">📷 بارکوڈ اسکینر</h3>
+            <div id="interactive" class="viewport" style="width: 100%; height: 250px; background: #000; border-radius: 10px; margin-bottom: 15px; position: relative; overflow: hidden;"></div>
+            <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">بارکوڈ کو کیمرے کے سامنے رکھیں...</p>
+            <button class="btn" onclick="closeScannerModal()" style="background: var(--accent); color: #020617;">بند کریں</button>
         </div>
     </div>
 
-    <!-- تاریخی ریکارڈ (Invoice History Modal) -->
+    <!-- ادھار کھاتا ماڈل -->
+    <div class="secret-modal" id="ledgerModal">
+        <div class="secret-content">
+            <h3 style="color: var(--accent); margin-bottom: 10px;">📒 گاہکوں کا ادھار کھاتا</h3>
+            <div id="ledgerListContainer" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;"></div>
+            <button class="btn" onclick="closeLedgerModal()" style="background: var(--accent); color: #020617;">بند کریں</button>
+        </div>
+    </div>
+
+    <!-- رپورٹس اور پرافٹ ماڈل -->
+    <div class="secret-modal" id="reportsModal">
+        <div class="secret-content">
+            <h3 style="color: var(--accent); margin-bottom: 10px;">📊 روزانہ کی سیل اور پرافٹ رپورٹ</h3>
+            <div id="reportsContent" style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 15px;"></div>
+            <button class="btn" onclick="closeReportsModal()" style="background: var(--accent); color: #020617;">بند کریں</button>
+        </div>
+    </div>
+
+    <!-- اخراجات (Expenses) ماڈل -->
+    <div class="secret-modal" id="expenseModal">
+        <div class="secret-content">
+            <h3 style="color: var(--accent); margin-bottom: 10px;">💸 دکان کے روزمرہ اخراجات</h3>
+            <div class="input-group">
+                <input type="text" id="expenseTitle" placeholder="خروجے کی تفصیل (مثلاً: بجلی بل، چائے)">
+            </div>
+            <div class="input-group">
+                <input type="number" id="expenseAmount" placeholder="رقم (روپے)">
+            </div>
+            <button class="btn" onclick="addExpense()" style="margin-bottom: 15px;">خرچہ محفوظ کریں</button>
+            <div id="expenseListContainer" style="max-height: 150px; overflow-y: auto; margin-bottom: 15px;"></div>
+            <button class="btn" onclick="closeExpenseModal()" style="background: var(--accent); color: #020617;">بند کریں</button>
+        </div>
+    </div>
+
+    <!-- ہسٹری ماڈل -->
     <div class="secret-modal" id="historyModal">
         <div class="secret-content">
             <h3 style="color: var(--accent); margin-bottom: 10px;">🧾 تاریخی ریکارڈ (تمام محفوظ رسیدیں)</h3>
-            <div id="historyListContainer" style="max-height: 300px; overflow-y: auto; margin-bottom: 15px; font-size: 0.9rem;"></div>
+            <div id="historyListContainer" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;"></div>
             <button class="btn" onclick="closeHistoryModal()" style="background: var(--accent); color: #020617;">بند کریں</button>
         </div>
     </div>
 
     <script>
-        let savedProducts = JSON.parse(localStorage.getItem('rana313_products') || '[]');
+        const translations = {
+            ur: { currency: "روپے" },
+            en: { currency: "PKR" },
+            pa: { currency: "روپے" },
+            ar: { currency: "ر.س" },
+            hi: { currency: "रूपये" }
+        };
+
+        let currentLang = 'ur';
+        let savedProducts = JSON.parse(localStorage.getItem('omni_pos_products') || '[]');
         let currentBill = [];
-        let viewLogs = JSON.parse(localStorage.getItem('rana313_view_logs') || '[]');
-        let invoiceHistory = JSON.parse(localStorage.getItem('rana313_invoice_history') || '[]');
+        let customerLedgers = JSON.parse(localStorage.getItem('omni_pos_ledgers') || '{}');
+        let invoiceHistory = JSON.parse(localStorage.getItem('omni_pos_invoice_history') || '[]');
+        let expensesList = JSON.parse(localStorage.getItem('omni_pos_expenses') || '[]');
         let loggedInUser = "";
 
         window.onload = function() {
@@ -555,28 +632,25 @@
         function loginUser() {
             let name = document.getElementById('loginNameInput').value.trim();
             if(name === "") {
-                alert("براہ کرم اپنا نام درج کریں!");
+                alert("براہ کرم نام درج کریں!");
                 return;
             }
             loggedInUser = name;
             document.getElementById('displayShopkeeper').innerText = name;
             document.getElementById('loginOverlay').style.display = 'none';
             document.getElementById('mainAppContainer').style.display = 'block';
-
-            let nowTime = new Date().toLocaleString('ur-PK');
-            viewLogs.unshift({ name: name, time: nowTime });
-            localStorage.setItem('rana313_view_logs', JSON.stringify(viewLogs));
         }
 
         function toggleDarkMode() {
             document.body.classList.toggle('light-mode');
         }
 
-        function installAppPrompt() {
-            alert("براؤزر کے مینو (3 ڈاٹس) میں جا کر 'Add to Home Screen' یا 'Install App' پر کلک کریں، ایپ انسٹال ہو جائے گی!");
+        function changeLanguage(lang) {
+            currentLang = lang;
+            renderInventoryBoxes();
+            renderBill();
         }
 
-        // بلک روز بنانا (یکدم کئی چیزیں لکھنے کے لیے)
         function initBulkRows() {
             let container = document.getElementById('bulkRowsContainer');
             container.innerHTML = "";
@@ -589,33 +663,41 @@
             let container = document.getElementById('bulkRowsContainer');
             let div = document.createElement('div');
             div.className = 'bulk-row';
-            div.innerHTML = `<input type="text" class="bulk-name" placeholder="پروڈکٹ کا نام" style="flex:2;">
-                             <input type="number" class="bulk-rate" placeholder="ریٹ" style="flex:1;">`;
+            div.innerHTML = `<input type="text" class="bulk-name" placeholder="پروڈکٹ نام" style="flex:2;">
+                             <input type="number" class="bulk-rate" placeholder="ریٹ" style="flex:1;">
+                             <input type="text" class="bulk-barcode" placeholder="بارکوڈ" style="flex:1.5;">
+                             <input type="number" class="bulk-stock" placeholder="تعداد" style="flex:1;">`;
             container.appendChild(div);
         }
 
         function saveBulkProducts() {
             let names = document.querySelectorAll('.bulk-name');
             let rates = document.querySelectorAll('.bulk-rate');
+            let barcodes = document.querySelectorAll('.bulk-barcode');
+            let stocks = document.querySelectorAll('.bulk-stock');
             let addedCount = 0;
 
             for(let i=0; i<names.length; i++) {
                 let name = names[i].value.trim();
                 let rate = parseFloat(rates[i].value);
+                let barcode = barcodes[i].value.trim();
+                let stock = parseFloat(stocks[i].value) || 10;
 
                 if(name !== "" && !isNaN(rate)) {
                     let existing = savedProducts.find(p => p.name.toLowerCase() === name.toLowerCase());
                     if(existing) {
                         existing.rate = rate;
+                        existing.barcode = barcode || existing.barcode;
+                        existing.stock = stock;
                     } else {
-                        savedProducts.push({ name: name, rate: rate });
+                        savedProducts.push({ name: name, rate: rate, barcode: barcode, stock: stock });
                     }
                     addedCount++;
                 }
             }
 
             if(addedCount > 0) {
-                localStorage.setItem('rana313_products', JSON.stringify(savedProducts));
+                localStorage.setItem('omni_pos_products', JSON.stringify(savedProducts));
                 renderInventoryBoxes();
                 initBulkRows();
                 alert(`${addedCount} پروڈکٹس کامیابی سے محفوظ ہو گئی ہیں!`);
@@ -624,54 +706,12 @@
             }
         }
 
-        function openSecretModal() {
-            let listDiv = document.getElementById('viewLogList');
-            if(viewLogs.length === 0) {
-                listDiv.innerHTML = "<p>ابھی تک کوئی لاگ موجود نہیں۔</p>";
-            } else {
-                let html = "";
-                viewLogs.forEach(log => {
-                    html += `<div style="padding: 8px; border-bottom: 1px solid var(--border-color); display:flex; justify-content:space-between;">
-                                <span>👤 <strong>${log.name}</strong></span>
-                                <span style="font-size:0.8rem; opacity:0.7;">${log.time}</span>
-                             </div>`;
-                });
-                listDiv.innerHTML = html;
-            }
-            document.getElementById('secretModal').style.display = 'flex';
-        }
-
-        function closeSecretModal() {
-            document.getElementById('secretModal').style.display = 'none';
-        }
-
-        function openHistoryModal() {
-            let container = document.getElementById('historyListContainer');
-            if(invoiceHistory.length === 0) {
-                container.innerHTML = "<p style='opacity:0.6;'>ابھی تک کوئی رسید محفوظ نہیں ہے۔</p>";
-            } else {
-                let html = "";
-                invoiceHistory.forEach((inv, index) => {
-                    html += `<div style="background:var(--input-bg); border:1px solid var(--border-color); padding:10px; border-radius:8px; margin-bottom:10px;">
-                                <p><strong>رسید # ${invoiceHistory.length - index}</strong> | تاریخ: ${inv.date}</p>
-                                <p><strong>دکاندار:</strong> ${inv.seller} | <strong>گاہک:</strong> ${inv.customer}</p>
-                                <p style="color:var(--primary); font-weight:bold;">کل رقم: ${inv.grandTotal.toFixed(2)} روپے</p>
-                             </div>`;
-                });
-                container.innerHTML = html;
-            }
-            document.getElementById('historyModal').style.display = 'flex';
-        }
-
-        function closeHistoryModal() {
-            document.getElementById('historyModal').style.display = 'none';
-        }
-
         function renderInventoryBoxes(filter = "") {
             let container = document.getElementById('productsGridContainer');
             document.getElementById('totalProductCount').innerText = savedProducts.length;
+            let curr = translations[currentLang].currency;
 
-            let filtered = savedProducts.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
+            let filtered = savedProducts.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()) || (p.barcode && p.barcode.includes(filter)));
 
             if(filtered.length === 0) {
                 container.innerHTML = `<p style="text-align: center; grid-column: span 2; padding: 15px; opacity: 0.6;">کوئی پروڈکٹ نہیں ملی۔</p>`;
@@ -680,9 +720,15 @@
 
             let html = "";
             filtered.forEach(prod => {
+                let lowStockBadge = prod.stock <= 2 ? `<br><span class="badge-low">خالی ہونے والی ہے!</span>` : '';
                 html += `<div class="mini-box" onclick="selectProduct('${prod.name}', ${prod.rate})">
                             <h4>${prod.name}</h4>
-                            <p>${prod.rate} روپے</p>
+                            <p>${prod.rate} ${curr} | اسٹاک: ${prod.stock}</p>
+                            ${lowStockBadge}
+                            <div style="margin-top:5px; display:flex; justify-content:center; gap:4px;">
+                                <button class="edit-btn" onclick="event.stopPropagation(); editProduct('${prod.name}')">تبدیل</button>
+                                <button class="del-btn" onclick="event.stopPropagation(); deleteProduct('${prod.name}')">مٹا دیں</button>
+                            </div>
                          </div>`;
             });
             container.innerHTML = html;
@@ -700,10 +746,29 @@
         }
 
         function autoFetchRate() {
-            let typedName = document.getElementById('saleName').value.trim().toLowerCase();
-            let found = savedProducts.find(p => p.name.toLowerCase() === typedName);
+            let typed = document.getElementById('saleName').value.trim().toLowerCase();
+            let found = savedProducts.find(p => p.name.toLowerCase() === typed || p.barcode === typed);
             if(found) {
                 document.getElementById('saleRate').value = found.rate;
+            }
+        }
+
+        function editProduct(name) {
+            let prod = savedProducts.find(p => p.name === name);
+            if(!prod) return;
+            let newRate = prompt("نیا ریٹ درج کریں:", prod.rate);
+            let newStock = prompt("نئی تعداد (Stock) درج کریں:", prod.stock);
+            if(newRate !== null && !isNaN(parseFloat(newRate))) prod.rate = parseFloat(newRate);
+            if(newStock !== null && !isNaN(parseFloat(newStock))) prod.stock = parseFloat(newStock);
+            localStorage.setItem('omni_pos_products', JSON.stringify(savedProducts));
+            renderInventoryBoxes();
+        }
+
+        function deleteProduct(name) {
+            if(confirm(`کیا آپ واقعی '${name}' کو مٹانا چاہتے ہیں؟`)) {
+                savedProducts = savedProducts.filter(p => p.name !== name);
+                localStorage.setItem('omni_pos_products', JSON.stringify(savedProducts));
+                renderInventoryBoxes();
             }
         }
 
@@ -717,11 +782,18 @@
                 return;
             }
 
-            let qtyNum = parseFloat(qtyInput);
-            let calculatedTotal = isNaN(qtyNum) ? rate : rate * qtyNum;
-            let qtyText = isNaN(qtyNum) ? qtyInput : qtyNum + " عدد";
+            let qtyNum = parseFloat(qtyInput) || 1;
+            let calculatedTotal = rate * qtyNum;
 
-            currentBill.push({ name: name, rate: rate, qtyText: qtyText, total: calculatedTotal });
+            // اسٹاک کم کرنا
+            let prod = savedProducts.find(p => p.name.toLowerCase() === name.toLowerCase());
+            if(prod) {
+                prod.stock = Math.max(0, prod.stock - qtyNum);
+                localStorage.setItem('omni_pos_products', JSON.stringify(savedProducts));
+                renderInventoryBoxes();
+            }
+
+            currentBill.push({ name: name, rate: rate, qtyText: qtyNum + " عدد", total: calculatedTotal });
 
             document.getElementById('saleName').value = "";
             document.getElementById('saleRate').value = "";
@@ -737,10 +809,11 @@
         function renderBill() {
             let tbody = document.getElementById('billBody');
             let grandTotalText = document.getElementById('grandTotalText');
+            let curr = translations[currentLang].currency;
 
             if(currentBill.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; opacity: 0.6; padding: 20px;">کوئی آئٹم شامل نہیں۔</td></tr>`;
-                grandTotalText.innerText = "0.00 روپے";
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; opacity: 0.6; padding: 15px;">کوئی آئٹم شامل نہیں۔</td></tr>`;
+                grandTotalText.innerText = "0.00 " + curr;
                 return;
             }
 
@@ -749,22 +822,31 @@
                 grandTotal += item.total;
                 html += `<tr>
                             <td style="font-weight:bold; color:var(--primary);">${item.name}</td>
-                            <td>${item.rate} روپے</td>
+                            <td>${item.rate} ${curr}</td>
                             <td>${item.qtyText}</td>
-                            <td style="font-weight:bold; color:var(--accent);">${item.total.toFixed(2)} روپے</td>
+                            <td style="font-weight:bold; color:var(--accent);">${item.total.toFixed(2)} ${curr}</td>
                             <td><button class="del-btn" onclick="removeBillItem(${index})">حذف</button></td>
                          </tr>`;
             });
 
             tbody.innerHTML = html;
-            grandTotalText.innerText = grandTotal.toFixed(2) + " روپے";
+            grandTotalText.innerText = grandTotal.toFixed(2) + " " + curr;
         }
 
-        function saveInvoiceToHistory() {
+        function saveInvoiceAndLedger() {
             if(currentBill.length === 0) return null;
             let customer = document.getElementById('customerName').value.trim() || "عام گاہک";
+            let billType = document.getElementById('billTypeSelector').value;
             let now = new Date();
-            let dateStr = now.toLocaleDateString('ur-PK') + " | " + now.toLocaleTimeString('en-US');
+            
+            // اردو کے دن اور مہینے کے نام
+            const days = ['اتوار', 'پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'ہفتہ'];
+            const months = ['جنوری', 'فروری', 'مارچ', 'اپریل', 'مئی', 'جون', 'جولائی', 'اگست', 'ستمبر', 'اکتوبر', 'نومبر', 'دسمبر'];
+            
+            let dayName = days[now.getDay()];
+            let monthName = months[now.getMonth()];
+            let dateStr = `${dayName}, ${now.getDate()} ${monthName} ${now.getFullYear()} | وقت: ${now.toLocaleTimeString()}`;
+            
             let grandTotal = currentBill.reduce((sum, item) => sum + item.total, 0);
 
             let invoiceObj = {
@@ -772,57 +854,211 @@
                 customer: customer,
                 date: dateStr,
                 items: [...currentBill],
-                grandTotal: grandTotal
+                grandTotal: grandTotal,
+                type: billType
             };
 
             invoiceHistory.unshift(invoiceObj);
-            localStorage.setItem('rana313_invoice_history', JSON.stringify(invoiceHistory));
+            localStorage.setItem('omni_pos_invoice_history', JSON.stringify(invoiceHistory));
+
+            // اگر کھاتہ ہو تو گاہک کے کھاتے میں رقم جمع کریں
+            if(billType === 'credit') {
+                if(!customerLedgers[customer]) {
+                    customerLedgers[customer] = { phone: document.getElementById('customerPhone').value.trim(), balance: 0, history: [] };
+                }
+                customerLedgers[customer].balance += grandTotal;
+                customerLedgers[customer].history.push(invoiceObj);
+                localStorage.setItem('omni_pos_ledgers', JSON.stringify(customerLedgers));
+            }
+
             return invoiceObj;
         }
 
         function triggerPrint() {
-            if(currentBill.length === 0) {
-                alert("بل خالی ہے!");
-                return;
-            }
-
-            let inv = saveInvoiceToHistory();
+            if(currentBill.length === 0) { alert("بل خالی ہے!"); return; }
+            let inv = saveInvoiceAndLedger();
             document.getElementById('receiptSeller').innerText = loggedInUser;
             document.getElementById('receiptCustomer').innerText = inv.customer;
             document.getElementById('receiptDateTime').innerText = inv.date;
-
             window.print();
         }
 
-        function sendWhatsAppInvoice() {
-            if(currentBill.length === 0) {
-                alert("بل خالی ہے!");
-                return;
-            }
-
+        function saveAndSendWhatsApp() {
+            if(currentBill.length === 0) { alert("بل خالی ہے!"); return; }
             let phone = document.getElementById('customerPhone').value.trim();
-            if(phone === "") {
-                alert("براہ کرم گاہک کا واٹس ایپ نمبر درج کریں!");
-                return;
-            }
+            if(phone === "") { alert("براہ کرم گاہک کا واٹس ایپ نمبر درج کریں!"); return; }
 
-            let inv = saveInvoiceToHistory();
-            let msg = `*--- رانا 313 جنرل اسٹور بل ---*\n`;
-            msg += `تاریخ: ${inv.date}\n`;
-            msg += `دکاندار: ${inv.seller} | گاہک: ${inv.customer}\n\n`;
-            msg += `*آئٹمز:*\n`;
+            let inv = saveAndSendWhatsAppMessage();
+        }
+
+        function saveAndSendWhatsAppMessage() {
+            let inv = saveInvoiceAndLedger();
+            let phone = document.getElementById('customerPhone').value.trim();
+            let curr = translations[currentLang].currency;
+            let billTypeTitle = inv.type === 'credit' ? 'ادھار کھاتا رسید' : 'نقد بل رسید';
+
+            let msg = `*--- OmniPOS Pro (${billTypeTitle}) ---*\n`;
+            msg += `تاریخ و دن: ${inv.date}\n`;
+            msg += `آپریٹر: ${inv.seller} | گاہک: ${inv.customer}\n\n`;
+            msg += `*لی گئی اشیاء:*\n`;
 
             inv.items.forEach((item, idx) => {
-                msg += `${idx+1}. ${item.name} | ${item.rate} x ${item.qtyText} = *${item.total.toFixed(2)} روپے*\n`;
+                msg += `${idx+1}. ${item.name} | ${item.rate} x ${item.qtyText} = *${item.total.toFixed(2)} ${curr}*\n`;
             });
 
-            msg += `\n*کل واجب الادا رقم: ${inv.grandTotal.toFixed(2)} روپے*\n`;
+            msg += `\n*کل واجب الادا رقم: ${inv.grandTotal.toFixed(2)} ${curr}*\n`;
+            if(inv.type === 'credit') {
+                msg += `*(یہ رقم آپ کے کھاتے میں درج کر لی گئی ہے)*\n`;
+            }
             msg += `شکریہ! دوبارہ تشریف لائیں 🙏`;
 
             let encodedMsg = encodeURIComponent(msg);
-            let whatsappUrl = `https://wa.me/${phone}?text=${encodedMsg}`;
-            window.open(whatsappUrl, '_blank');
+            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodedMsg}`, '_blank');
         }
+
+        // بارکوڈ اسکینر کیمرہ فنکشن
+        function openScannerModal() {
+            document.getElementById('scannerModal').style.display = 'flex';
+            Quagga.init({
+                inputStream : {
+                    name : "Live",
+                    type : "LiveStream",
+                    target: document.querySelector('#interactive')
+                },
+                decoder : {
+                    readers : ["code_128_reader", "ean_reader", "ean_8_reader", "upc_reader"]
+                }
+            }, function(err) {
+                if (err) { console.log(err); return; }
+                Quagga.start();
+            });
+
+            Quagga.onDetected(function(result) {
+                let code = result.codeResult.code;
+                document.getElementById('saleName').value = code;
+                autoFetchRate();
+                closeScannerModal();
+            });
+        }
+
+        function closeScannerModal() {
+            try { Quagga.stop(); } catch(e) {}
+            document.getElementById('scannerModal').style.display = 'none';
+        }
+
+        // ادھار کھاتا ماڈل
+        function openLedgerModal() {
+            let container = document.getElementById('ledgerListContainer');
+            let curr = translations[currentLang].currency;
+            let keys = Object.keys(customerLedgers);
+
+            if(keys.length === 0) {
+                container.innerHTML = "<p style='opacity:0.6;'>کوئی ادھار کھاتا موجود نہیں۔</p>";
+            } else {
+                let html = "";
+                keys.forEach(cust => {
+                    let data = customerLedgers[cust];
+                    html += `<div style="background:var(--input-bg); border:1px solid var(--border-color); padding:10px; border-radius:8px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+                                <div>
+                                    <p><strong>👤 گاہک:</strong> ${cust}</p>
+                                    <p><strong>📞 نمبر:</strong> ${data.phone || 'نامعلوم'}</p>
+                                    <p style="color:#ef4444; font-weight:bold;">بقايا ادھار: ${data.balance.toFixed(2)} ${curr}</p>
+                                </div>
+                                <div>
+                                    <button class="whatsapp-btn" onclick="sendLedgerWhatsApp('${cust}')">💬 کھاتا بھیجیں</button>
+                                </div>
+                             </div>`;
+                });
+                container.innerHTML = html;
+            }
+            document.getElementById('ledgerModal').style.display = 'flex';
+        }
+
+        function closeLedgerModal() { document.getElementById('ledgerModal').style.display = 'none'; }
+
+        function sendLedgerWhatsApp(custName) {
+            let data = customerLedgers[custName];
+            if(!data || !data.phone) {
+                alert("اس گاہک کا واٹس ایپ نمبر درج نہیں ہے!");
+                return;
+            }
+            let curr = translations[currentLang].currency;
+            let msg = `*--- کسٹمر ادھار کھاتا تفصیل ---*\n`;
+            msg += `گاہک: ${custName}\n`;
+            msg += `*کل بقایا ادھار رقم: ${data.balance.toFixed(2)} ${curr}*\n`;
+            msg += `براہ کرم جلد ادائیگی کریں۔ شکریہ! 🙏`;
+
+            window.open(`https://api.whatsapp.com/send?phone=${data.phone}&text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        // رپورٹس
+        function openReportsModal() {
+            let content = document.getElementById('reportsContent');
+            let curr = translations[currentLang].currency;
+            let totalSales = invoiceHistory.reduce((sum, inv) => sum + inv.grandTotal, 0);
+            let totalExpenses = expensesList.reduce((sum, exp) => sum + exp.amount, 0);
+            let netProfit = totalSales - totalExpenses;
+
+            content.innerHTML = `<p><strong>کل سیلز (مجموعی آمدنی):</strong> ${totalSales.toFixed(2)} ${curr}</p>
+                                 <p><strong>کل اخراجات:</strong> ${totalExpenses.toFixed(2)} ${curr}</p>
+                                 <p style="color:var(--primary); font-size:1.1rem; font-weight:bold; margin-top:10px;">خالص بچت / پرافٹ: ${netProfit.toFixed(2)} ${curr}</p>`;
+            document.getElementById('reportsModal').style.display = 'flex';
+        }
+
+        function closeReportsModal() { document.getElementById('reportsModal').style.display = 'none'; }
+
+        // اخراجات
+        function openExpenseModal() {
+            renderExpenses();
+            document.getElementById('expenseModal').style.display = 'flex';
+        }
+        function closeExpenseModal() { document.getElementById('expenseModal').style.display = 'none'; }
+
+        function addExpense() {
+            let title = document.getElementById('expenseTitle').value.trim();
+            let amount = parseFloat(document.getElementById('expenseAmount').value);
+            let curr = translations[currentLang].currency;
+
+            if(title === "" || isNaN(amount)) { alert("تفصیل اور رقم درست درج کریں!"); return; }
+            expensesList.push({ title: title, amount: amount, time: new Date().toLocaleDateString() });
+            localStorage.setItem('omni_pos_expenses', JSON.stringify(expensesList));
+            document.getElementById('expenseTitle').value = "";
+            document.getElementById('expenseAmount').value = "";
+            renderExpenses();
+        }
+
+        function renderExpenses() {
+            let container = document.getElementById('expenseListContainer');
+            let curr = translations[currentLang].currency;
+            if(expensesList.length === 0) { container.innerHTML = "<p style='opacity:0.6;'>کوئی خرچہ درج نہیں۔</p>"; return; }
+            let html = "";
+            expensesList.forEach((exp, idx) => {
+                html += `<div style="display:flex; justify-content:space-between; padding:6px; border-bottom:1px solid var(--border-color); font-size:0.85rem;">
+                            <span>${exp.title} (${exp.time})</span>
+                            <span style="color:#ef4444; font-weight:bold;">${exp.amount} ${curr}</span>
+                         </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function openHistoryModal() {
+            let container = document.getElementById('historyListContainer');
+            let curr = translations[currentLang].currency;
+            if(invoiceHistory.length === 0) { container.innerHTML = "<p style='opacity:0.6;'>کوئی رسید محفوظ نہیں۔</p>"; return; }
+            let html = "";
+            invoiceHistory.forEach((inv, index) => {
+                html += `<div style="background:var(--input-bg); border:1px solid var(--border-color); padding:10px; border-radius:8px; margin-bottom:10px;">
+                            <p><strong>رسید # ${invoiceHistory.length - index}</strong> (${inv.type === 'credit' ? 'ادھار کھاتہ' : 'نقد'})</p>
+                            <p>تاریخ و دن: ${inv.date}</p>
+                            <p>آپریٹر: ${inv.seller} | گاہک: ${inv.customer}</p>
+                            <p style="color:var(--primary); font-weight:bold;">کل رقم: ${inv.grandTotal.toFixed(2)} ${curr}</p>
+                         </div>`;
+            });
+            container.innerHTML = container.innerHTML = html;
+            document.getElementById('historyModal').style.display = 'flex';
+        }
+
+        function closeHistoryModal() { document.getElementById('historyModal').style.display = 'none'; }
     </script>
 
 </body>
