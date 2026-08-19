@@ -1,21 +1,74 @@
-<!-- اس کوڈ کو کاپی کریں، یہ اب "فری ہینڈ" ہے -->
-<div class="input-group">
-    <label>کاروبار کی قسم (Category/Service):</label>
-    <!-- اب سلیکٹ کی جگہ ان پٹ باکس ہے، جو مرضی لکھیں -->
-    <input type="text" id="catInput" placeholder="مثلاً: پراپرٹی ڈیلر، ٹیلرنگ، الیکٹرونکس وغیرہ..." value="جنٹس ٹیلرنگ">
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Musab Creator Studio - وزٹنگ کارڈ جنریٹر</title>
+    <style>
+        body { background: #0f172a; color: white; font-family: sans-serif; padding: 20px; text-align: right; }
+        .container { max-width: 900px; margin: auto; background: #1e293b; padding: 30px; border-radius: 20px; }
+        .input-group { margin-bottom: 20px; }
+        input { width: 100%; padding: 15px; border-radius: 10px; border: none; background: #334155; color: white; font-size: 16px; }
+        button { background: #00ff88; color: black; padding: 15px 30px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; font-size: 18px; }
+        
+        /* کارڈ کا اسٹائل */
+        #cardBox {
+            margin-top: 30px;
+            width: 100%;
+            max-width: 400px;
+            height: 200px;
+            background: linear-gradient(135deg, #4f46e5, #9333ea);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>ڈیجیٹل کارڈ جنریٹر</h1>
+    
+    <div class="input-group">
+        <label>دکان کا نام:</label>
+        <input type="text" id="shopInput" placeholder="نام لکھیں">
+    </div>
+    <div class="input-group">
+        <label>کام کی قسم (Category):</label>
+        <input type="text" id="catInput" placeholder="کام کی قسم لکھیں">
+    </div>
+    <div class="input-group">
+        <label>مالک کا نام:</label>
+        <input type="text" id="ownerInput" placeholder="نام لکھیں">
+    </div>
+    <div class="input-group">
+        <label>فون نمبر:</label>
+        <input type="text" id="phoneInput" placeholder="نمبر لکھیں">
+    </div>
+
+    <button onclick="generateCard()">کارڈ دیکھیں</button>
+
+    <!-- کارڈ یہاں بنے گا -->
+    <div id="cardBox">
+        <h2 id="cShop">دکان کا نام</h2>
+        <p id="cCat">کام کی قسم</p>
+        <h3 id="cOwner">مالک کا نام</h3>
+        <p id="cPhone">فون نمبر</p>
+    </div>
 </div>
 
 <script>
     function generateCard() {
-        // باقی سب کوڈ وہی ہے، بس کیٹگری کو اب ٹیکسٹ باکس سے لے رہے ہیں
-        let shop = document.getElementById('shopInput').value;
-        let cat = document.getElementById('catInput').value; // یہ اب یوزر کی مرضی کا ٹیکسٹ لے گا
-        let owner = document.getElementById('ownerInput').value;
-        let phone = document.getElementById('phoneInput').value;
-
-        document.getElementById('cardShop').innerText = shop;
-        document.getElementById('cardCat').innerText = cat; // جو یوزر لکھے گا، وہی کارڈ پر آئے گا
-        document.getElementById('cardOwner').innerText = owner;
-        document.getElementById('cardPhone').innerText = "فون: " + phone;
+        document.getElementById('cShop').innerText = document.getElementById('shopInput').value;
+        document.getElementById('cCat').innerText = document.getElementById('catInput').value;
+        document.getElementById('cOwner').innerText = document.getElementById('ownerInput').value;
+        document.getElementById('cPhone').innerText = "فون: " + document.getElementById('phoneInput').value;
     }
 </script>
+
+</body>
+</html>
