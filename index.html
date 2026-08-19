@@ -2,71 +2,54 @@
 <html lang="ur" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Musab Creator Studio - وزٹنگ کارڈ جنریٹر</title>
+    <title>Musab Studio - Premium Card Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jameel+Noori+Nastaleeq&display=swap" rel="stylesheet">
     <style>
-        body { background: #0f172a; color: white; font-family: sans-serif; padding: 20px; text-align: right; }
-        .container { max-width: 900px; margin: auto; background: #1e293b; padding: 30px; border-radius: 20px; }
-        .input-group { margin-bottom: 20px; }
-        input { width: 100%; padding: 15px; border-radius: 10px; border: none; background: #334155; color: white; font-size: 16px; }
-        button { background: #00ff88; color: black; padding: 15px 30px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; font-size: 18px; }
-        
-        /* کارڈ کا اسٹائل */
-        #cardBox {
-            margin-top: 30px;
-            width: 100%;
-            max-width: 400px;
-            height: 200px;
-            background: linear-gradient(135deg, #4f46e5, #9333ea);
-            border-radius: 15px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-            margin: auto;
-        }
+        body { margin: 0; background: #0b0e14; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .app-container { width: 90%; max-width: 800px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .input-box { display: flex; flex-direction: column; gap: 15px; }
+        input { padding: 15px; border-radius: 12px; border: none; background: #1a1f29; color: white; outline: none; }
+        button { padding: 15px; border-radius: 12px; border: none; background: linear-gradient(90deg, #6366f1, #a855f7); color: white; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        button:hover { transform: scale(1.05); }
+
+        /* پریمیم کارڈ اسٹائل */
+        .card-preview { width: 350px; height: 200px; background: linear-gradient(135deg, #1e293b, #0f172a); border-radius: 20px; padding: 25px; border: 1px solid #4f46e5; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; }
+        .card-preview::before { content: ""; position: absolute; top: -10px; right: -10px; width: 50px; height: 50px; background: #6366f1; border-radius: 50%; opacity: 0.3; }
+        h2 { margin: 0; color: #6366f1; font-family: 'Jameel Noori Nastaleeq', serif; font-size: 28px; }
+        .cat { color: #94a3b8; font-size: 14px; }
+        .owner { font-weight: bold; font-size: 18px; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>ڈیجیٹل کارڈ جنریٹر</h1>
-    
-    <div class="input-group">
-        <label>دکان کا نام:</label>
-        <input type="text" id="shopInput" placeholder="نام لکھیں">
-    </div>
-    <div class="input-group">
-        <label>کام کی قسم (Category):</label>
-        <input type="text" id="catInput" placeholder="کام کی قسم لکھیں">
-    </div>
-    <div class="input-group">
-        <label>مالک کا نام:</label>
-        <input type="text" id="ownerInput" placeholder="نام لکھیں">
-    </div>
-    <div class="input-group">
-        <label>فون نمبر:</label>
-        <input type="text" id="phoneInput" placeholder="نمبر لکھیں">
+<div class="app-container">
+    <div class="input-box">
+        <h2 style="color:white; font-family: sans-serif;">کارڈ کی تفصیلات</h2>
+        <input type="text" id="shop" placeholder="دکان کا نام">
+        <input type="text" id="cat" placeholder="کام کی قسم">
+        <input type="text" id="owner" placeholder="مالک کا نام">
+        <input type="text" id="phone" placeholder="فون نمبر">
+        <button onclick="updateCard()">کارڈ پرنٹ کریں</button>
     </div>
 
-    <button onclick="generateCard()">کارڈ دیکھیں</button>
-
-    <!-- کارڈ یہاں بنے گا -->
-    <div id="cardBox">
-        <h2 id="cShop">دکان کا نام</h2>
-        <p id="cCat">کام کی قسم</p>
-        <h3 id="cOwner">مالک کا نام</h3>
-        <p id="cPhone">فون نمبر</p>
+    <div class="card-preview">
+        <div>
+            <h2 id="outShop">آپ کی دکان</h2>
+            <div class="cat" id="outCat">کام کی قسم</div>
+        </div>
+        <div>
+            <div class="owner" id="outOwner">مالک کا نام</div>
+            <div style="font-size: 12px; color: #6366f1;" id="outPhone">0300-0000000</div>
+        </div>
     </div>
 </div>
 
 <script>
-    function generateCard() {
-        document.getElementById('cShop').innerText = document.getElementById('shopInput').value;
-        document.getElementById('cCat').innerText = document.getElementById('catInput').value;
-        document.getElementById('cOwner').innerText = document.getElementById('ownerInput').value;
-        document.getElementById('cPhone').innerText = "فون: " + document.getElementById('phoneInput').value;
+    function updateCard() {
+        document.getElementById('outShop').innerText = document.getElementById('shop').value;
+        document.getElementById('outCat').innerText = document.getElementById('cat').value;
+        document.getElementById('outOwner').innerText = document.getElementById('owner').value;
+        document.getElementById('outPhone').innerText = document.getElementById('phone').value;
     }
 </script>
 
