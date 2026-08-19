@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="appTitle">OmniPOS Pro Ultimate - ایڈوانسڈ بلنگ و کھاتا سسٹم</title>
-    <!-- بارکوڈ اسکیننگ کے لیے QuaggaJS لائبریری -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+    <title id="appTitle">OmniPOS Pro Ultimate PK.com</title>
     <style>
         :root {
             --primary: #00f2fe;
             --secondary: #0f172a;
             --accent: #4facfe;
-            --bg-grad: linear-gradient(135deg, #0f172a, #1e1b4b, #020617);
+            --bg-grad: linear-gradient(135deg, #090d16, #1e1b4b, #020617);
             --card-bg: rgba(15, 23, 42, 0.95);
             --text-color: #f8fafc;
             --border-color: rgba(255, 255, 255, 0.15);
@@ -29,366 +27,92 @@
             --input-bg: #ffffff;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        body {
-            background: var(--bg-grad);
-            color: var(--text-color);
-            min-height: 100vh;
-            padding: 15px;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: background 0.3s, color 0.3s; }
+        body { background: var(--bg-grad); color: var(--text-color); min-height: 100vh; padding: 15px; }
 
         #loginOverlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(2, 6, 23, 0.95);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(2, 6, 23, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999;
         }
-
         .login-card {
-            background: #0f172a;
-            border: 2px solid var(--primary);
-            padding: 30px;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
+            background: #0f172a; border: 2px solid var(--primary); padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
         }
+        .login-card h2 { color: var(--primary); margin-bottom: 15px; }
 
-        .login-card h2 {
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .main-app-container {
-            display: none;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        .main-app-container { display: none; max-width: 1400px; margin: 0 auto; }
 
         header {
-            text-align: center;
-            padding: 15px;
-            background: var(--card-bg);
-            border-radius: 20px;
-            border: 2px solid var(--border-color);
-            margin-bottom: 20px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            text-align: center; padding: 25px 15px; background-size: cover; background-position: center;
+            background-color: var(--card-bg); border-radius: 20px; border: 2px solid var(--border-color);
+            margin-bottom: 20px; box-shadow: 0 0 20px rgba(0,0,0,0.3); position: relative; overflow: hidden;
         }
-
-        .header-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
+        header::before {
+            content: ""; position: absolute; top:0; left:0; width:100%; height:100%;
+            background: rgba(15, 23, 42, 0.85); z-index: 1;
         }
-
+        .light-mode header::before { background: rgba(255, 255, 255, 0.85); }
+        .header-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        
         .app-logo {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            border: 2px solid var(--primary);
-            object-fit: cover;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+            width: 75px; height: 75px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); cursor: pointer;
         }
-
-        header h1 {
-            color: var(--primary);
-            font-size: 1.8rem;
-        }
+        header h1 { color: var(--primary); font-size: 1.8rem; }
 
         .top-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-            padding-top: 8px;
-            border-top: 1px solid var(--border-color);
+            position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--border-color);
         }
-
         .icon-btn, select.icon-btn {
-            background: var(--input-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 6px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: bold;
-            outline: none;
+            background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: bold; outline: none;
         }
+        .icon-btn:hover { border-color: var(--primary); }
 
-        .icon-btn:hover {
-            border-color: var(--primary);
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        @media (max-width: 900px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } }
 
         .panel {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            margin-bottom: 20px;
-            max-height: 750px;
-            overflow-y: auto;
+            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin-bottom: 20px; max-height: 800px; overflow-y: auto;
         }
-
         .panel h3 {
-            color: var(--accent);
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-            border-right: 4px solid var(--accent);
-            padding-right: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            color: var(--accent); font-size: 1.1rem; margin-bottom: 12px; border-right: 4px solid var(--accent); padding-right: 8px; display: flex; justify-content: space-between; align-items: center;
         }
 
-        .input-group {
-            margin-bottom: 12px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 4px;
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            background: var(--input-bg);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            outline: none;
-            font-size: 0.95rem;
-        }
-
-        input:focus {
-            border-color: var(--primary);
-        }
+        .input-group { margin-bottom: 12px; }
+        .input-group label { display: block; margin-bottom: 4px; font-size: 0.9rem; opacity: 0.9; }
+        input, select, textarea { width: 100%; padding: 10px; background: var(--input-bg); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 8px; outline: none; font-size: 0.95rem; }
+        input:focus { border-color: var(--primary); }
 
         .btn {
-            background: linear-gradient(135deg, #00f2fe, #4facfe);
-            color: #020617;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.95rem;
-            width: 100%;
-            transition: 0.3s;
+            background: linear-gradient(135deg, #00f2fe, #4facfe); color: #020617; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.95rem; width: 100%; transition: 0.3s;
         }
+        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
-        }
+        .bulk-rows-container { max-height: 180px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px; margin-bottom: 10px; }
+        .bulk-row { display: flex; gap: 8px; margin-bottom: 8px; }
 
-        .bulk-rows-container {
-            max-height: 180px;
-            overflow-y: auto;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 8px;
-            margin-bottom: 10px;
-        }
+        .table-responsive { max-height: 180px; overflow-y: auto; margin-bottom: 12px; border: 1px solid var(--border-color); border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; text-align: right; }
+        th { background: var(--input-bg); color: var(--accent); padding: 8px; font-size: 0.85rem; position: sticky; top: 0; }
+        td { padding: 8px; border-bottom: 1px solid var(--border-color); font-size: 0.85rem; }
 
-        .bulk-row {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
+        .del-btn { background: #ff4444; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
 
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 8px;
-            max-height: 160px;
-            overflow-y: auto;
-            margin-top: 8px;
-            padding: 4px;
-        }
+        .total-box { background: var(--input-bg); border: 2px solid var(--primary); border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+        .total-box h2 { color: var(--primary); font-size: 1.2rem; }
 
-        .mini-box {
-            background: var(--input-bg);
-            border: 1px solid var(--border-color);
-            padding: 8px;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            position: relative;
-        }
+        .action-btns-group { display: flex; gap: 6px; flex-wrap: wrap; }
+        .print-btn { background: var(--accent); color: #020617; padding: 6px 10px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 0.8rem; }
+        .whatsapp-btn { background: #25d366; color: white; padding: 6px 10px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 0.8rem; }
+        .copy-btn { background: #8b5cf6; color: white; padding: 6px 10px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 0.8rem; }
 
-        .mini-box:hover {
-            border-color: var(--primary);
-        }
+        .secret-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; }
+        .secret-content { background: var(--card-bg); border: 2px solid var(--accent); padding: 20px; border-radius: 15px; width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; }
 
-        .mini-box h4 {
-            color: var(--primary);
-            font-size: 0.85rem;
-            margin-bottom: 2px;
-        }
-
-        .mini-box p {
-            font-size: 0.75rem;
-            opacity: 0.8;
-        }
-
-        .secret-modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .secret-content {
-            background: var(--card-bg);
-            border: 2px solid var(--accent);
-            padding: 20px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-
-        .table-responsive {
-            max-height: 160px;
-            overflow-y: auto;
-            margin-bottom: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: right;
-        }
-
-        th {
-            background: var(--input-bg);
-            color: var(--accent);
-            padding: 8px;
-            font-size: 0.85rem;
-            position: sticky;
-            top: 0;
-        }
-
-        td {
-            padding: 8px;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.85rem;
-        }
-
-        .del-btn {
-            background: #ff4444;
-            color: white;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.75rem;
-        }
-
-        .edit-btn {
-            background: #f59e0b;
-            color: white;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.75rem;
-            margin-left: 4px;
-        }
-
-        .total-box {
-            background: var(--input-bg);
-            border: 2px solid var(--primary);
-            border-radius: 12px;
-            padding: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .total-box h2 {
-            color: var(--primary);
-            font-size: 1.2rem;
-        }
-
-        .action-btns-group {
-            display: flex;
-            gap: 8px;
-        }
-
-        .print-btn {
-            background: var(--accent);
-            color: #020617;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            font-size: 0.85rem;
-        }
-
-        .whatsapp-btn {
-            background: #25d366;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            font-size: 0.85rem;
-        }
-
-        .badge-low {
-            background: #ef4444;
-            color: white;
-            font-size: 0.65rem;
-            padding: 2px 5px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-top: 2px;
-        }
-
+        footer { text-align: center; padding: 15px; margin-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.9rem; opacity: 0.85; }
+        
         .print-invoice-header { display: none; }
         @media print {
             body { background: white !important; color: black !important; padding: 0; }
-            .dashboard-grid, header, .panel:not(:last-child), .action-btns-group, .del-btn, .edit-btn, .input-group, button { display: none !important; }
+            .dashboard-grid, header, .panel:not(:last-child), .action-btns-group, .del-btn, .edit-btn, .input-group, button, footer { display: none !important; }
             .panel:last-child { background: white !important; border: none !important; padding: 0 !important; width: 100% !important; max-height: none !important; }
             .print-invoice-header { display: block !important; text-align: center; margin-bottom: 15px; border-bottom: 2px dashed #333; padding-bottom: 10px; }
             table, th, td { border: 1px solid #333 !important; color: black !important; }
@@ -402,38 +126,42 @@
     <!-- لاگ ان اسکرین -->
     <div id="loginOverlay">
         <div class="login-card">
-            <h2>OmniPOS Pro Ultimate</h2>
-            <p id="loginTextLabel" style="margin-bottom: 15px; font-size: 0.9rem; opacity: 0.8;">دکان یا بزنس کا نام درج کریں:</p>
-            <input type="text" id="loginNameInput" placeholder="اپنا یا دکان کا نام لکھیں" style="margin-bottom: 15px;">
-            <button class="btn" id="loginBtnText" onclick="loginUser()">سسٹم میں داخل ہوں</button>
+            <h2>OmniPOS Pro PK.com</h2>
+            <p style="margin-bottom: 15px; font-size: 0.9rem; opacity: 0.8;">آپنا یا دکان کا نام درج کریں:</p>
+            <input type="text" id="loginNameInput" placeholder="نام لکھیں" style="margin-bottom: 15px;">
+            <button class="btn" onclick="loginUser()">سسٹم میں داخل ہوں</button>
         </div>
     </div>
 
     <!-- اصل ایپ کا ڈیش بورڈ -->
     <div class="main-app-container" id="mainAppContainer">
         
-        <header>
+        <!-- ہیڈر -->
+        <header id="mainHeaderElement">
             <div class="header-content">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=150&h=150&fit=crop" alt="OmniPOS Logo" class="app-logo">
+                <input type="file" id="logoUploadInput" accept="image/*" style="display: none;" onchange="changeLogoImage(event)">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=150&h=150&fit=crop" alt="Logo" class="app-logo" id="headerLogoImg" onclick="document.getElementById('logoUploadInput').click()" title="گول لوگو بدلنے کے لیے کلک کریں">
+                
                 <div>
-                    <h1 id="mainHeading">OmniPOS Pro Ultimate</h1>
-                    <p style="font-size:0.85rem; opacity:0.8;"><span id="subHeaderDesc">ایڈوانسڈ بلنگ، ادھار کھاتا اور اسمارٹ اسکینر سسٹم</span> | <span id="operatorLabel">آپریٹر</span>: <span id="displayShopkeeper"></span></p>
+                    <h1 id="mainHeading">OmniPOS Pro Ultimate PK.com</h1>
+                    <p style="font-size:0.85rem; opacity:0.9;">
+                        آپریٹر: <span id="displayShopkeeper" style="font-weight:bold;"></span> 
+                        <button onclick="editShopkeeperName()" style="background:none; border:none; color:var(--primary); cursor:pointer; text-decoration:underline; font-size:0.8rem; margin-right:5px;">[نام تبدیل کریں]</button> 
+                        | پلیٹ فارم: PK.com
+                    </p>
                 </div>
             </div>
             
             <div class="top-controls">
-                <select id="langSelector" class="icon-btn" onchange="changeLanguage(this.value)">
-                    <option value="ur">اردو (Urdu)</option>
-                    <option value="en">English</option>
-                    <option value="pa">پنجابی (Punjabi)</option>
-                    <option value="ar">العربية (Arabic)</option>
-                    <option value="hi">हिन्दी (Hindi)</option>
-                </select>
+                <input type="file" id="bannerUploadInput" accept="image/*" style="display: none;" onchange="changeBannerImage(event)">
+                <button class="icon-btn" onclick="document.getElementById('bannerUploadInput').click()" style="border-color: var(--primary);">🖼️ کور تصویر</button>
+                
+                <!-- نیا ویب سائٹ لنک کاپی کرنے کا بٹن -->
+                <button class="icon-btn" onclick="copyWebsiteLink()" style="background: linear-gradient(135deg, #8b5cf6, #ec4899); color: white; border: none;">🔗 ویب سائٹ لنک کاپی کریں</button>
 
                 <button class="icon-btn" onclick="toggleDarkMode()">🌓 تھیم</button>
-                <button class="icon-btn" onclick="openScannerModal()">📷 بارکوڈ اسکینر</button>
                 <button class="icon-btn" onclick="openLedgerModal()">📒 ادھار کھاتا</button>
-                <button class="icon-btn" onclick="openReportsModal()">📊 رپورٹس & منافع</button>
+                <button class="icon-btn" onclick="openReportsModal()">📊 رپورٹس</button>
                 <button class="icon-btn" onclick="openExpenseModal()">💸 اخراجات</button>
                 <button class="icon-btn" onclick="openHistoryModal()">🧾 ہسٹری</button>
             </div>
@@ -441,44 +169,36 @@
 
         <div class="dashboard-grid">
             
-            <!-- بائیں سائیڈ: پروڈکٹ اور اسٹاک مینجمنٹ -->
+            <!-- بائیں سائیڈ: پروڈکٹ انٹری -->
             <div class="panel">
-                <h3>متعدد پروڈکٹس اور اسٹاک درج کریں (Bulk Entry)</h3>
-                <p style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 10px;">سامان کا نام، ریٹ، بارکوڈ اور بچی ہوئی تعداد (Stock) درج کریں:</p>
-                
+                <h3>پروڈکٹ درج کریں (نام، سیل ریٹ اور لاگت)</h3>
                 <div class="bulk-rows-container" id="bulkRowsContainer"></div>
 
                 <div style="display: flex; gap: 8px; margin-bottom: 12px;">
                     <button class="icon-btn" onclick="addBulkRow()" style="flex: 1; background: var(--input-bg);">＋ مزید خانہ جوڑیں</button>
-                    <button class="btn" onclick="saveBulkProducts()" style="flex: 1;">تمام پروڈکٹس سیو کریں</button>
+                    <button class="btn" onclick="saveBulkProducts()" style="flex: 1;">پروڈکٹس محفوظ کریں</button>
                 </div>
 
-                <div style="margin-top: 10px;">
+                <div style="margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 12px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <h3 style="margin:0; border:none; padding:0; font-size:0.95rem;">کل رجسٹرڈ اشیاء: <span id="totalProductCount" style="color:var(--primary);">0</span></h3>
+                        <h3 style="border:none; padding:0; font-size:0.95rem; margin:0;">کل رجسٹرڈ اشیاء: <span id="totalProductCount" style="color:var(--primary);">0</span></h3>
                     </div>
-                    
-                    <div class="input-group" style="margin-bottom: 8px;">
-                        <input type="text" id="searchStock" placeholder="🔍 اسٹاک میں سرچ کریں..." onkeyup="filterStock()">
+                    <div class="input-group">
+                        <input type="text" id="searchStock" placeholder="🔍 سرچ کریں (دیکھیں کون سی چیز سیو ہے)..." onkeyup="filterStockGrid()">
                     </div>
-
-                    <div id="inventorySection">
-                        <div class="products-grid" id="productsGridContainer">
-                            <p id="noProductText" style="text-align: center; grid-column: span 2; padding: 15px; opacity: 0.6;">کوئی پروڈکٹ موجود نہیں۔</p>
-                        </div>
-                    </div>
+                    <div id="productsGridContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; max-height: 180px; overflow-y: auto;"></div>
                 </div>
             </div>
 
-            <!-- دائیں سائیڈ: فروخت، بلنگ اور کھاتا سلیکشن -->
+            <!-- دائیں سائیڈ: فروخت اور بلنگ -->
             <div class="panel">
                 <h3>فروخت، بلنگ اور کھاتا سسٹم</h3>
                 
                 <div class="input-group">
-                    <label>بل کی قسم:</label>
-                    <select id="billTypeSelector" onchange="toggleCustomerLedgerInput()">
+                    <label>رسید کی قسم:</label>
+                    <select id="billTypeSelector">
                         <option value="cash">نقد بل (Cash Sale)</option>
-                        <option value="credit">کھاتے میں جمع کریں (Customer Credit)</option>
+                        <option value="credit">کھاتے میں جمع کریں (Credit Ledger)</option>
                     </select>
                 </div>
 
@@ -488,17 +208,17 @@
                 </div>
 
                 <div class="input-group">
-                    <label>گاہک کا واٹس ایپ نمبر (مثلاً: 923...):</label>
+                    <label>گاہک کا واٹس ایپ نمبر:</label>
                     <input type="text" id="customerPhone" placeholder="مثلاً: 923001234567">
                 </div>
 
                 <div class="input-group">
-                    <label>پروڈکٹ کا نام (ریٹ خود آئے گا):</label>
-                    <input type="text" id="saleName" placeholder="نام لکھیں یا اسکین کریں..." onkeyup="autoFetchRate()">
+                    <label>پروڈکٹ کا نام:</label>
+                    <input type="text" id="saleName" placeholder="نام لکھیں..." onkeyup="autoFetchRate()">
                 </div>
 
                 <div class="input-group">
-                    <label>فی ریٹ (تبدیل بھی کیا جا سکتا ہے):</label>
+                    <label>سیل ریٹ:</label>
                     <input type="number" id="saleRate" placeholder="ریٹ خود آئے گا">
                 </div>
 
@@ -512,9 +232,9 @@
                 <!-- بل لسٹ -->
                 <div style="margin-top: 15px;">
                     <div class="print-invoice-header" id="printHeaderInfo">
-                        <h2 id="receiptShopName">OmniPOS Pro بلنگ</h2>
-                        <p><strong>آپریٹر:</strong> <span id="receiptSeller"></span> | <strong>گاہک:</strong> <span id="receiptCustomer"></span></p>
-                        <p><strong>تاریخ و وقت:</strong> <span id="receiptDateTime"></span></p>
+                        <h2 id="receiptShopName">OmniPOS Pro PK.com</h2>
+                        <p><strong>آپریٹر:</strong> <span id="receiptSeller"></span> | <strong>پلیٹ فارم:</strong> PK.com</p>
+                        <p><strong>گاہک:</strong> <span id="receiptCustomer"></span> | <strong>تاریخ:</strong> <span id="receiptDateTime"></span></p>
                     </div>
 
                     <h3 style="border:none; padding:0; margin-bottom:8px;">موجودہ بل</h3>
@@ -530,9 +250,7 @@
                                 </tr>
                             </thead>
                             <tbody id="billBody">
-                                <tr>
-                                    <td colspan="5" style="text-align: center; opacity: 0.6; padding: 15px;">کوئی آئٹم شامل نہیں۔</td>
-                                </tr>
+                                <tr><td colspan="5" style="text-align: center; opacity: 0.6; padding: 15px;">کوئی آئٹم شامل نہیں۔</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -544,6 +262,7 @@
                         </div>
                         <div class="action-btns-group">
                             <button class="print-btn" onclick="triggerPrint()">پرنٹ</button>
+                            <button class="copy-btn" onclick="copyBillText()">📋 کاپی بل</button>
                             <button class="whatsapp-btn" onclick="saveAndSendWhatsApp()">💬 واٹس ایپ</button>
                         </div>
                     </div>
@@ -552,19 +271,13 @@
 
         </div>
 
+        <footer>
+            <p>تمہید اور ڈیزائن بذریعہ: <strong>رانا چمن (رانا افتخار احمد)</strong> | OmniPOS Pro Ultimate PK.com © 2026</p>
+        </footer>
+
     </div>
 
-    <!-- بارکوڈ اسکینر ماڈل -->
-    <div class="secret-modal" id="scannerModal">
-        <div class="secret-content" style="text-align: center;">
-            <h3 style="color: var(--accent); margin-bottom: 10px;">📷 بارکوڈ اسکینر</h3>
-            <div id="interactive" class="viewport" style="width: 100%; height: 250px; background: #000; border-radius: 10px; margin-bottom: 15px; position: relative; overflow: hidden;"></div>
-            <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 10px;">بارکوڈ کو کیمرے کے سامنے رکھیں...</p>
-            <button class="btn" onclick="closeScannerModal()" style="background: var(--accent); color: #020617;">بند کریں</button>
-        </div>
-    </div>
-
-    <!-- ادھار کھاتا ماڈل -->
+    <!-- ماڈلز -->
     <div class="secret-modal" id="ledgerModal">
         <div class="secret-content">
             <h3 style="color: var(--accent); margin-bottom: 10px;">📒 گاہکوں کا ادھار کھاتا</h3>
@@ -573,32 +286,25 @@
         </div>
     </div>
 
-    <!-- رپورٹس اور پرافٹ ماڈل -->
     <div class="secret-modal" id="reportsModal">
         <div class="secret-content">
-            <h3 style="color: var(--accent); margin-bottom: 10px;">📊 روزانہ کی سیل اور پرافٹ رپورٹ</h3>
+            <h3 style="color: var(--accent); margin-bottom: 10px;">📊 روزانہ کی سیل اور خالص منافع رپورٹ</h3>
             <div id="reportsContent" style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 15px;"></div>
             <button class="btn" onclick="closeReportsModal()" style="background: var(--accent); color: #020617;">بند کریں</button>
         </div>
     </div>
 
-    <!-- اخراجات (Expenses) ماڈل -->
     <div class="secret-modal" id="expenseModal">
         <div class="secret-content">
             <h3 style="color: var(--accent); margin-bottom: 10px;">💸 دکان کے روزمرہ اخراجات</h3>
-            <div class="input-group">
-                <input type="text" id="expenseTitle" placeholder="خروجے کی تفصیل (مثلاً: بجلی بل، چائے)">
-            </div>
-            <div class="input-group">
-                <input type="number" id="expenseAmount" placeholder="رقم (روپے)">
-            </div>
+            <div class="input-group"><input type="text" id="expenseTitle" placeholder="خرچے کی تفصیل"></div>
+            <div class="input-group"><input type="number" id="expenseAmount" placeholder="رقم (روپے)"></div>
             <button class="btn" onclick="addExpense()" style="margin-bottom: 15px;">خرچہ محفوظ کریں</button>
             <div id="expenseListContainer" style="max-height: 150px; overflow-y: auto; margin-bottom: 15px;"></div>
             <button class="btn" onclick="closeExpenseModal()" style="background: var(--accent); color: #020617;">بند کریں</button>
         </div>
     </div>
 
-    <!-- ہسٹری ماڈل -->
     <div class="secret-modal" id="historyModal">
         <div class="secret-content">
             <h3 style="color: var(--accent); margin-bottom: 10px;">🧾 تاریخی ریکارڈ (تمام محفوظ رسیدیں)</h3>
@@ -608,55 +314,91 @@
     </div>
 
     <script>
-        const translations = {
-            ur: { currency: "روپے" },
-            en: { currency: "PKR" },
-            pa: { currency: "روپے" },
-            ar: { currency: "ر.س" },
-            hi: { currency: "रूपये" }
-        };
-
-        let currentLang = 'ur';
-        let savedProducts = JSON.parse(localStorage.getItem('omni_pos_products') || '[]');
+        let savedProducts = JSON.parse(localStorage.getItem('omni_pos_products_pk') || '[]');
         let currentBill = [];
-        let customerLedgers = JSON.parse(localStorage.getItem('omni_pos_ledgers') || '{}');
-        let invoiceHistory = JSON.parse(localStorage.getItem('omni_pos_invoice_history') || '[]');
-        let expensesList = JSON.parse(localStorage.getItem('omni_pos_expenses') || '[]');
-        let loggedInUser = "";
+        let customerLedgers = JSON.parse(localStorage.getItem('omni_pos_ledgers_pk') || '{}');
+        let invoiceHistory = JSON.parse(localStorage.getItem('omni_pos_invoice_pk') || '[]');
+        let expensesList = JSON.parse(localStorage.getItem('omni_pos_expenses_pk') || '[]');
+        let loggedInUser = localStorage.getItem('omni_pos_username') || "";
+        let customLogoBase64 = localStorage.getItem('omni_pos_custom_logo') || "";
+        let customBannerBase64 = localStorage.getItem('omni_pos_custom_banner') || "";
 
         window.onload = function() {
-            renderInventoryBoxes();
+            if(loggedInUser) {
+                document.getElementById('displayShopkeeper').innerText = loggedInUser;
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('mainAppContainer').style.display = 'block';
+            }
+            if(customLogoBase64) { document.getElementById('headerLogoImg').src = customLogoBase64; }
+            if(customBannerBase64) { document.getElementById('mainHeaderElement').style.backgroundImage = `url(${customBannerBase64})`; }
+            renderInventoryGrid();
             initBulkRows();
         };
 
         function loginUser() {
             let name = document.getElementById('loginNameInput').value.trim();
-            if(name === "") {
-                alert("براہ کرم نام درج کریں!");
-                return;
-            }
+            if(name === "") { alert("براہ کرم نام درج کریں!"); return; }
             loggedInUser = name;
-            document.getElementById('displayShopkeeper').innerText = name;
+            localStorage.setItem('omni_pos_username', loggedInUser);
+            document.getElementById('displayShopkeeper').innerText = loggedInUser;
             document.getElementById('loginOverlay').style.display = 'none';
             document.getElementById('mainAppContainer').style.display = 'block';
         }
 
-        function toggleDarkMode() {
-            document.body.classList.toggle('light-mode');
+        function editShopkeeperName() {
+            let newName = prompt("نیا نام درج کریں:", loggedInUser);
+            if(newName && newName.trim() !== "") {
+                loggedInUser = newName.trim();
+                localStorage.setItem('omni_pos_username', loggedInUser);
+                document.getElementById('displayShopkeeper').innerText = loggedInUser;
+                alert("نام کامیابی سے تبدیل ہو گیا ہے!");
+            }
         }
 
-        function changeLanguage(lang) {
-            currentLang = lang;
-            renderInventoryBoxes();
-            renderBill();
+        function toggleDarkMode() { document.body.classList.toggle('light-mode'); }
+
+        // ویب سائٹ کا لنک کاپی کرنے کا فنکشن
+        function copyWebsiteLink() {
+            let websiteUrl = window.location.href;
+            navigator.clipboard.writeText(websiteUrl).then(() => {
+                alert("🌐 ویب سائٹ کا لنک کامیابی سے کاپی ہو گیا ہے!\n\n" + websiteUrl);
+            }).catch(err => {
+                alert("لنک کاپی کرنے میں خرابی پیش آئی!");
+            });
+        }
+
+        function changeLogoImage(event) {
+            let file = event.target.files[0];
+            if(file) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    customLogoBase64 = e.target.result;
+                    localStorage.setItem('omni_pos_custom_logo', customLogoBase64);
+                    document.getElementById('headerLogoImg').src = customLogoBase64;
+                    alert("گول لوگو تبدیل ہو گیا!");
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function changeBannerImage(event) {
+            let file = event.target.files[0];
+            if(file) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    customBannerBase64 = e.target.result;
+                    localStorage.setItem('omni_pos_custom_banner', customBannerBase64);
+                    document.getElementById('mainHeaderElement').style.backgroundImage = `url(${customBannerBase64})`;
+                    alert("کور بینر تبدیل ہو گیا!");
+                }
+                reader.readAsDataURL(file);
+            }
         }
 
         function initBulkRows() {
             let container = document.getElementById('bulkRowsContainer');
             container.innerHTML = "";
-            for(let i=0; i<3; i++) {
-                addBulkRow();
-            }
+            for(let i=0; i<3; i++) { addBulkRow(); }
         }
 
         function addBulkRow() {
@@ -664,8 +406,8 @@
             let div = document.createElement('div');
             div.className = 'bulk-row';
             div.innerHTML = `<input type="text" class="bulk-name" placeholder="پروڈکٹ نام" style="flex:2;">
-                             <input type="number" class="bulk-rate" placeholder="ریٹ" style="flex:1;">
-                             <input type="text" class="bulk-barcode" placeholder="بارکوڈ" style="flex:1.5;">
+                             <input type="number" class="bulk-rate" placeholder="سیل ریٹ" style="flex:1;">
+                             <input type="number" class="bulk-cost" placeholder="لاگت (Cost)" style="flex:1.2;">
                              <input type="number" class="bulk-stock" placeholder="تعداد" style="flex:1;">`;
             container.appendChild(div);
         }
@@ -673,70 +415,62 @@
         function saveBulkProducts() {
             let names = document.querySelectorAll('.bulk-name');
             let rates = document.querySelectorAll('.bulk-rate');
-            let barcodes = document.querySelectorAll('.bulk-barcode');
+            let costs = document.querySelectorAll('.bulk-cost');
             let stocks = document.querySelectorAll('.bulk-stock');
             let addedCount = 0;
 
             for(let i=0; i<names.length; i++) {
                 let name = names[i].value.trim();
                 let rate = parseFloat(rates[i].value);
-                let barcode = barcodes[i].value.trim();
+                let cost = parseFloat(costs[i].value) || 0;
                 let stock = parseFloat(stocks[i].value) || 10;
 
                 if(name !== "" && !isNaN(rate)) {
                     let existing = savedProducts.find(p => p.name.toLowerCase() === name.toLowerCase());
                     if(existing) {
                         existing.rate = rate;
-                        existing.barcode = barcode || existing.barcode;
+                        existing.cost = cost;
                         existing.stock = stock;
                     } else {
-                        savedProducts.push({ name: name, rate: rate, barcode: barcode, stock: stock });
+                        savedProducts.push({ name: name, rate: rate, cost: cost, stock: stock });
                     }
                     addedCount++;
                 }
             }
 
             if(addedCount > 0) {
-                localStorage.setItem('omni_pos_products', JSON.stringify(savedProducts));
-                renderInventoryBoxes();
+                localStorage.setItem('omni_pos_products_pk', JSON.stringify(savedProducts));
+                renderInventoryGrid();
                 initBulkRows();
-                alert(`${addedCount} پروڈکٹس کامیابی سے محفوظ ہو گئی ہیں!`);
+                alert(`${addedCount} پروڈکٹس محفوظ ہو گئیں! کل آئٹمز: ${savedProducts.length}`);
             } else {
                 alert("کم از کم ایک پروڈکٹ کا نام اور درست ریٹ درج کریں!");
             }
         }
 
-        function renderInventoryBoxes(filter = "") {
+        function renderInventoryGrid(filter = "") {
             let container = document.getElementById('productsGridContainer');
             document.getElementById('totalProductCount').innerText = savedProducts.length;
-            let curr = translations[currentLang].currency;
-
-            let filtered = savedProducts.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()) || (p.barcode && p.barcode.includes(filter)));
+            let filtered = savedProducts.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
 
             if(filtered.length === 0) {
-                container.innerHTML = `<p style="text-align: center; grid-column: span 2; padding: 15px; opacity: 0.6;">کوئی پروڈکٹ نہیں ملی۔</p>`;
+                container.innerHTML = `<p style="text-align: center; grid-column: span 2; padding: 10px; opacity: 0.6;">کوئی پروڈکٹ نہیں۔</p>`;
                 return;
             }
 
             let html = "";
             filtered.forEach(prod => {
-                let lowStockBadge = prod.stock <= 2 ? `<br><span class="badge-low">خالی ہونے والی ہے!</span>` : '';
-                html += `<div class="mini-box" onclick="selectProduct('${prod.name}', ${prod.rate})">
-                            <h4>${prod.name}</h4>
-                            <p>${prod.rate} ${curr} | اسٹاک: ${prod.stock}</p>
-                            ${lowStockBadge}
-                            <div style="margin-top:5px; display:flex; justify-content:center; gap:4px;">
-                                <button class="edit-btn" onclick="event.stopPropagation(); editProduct('${prod.name}')">تبدیل</button>
-                                <button class="del-btn" onclick="event.stopPropagation(); deleteProduct('${prod.name}')">مٹا دیں</button>
-                            </div>
+                html += `<div style="background:var(--input-bg); border:1px solid var(--border-color); padding:8px; border-radius:8px; text-align:center; cursor:pointer;" onclick="selectProduct('${prod.name}', ${prod.rate})">
+                            <h4 style="color:var(--primary); font-size:0.85rem;">${prod.name}</h4>
+                            <p style="font-size:0.75rem; opacity:0.8;">ریٹ: ${prod.rate}</p>
                          </div>`;
             });
             container.innerHTML = html;
         }
 
-        function filterStock() {
+        function filterStockGrid() {
             let query = document.getElementById('searchStock').value;
-            renderInventoryBoxes(query);
+            renderInventoryGrid(query);
         }
 
         function selectProduct(name, rate) {
@@ -747,29 +481,8 @@
 
         function autoFetchRate() {
             let typed = document.getElementById('saleName').value.trim().toLowerCase();
-            let found = savedProducts.find(p => p.name.toLowerCase() === typed || p.barcode === typed);
-            if(found) {
-                document.getElementById('saleRate').value = found.rate;
-            }
-        }
-
-        function editProduct(name) {
-            let prod = savedProducts.find(p => p.name === name);
-            if(!prod) return;
-            let newRate = prompt("نیا ریٹ درج کریں:", prod.rate);
-            let newStock = prompt("نئی تعداد (Stock) درج کریں:", prod.stock);
-            if(newRate !== null && !isNaN(parseFloat(newRate))) prod.rate = parseFloat(newRate);
-            if(newStock !== null && !isNaN(parseFloat(newStock))) prod.stock = parseFloat(newStock);
-            localStorage.setItem('omni_pos_products', JSON.stringify(savedProducts));
-            renderInventoryBoxes();
-        }
-
-        function deleteProduct(name) {
-            if(confirm(`کیا آپ واقعی '${name}' کو مٹانا چاہتے ہیں؟`)) {
-                savedProducts = savedProducts.filter(p => p.name !== name);
-                localStorage.setItem('omni_pos_products', JSON.stringify(savedProducts));
-                renderInventoryBoxes();
-            }
+            let found = savedProducts.find(p => p.name.toLowerCase() === typed);
+            if(found) { document.getElementById('saleRate').value = found.rate; }
         }
 
         function addToBill() {
@@ -784,17 +497,16 @@
 
             let qtyNum = parseFloat(qtyInput) || 1;
             let calculatedTotal = rate * qtyNum;
-
-            // اسٹاک کم کرنا
             let prod = savedProducts.find(p => p.name.toLowerCase() === name.toLowerCase());
+            let costPrice = prod ? prod.cost : 0;
+
             if(prod) {
                 prod.stock = Math.max(0, prod.stock - qtyNum);
-                localStorage.setItem('omni_pos_products', JSON.stringify(savedProducts));
-                renderInventoryBoxes();
+                localStorage.setItem('omni_pos_products_pk', JSON.stringify(savedProducts));
+                renderInventoryGrid();
             }
 
-            currentBill.push({ name: name, rate: rate, qtyText: qtyNum + " عدد", total: calculatedTotal });
-
+            currentBill.push({ name: name, rate: rate, cost: costPrice, qtyText: qtyNum + " عدد", total: calculatedTotal });
             document.getElementById('saleName').value = "";
             document.getElementById('saleRate').value = "";
             document.getElementById('saleQty').value = "1";
@@ -809,11 +521,10 @@
         function renderBill() {
             let tbody = document.getElementById('billBody');
             let grandTotalText = document.getElementById('grandTotalText');
-            let curr = translations[currentLang].currency;
-
+            
             if(currentBill.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; opacity: 0.6; padding: 15px;">کوئی آئٹم شامل نہیں۔</td></tr>`;
-                grandTotalText.innerText = "0.00 " + curr;
+                grandTotalText.innerText = "0.00 روپے";
                 return;
             }
 
@@ -822,15 +533,33 @@
                 grandTotal += item.total;
                 html += `<tr>
                             <td style="font-weight:bold; color:var(--primary);">${item.name}</td>
-                            <td>${item.rate} ${curr}</td>
+                            <td>${item.rate}</td>
                             <td>${item.qtyText}</td>
-                            <td style="font-weight:bold; color:var(--accent);">${item.total.toFixed(2)} ${curr}</td>
+                            <td style="font-weight:bold; color:var(--accent);">${item.total.toFixed(2)}</td>
                             <td><button class="del-btn" onclick="removeBillItem(${index})">حذف</button></td>
                          </tr>`;
             });
 
             tbody.innerHTML = html;
-            grandTotalText.innerText = grandTotal.toFixed(2) + " " + curr;
+            grandTotalText.innerText = grandTotal.toFixed(2) + " روپے";
+        }
+
+        function generateBillTextPayload() {
+            let customer = document.getElementById('customerName').value.trim() || "عام گاہک";
+            let now = new Date();
+            let dateStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()} | ${now.toLocaleTimeString()}`;
+            let grandTotal = currentBill.reduce((sum, item) => sum + item.total, 0);
+
+            let msg = `*--- OmniPOS Pro PK.com ---*\n`;
+            msg += `آپریٹر: ${loggedInUser}\n`;
+            msg += `تاریخ: ${dateStr}\n`;
+            msg += `گاہک: ${customer}\n\n`;
+            msg += `*آئٹمز:*\n`;
+            currentBill.forEach((item, idx) => {
+                msg += `${idx+1}. ${item.name} (${item.rate} x ${item.qtyText}) = *${item.total.toFixed(2)} روپے*\n`;
+            });
+            msg += `\n*کل رقم: ${grandTotal.toFixed(2)} روپے*\nشکریہ! PK.com 🙏`;
+            return msg;
         }
 
         function saveInvoiceAndLedger() {
@@ -838,16 +567,16 @@
             let customer = document.getElementById('customerName').value.trim() || "عام گاہک";
             let billType = document.getElementById('billTypeSelector').value;
             let now = new Date();
-            
-            // اردو کے دن اور مہینے کے نام
-            const days = ['اتوار', 'پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'ہفتہ'];
-            const months = ['جنوری', 'فروری', 'مارچ', 'اپریل', 'مئی', 'جون', 'جولائی', 'اگست', 'ستمبر', 'اکتوبر', 'نومبر', 'دسمبر'];
-            
-            let dayName = days[now.getDay()];
-            let monthName = months[now.getMonth()];
-            let dateStr = `${dayName}, ${now.getDate()} ${monthName} ${now.getFullYear()} | وقت: ${now.toLocaleTimeString()}`;
-            
+            let dateStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()} | ${now.toLocaleTimeString()}`;
             let grandTotal = currentBill.reduce((sum, item) => sum + item.total, 0);
+            
+            let totalCostOfSales = 0;
+            currentBill.forEach(item => {
+                let p = savedProducts.find(prod => prod.name.toLowerCase() === item.name.toLowerCase());
+                let unitCost = p ? p.cost : item.cost;
+                let qNum = parseFloat(item.qtyText) || 1;
+                totalCostOfSales += (unitCost * qNum);
+            });
 
             let invoiceObj = {
                 seller: loggedInUser,
@@ -855,22 +584,21 @@
                 date: dateStr,
                 items: [...currentBill],
                 grandTotal: grandTotal,
+                totalCost: totalCostOfSales,
                 type: billType
             };
 
             invoiceHistory.unshift(invoiceObj);
-            localStorage.setItem('omni_pos_invoice_history', JSON.stringify(invoiceHistory));
+            localStorage.setItem('omni_pos_invoice_pk', JSON.stringify(invoiceHistory));
 
-            // اگر کھاتہ ہو تو گاہک کے کھاتے میں رقم جمع کریں
             if(billType === 'credit') {
                 if(!customerLedgers[customer]) {
                     customerLedgers[customer] = { phone: document.getElementById('customerPhone').value.trim(), balance: 0, history: [] };
                 }
                 customerLedgers[customer].balance += grandTotal;
                 customerLedgers[customer].history.push(invoiceObj);
-                localStorage.setItem('omni_pos_ledgers', JSON.stringify(customerLedgers));
+                localStorage.setItem('omni_pos_ledgers_pk', JSON.stringify(customerLedgers));
             }
-
             return invoiceObj;
         }
 
@@ -883,75 +611,27 @@
             window.print();
         }
 
+        function copyBillText() {
+            if(currentBill.length === 0) { alert("بل خالی ہے!"); return; }
+            saveInvoiceAndLedger();
+            let textToCopy = generateBillTextPayload();
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert("بل کا متن کاپی ہو گیا ہے!");
+            }).catch(err => { alert("خرابی پیش آئی!"); });
+        }
+
         function saveAndSendWhatsApp() {
             if(currentBill.length === 0) { alert("بل خالی ہے!"); return; }
             let phone = document.getElementById('customerPhone').value.trim();
             if(phone === "") { alert("براہ کرم گاہک کا واٹس ایپ نمبر درج کریں!"); return; }
-
-            let inv = saveAndSendWhatsAppMessage();
+            saveInvoiceAndLedger();
+            let msg = generateBillTextPayload();
+            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        function saveAndSendWhatsAppMessage() {
-            let inv = saveInvoiceAndLedger();
-            let phone = document.getElementById('customerPhone').value.trim();
-            let curr = translations[currentLang].currency;
-            let billTypeTitle = inv.type === 'credit' ? 'ادھار کھاتا رسید' : 'نقد بل رسید';
-
-            let msg = `*--- OmniPOS Pro (${billTypeTitle}) ---*\n`;
-            msg += `تاریخ و دن: ${inv.date}\n`;
-            msg += `آپریٹر: ${inv.seller} | گاہک: ${inv.customer}\n\n`;
-            msg += `*لی گئی اشیاء:*\n`;
-
-            inv.items.forEach((item, idx) => {
-                msg += `${idx+1}. ${item.name} | ${item.rate} x ${item.qtyText} = *${item.total.toFixed(2)} ${curr}*\n`;
-            });
-
-            msg += `\n*کل واجب الادا رقم: ${inv.grandTotal.toFixed(2)} ${curr}*\n`;
-            if(inv.type === 'credit') {
-                msg += `*(یہ رقم آپ کے کھاتے میں درج کر لی گئی ہے)*\n`;
-            }
-            msg += `شکریہ! دوبارہ تشریف لائیں 🙏`;
-
-            let encodedMsg = encodeURIComponent(msg);
-            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodedMsg}`, '_blank');
-        }
-
-        // بارکوڈ اسکینر کیمرہ فنکشن
-        function openScannerModal() {
-            document.getElementById('scannerModal').style.display = 'flex';
-            Quagga.init({
-                inputStream : {
-                    name : "Live",
-                    type : "LiveStream",
-                    target: document.querySelector('#interactive')
-                },
-                decoder : {
-                    readers : ["code_128_reader", "ean_reader", "ean_8_reader", "upc_reader"]
-                }
-            }, function(err) {
-                if (err) { console.log(err); return; }
-                Quagga.start();
-            });
-
-            Quagga.onDetected(function(result) {
-                let code = result.codeResult.code;
-                document.getElementById('saleName').value = code;
-                autoFetchRate();
-                closeScannerModal();
-            });
-        }
-
-        function closeScannerModal() {
-            try { Quagga.stop(); } catch(e) {}
-            document.getElementById('scannerModal').style.display = 'none';
-        }
-
-        // ادھار کھاتا ماڈل
         function openLedgerModal() {
             let container = document.getElementById('ledgerListContainer');
-            let curr = translations[currentLang].currency;
             let keys = Object.keys(customerLedgers);
-
             if(keys.length === 0) {
                 container.innerHTML = "<p style='opacity:0.6;'>کوئی ادھار کھاتا موجود نہیں۔</p>";
             } else {
@@ -961,81 +641,61 @@
                     html += `<div style="background:var(--input-bg); border:1px solid var(--border-color); padding:10px; border-radius:8px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
                                 <div>
                                     <p><strong>👤 گاہک:</strong> ${cust}</p>
-                                    <p><strong>📞 نمبر:</strong> ${data.phone || 'نامعلوم'}</p>
-                                    <p style="color:#ef4444; font-weight:bold;">بقايا ادھار: ${data.balance.toFixed(2)} ${curr}</p>
+                                    <p style="color:#ef4444; font-weight:bold;">بقايا ادھار: ${data.balance.toFixed(2)} روپے</p>
                                 </div>
-                                <div>
-                                    <button class="whatsapp-btn" onclick="sendLedgerWhatsApp('${cust}')">💬 کھاتا بھیجیں</button>
-                                </div>
+                                <div><button class="whatsapp-btn" onclick="sendLedgerWhatsApp('${cust}')">💬 کھاتا بھیجیں</button></div>
                              </div>`;
                 });
                 container.innerHTML = html;
             }
             document.getElementById('ledgerModal').style.display = 'flex';
         }
-
         function closeLedgerModal() { document.getElementById('ledgerModal').style.display = 'none'; }
 
         function sendLedgerWhatsApp(custName) {
             let data = customerLedgers[custName];
-            if(!data || !data.phone) {
-                alert("اس گاہک کا واٹس ایپ نمبر درج نہیں ہے!");
-                return;
-            }
-            let curr = translations[currentLang].currency;
-            let msg = `*--- کسٹمر ادھار کھاتا تفصیل ---*\n`;
-            msg += `گاہک: ${custName}\n`;
-            msg += `*کل بقایا ادھار رقم: ${data.balance.toFixed(2)} ${curr}*\n`;
-            msg += `براہ کرم جلد ادائیگی کریں۔ شکریہ! 🙏`;
-
+            if(!data || !data.phone) { alert("واٹس ایپ نمبر درج نہیں ہے!"); return; }
+            let msg = `*--- کسٹمر ادھار کھاتا (PK.com) ---*\nگاہک: ${custName}\n*کل بقایا ادھار: ${data.balance.toFixed(2)} روپے*\nشکریہ! 🙏`;
             window.open(`https://api.whatsapp.com/send?phone=${data.phone}&text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        // رپورٹس
         function openReportsModal() {
             let content = document.getElementById('reportsContent');
-            let curr = translations[currentLang].currency;
             let totalSales = invoiceHistory.reduce((sum, inv) => sum + inv.grandTotal, 0);
+            let totalCostOfSales = invoiceHistory.reduce((sum, inv) => sum + inv.totalCost, 0);
+            let grossProfit = totalSales - totalCostOfSales;
             let totalExpenses = expensesList.reduce((sum, exp) => sum + exp.amount, 0);
-            let netProfit = totalSales - totalExpenses;
+            let netProfit = grossProfit - totalExpenses;
 
-            content.innerHTML = `<p><strong>کل سیلز (مجموعی آمدنی):</strong> ${totalSales.toFixed(2)} ${curr}</p>
-                                 <p><strong>کل اخراجات:</strong> ${totalExpenses.toFixed(2)} ${curr}</p>
-                                 <p style="color:var(--primary); font-size:1.1rem; font-weight:bold; margin-top:10px;">خالص بچت / پرافٹ: ${netProfit.toFixed(2)} ${curr}</p>`;
+            content.innerHTML = `<p><strong>کل سیلز:</strong> ${totalSales.toFixed(2)} روپے</p>
+                                 <p><strong>کل لاگت:</strong> ${totalCostOfSales.toFixed(2)} روپے</p>
+                                 <p style="color:#10b981;"><strong>مجموعی منافع:</strong> ${grossProfit.toFixed(2)} روپے</p>
+                                 <p><strong>کل اخراجات:</strong> ${totalExpenses.toFixed(2)} روپے</p>
+                                 <p style="color:var(--primary); font-size:1.1rem; font-weight:bold; margin-top:10px;">خالص بچت / پرافٹ: ${netProfit.toFixed(2)} روپے</p>`;
             document.getElementById('reportsModal').style.display = 'flex';
         }
-
         function closeReportsModal() { document.getElementById('reportsModal').style.display = 'none'; }
 
-        // اخراجات
-        function openExpenseModal() {
-            renderExpenses();
-            document.getElementById('expenseModal').style.display = 'flex';
-        }
+        function openExpenseModal() { renderExpenses(); document.getElementById('expenseModal').style.display = 'flex'; }
         function closeExpenseModal() { document.getElementById('expenseModal').style.display = 'none'; }
-
         function addExpense() {
             let title = document.getElementById('expenseTitle').value.trim();
             let amount = parseFloat(document.getElementById('expenseAmount').value);
-            let curr = translations[currentLang].currency;
-
             if(title === "" || isNaN(amount)) { alert("تفصیل اور رقم درست درج کریں!"); return; }
             expensesList.push({ title: title, amount: amount, time: new Date().toLocaleDateString() });
-            localStorage.setItem('omni_pos_expenses', JSON.stringify(expensesList));
+            localStorage.setItem('omni_pos_expenses_pk', JSON.stringify(expensesList));
             document.getElementById('expenseTitle').value = "";
             document.getElementById('expenseAmount').value = "";
             renderExpenses();
         }
-
         function renderExpenses() {
             let container = document.getElementById('expenseListContainer');
-            let curr = translations[currentLang].currency;
             if(expensesList.length === 0) { container.innerHTML = "<p style='opacity:0.6;'>کوئی خرچہ درج نہیں۔</p>"; return; }
             let html = "";
-            expensesList.forEach((exp, idx) => {
+            expensesList.expensesList?.forEach?.(exp => {}); // safe guard
+            expensesList.forEach(exp => {
                 html += `<div style="display:flex; justify-content:space-between; padding:6px; border-bottom:1px solid var(--border-color); font-size:0.85rem;">
-                            <span>${exp.title} (${exp.time})</span>
-                            <span style="color:#ef4444; font-weight:bold;">${exp.amount} ${curr}</span>
+                            <span>${exp.title} (${exp.time})</span><span style="color:#ef4444; font-weight:bold;">${exp.amount} روپے</span>
                          </div>`;
             });
             container.innerHTML = html;
@@ -1043,21 +703,19 @@
 
         function openHistoryModal() {
             let container = document.getElementById('historyListContainer');
-            let curr = translations[currentLang].currency;
             if(invoiceHistory.length === 0) { container.innerHTML = "<p style='opacity:0.6;'>کوئی رسید محفوظ نہیں۔</p>"; return; }
             let html = "";
             invoiceHistory.forEach((inv, index) => {
                 html += `<div style="background:var(--input-bg); border:1px solid var(--border-color); padding:10px; border-radius:8px; margin-bottom:10px;">
                             <p><strong>رسید # ${invoiceHistory.length - index}</strong> (${inv.type === 'credit' ? 'ادھار کھاتہ' : 'نقد'})</p>
-                            <p>تاریخ و دن: ${inv.date}</p>
+                            <p>تاریخ: ${inv.date}</p>
                             <p>آپریٹر: ${inv.seller} | گاہک: ${inv.customer}</p>
-                            <p style="color:var(--primary); font-weight:bold;">کل رقم: ${inv.grandTotal.toFixed(2)} ${curr}</p>
+                            <p style="color:var(--primary); font-weight:bold;">کل رقم: ${inv.grandTotal.toFixed(2)} روپے</p>
                          </div>`;
             });
-            container.innerHTML = container.innerHTML = html;
+            container.innerHTML = html;
             document.getElementById('historyModal').style.display = 'flex';
         }
-
         function closeHistoryModal() { document.getElementById('historyModal').style.display = 'none'; }
     </script>
 
