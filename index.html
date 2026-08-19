@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musab Creator Studio - آل ان ون کری ایٹر اسٹوڈیو</title>
+    <style>
+        :root {
+            --primary: #00ff88;
+            --secondary: #0f172a;
+            --accent: #ffcc00;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --gradient: linear-gradient(135deg, #1e1b4b, #0f172a, #020617);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--gradient);
+            color: var(--text-light);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* مین کنٹینر */
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* خوبصورت ہیڈر سیکشن */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        header h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 20px rgba(0,255,136,0.3);
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* سرچ بار سیکشن */
+        .search-section {
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            display: flex;
+            gap: 10px;
+            background: rgba(30, 41, 59, 0.9);
+            padding: 8px;
+            border-radius: 50px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .search-section input {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            background: transparent;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-section input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-section button {
+            padding: 0 30px;
+            background: var(--primary);
+            color: #020617;
+            border: none;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-section button:hover {
+            background: #00cc6a;
+            box-shadow: 0 0 15px rgba(0,255,136,0.5);
+            transform: scale(1.02);
+        }
+
+        /* سیکشن کا عنوان */
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            border-right: 4px solid var(--accent);
+            padding-right: 10px;
+        }
+
+        /* گرڈ سسٹم - ٹیمپلیٹس اور ٹولز کے لیے */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        /* کارڈ کا دلکش ڈیزائن */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: right;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 12px 40px rgba(0,255,136,0.15);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card h3 {
+            color: var(--text-light);
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .card button {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 10px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .card button:hover {
+            background: var(--primary);
+            color: #020617;
+        }
+
+        /* گوگل ایڈسنس بینر سیکشن */
+        .ad-banner {
+            max-width: 800px;
+            margin: 40px auto;
+            background: rgba(15, 23, 42, 0.4);
+            border: 2px dashed rgba(148, 163, 184, 0.3);
+            text-align: center;
+            padding: 25px;
+            border-radius: 15px;
+            color: var(--text-muted);
+        }
+
+        /* فوٹر */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+            margin-top: 30px;
+        }
+
+        /* موبائل ریسپانسو ڈیزائن */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .search-section { flex-direction: column; background: transparent; border: none; box-shadow: none; gap: 12px; }
+            .search-section input { background: rgba(30, 41, 59, 0.9); border-radius: 30px; border: 1px solid var(--card-border); }
+            .search-section button { padding: 15px; border-radius: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        
+        <!-- ہیڈر -->
+        <header>
+            <h1>Musab Creator Studio</h1>
+            <p>لا محدود ویڈیو ٹیمپلیٹس اور اے آئی ایڈیٹنگ ٹولز - بغیر کسی قید کے بالکل مفت!</p>
+        </header>
+
+        <!-- خوبصورت سرچ بار -->
+        <div class="search-section">
+            <input type="text" id="searchInput" placeholder="اپنی مرضی کا کوئی بھی ٹیمپلیٹ یا ٹول تلاش کریں (مثلاً: برتھ ڈے, ٹک ٹاک, بیک گراؤنڈ)...">
+            <button onclick="searchTool()">تلاش کریں</button>
+        </div>
+
+        <h2 class="section-title">تمام فیچرز اور ٹولز</h2>
+
+        <!-- کیٹگریز کارڈز -->
+        <div class="grid-container">
+            
+            <div class="card">
+                <h3>🎬 وائرل ویڈیو ٹیمپلیٹس</h3>
+                <p>CapCut اسٹائل کے تمام زبردست شارٹس، ریلز اور ٹک ٹاک ٹیمپلیٹس لامحدود استعمال کریں۔</p>
+                <button onclick="alert('ٹیمپلیٹ اسٹوڈیو اوپن ہو رہا ہے!')">استعمال کریں</button>
+            </div>
+
+            <div class="card">
+                <h3>🎨 ڈیزائن اینڈ پوسٹر ٹیمپلیٹس</h3>
+                <p>Canva اسٹائل کے ہزاروں پروفیشنل پوسٹرز، تھمب نیلز اور وزٹنگ کارڈز کے ڈیزائن۔</p>
+                <button onclick="alert('ڈیزائن اسٹوڈیو اوپن ہو رہا ہے!')">اوپن کریں</button>
+            </div>
+
+            <div class="card">
+                <h3>✂️ اے آئی بیک گراؤنڈ ریمور</h3>
+                <p>کسی بھی تصویر کا پس منظر ایک سیکنڈ میں بالکل صاف اور شفاف بنائیں۔</p>
+                <button onclick="alert('بیک گراؤنڈ ریمور ٹول ریڈی ہے!')">ٹول چلائیں</button>
+            </div>
+
+            <div class="card">
+                <h3>✨ اے آئی امیج جنریٹر</h3>
+                <p>اپنے الفاظ سے شاندار اور خوبصورت تصاویر خود بخود تخلیق کروائیں۔</p>
+                <button onclick="alert('جنریٹر اوپن ہو رہا ہے!')">تصویر بنائیں</button>
+            </div>
+
+            <div class="card">
+                <h3>📉 میڈیا کمپریسر</h3>
+                <p>بڑی ویڈیوز اور تصویروں کا سائز کم کریں بغیر کوالٹی کو متاثر کیے۔</p>
+                <button onclick="alert('کمپریسنگ ٹول ایکٹیو ہے!')">سائز کم کریں</button>
+            </div>
+
+            <div class="card">
+                <h3>🔤 آٹو سب ٹائٹل میکر</h3>
+                <p>ویڈیو کی آواز سے خود بخود لکھائی (Captions) اور سب ٹائٹلز تیار کریں۔</p>
+                <button onclick="alert('سب ٹائٹل ٹول اوپن ہو رہا ہے!')">شروع کریں</button>
+            </div>
+
+        </div>
+
+        <!-- گوگل ایڈسنس بینر جگہ -->
+        <div class="ad-banner">
+            [ یہاں آپ کا گوگل ایڈسنس (Google AdSense) کا اشتہار شو ہوگا ]
+        </div>
+
+        <!-- فوٹر -->
+        <footer>
+            <p>&copy; 2026 Musab Creator Studio. All Rights Reserved.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        function searchTool() {
+            let query = document.getElementById('searchInput').value;
+            if(query.trim() !== "") {
+                alert("تلاش کامیاب: " + query + "\nتمام ٹیمپلیٹس اور ٹولز بالکل فری دستیاب ہیں!");
+            } else {
+                alert("براہ کرم سرچ باکس میں کچھ لکھیں!");
+            }
+        }
+    </script>
+
+</body>
+</html>
