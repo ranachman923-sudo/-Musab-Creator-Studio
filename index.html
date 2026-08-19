@@ -2,56 +2,436 @@
 <html lang="ur" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Musab Studio - Premium Card Generator</title>
-    <link href="https://fonts.googleapis.com/css2?family=Jameel+Noori+Nastaleeq&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musab Smart POS Pro - الٹیمیٹ بلنگ سسٹم</title>
     <style>
-        body { margin: 0; background: #0b0e14; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .app-container { width: 90%; max-width: 800px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .input-box { display: flex; flex-direction: column; gap: 15px; }
-        input { padding: 15px; border-radius: 12px; border: none; background: #1a1f29; color: white; outline: none; }
-        button { padding: 15px; border-radius: 12px; border: none; background: linear-gradient(90deg, #6366f1, #a855f7); color: white; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        button:hover { transform: scale(1.05); }
+        :root {
+            --primary: #00ff88;
+            --secondary: #0f172a;
+            --accent: #ffcc00;
+            --glow: 0 0 20px rgba(0, 255, 136, 0.3);
+            --card-bg: rgba(15, 23, 42, 0.9);
+            --border-color: rgba(255, 255, 255, 0.15);
+        }
 
-        /* پریمیم کارڈ اسٹائل */
-        .card-preview { width: 350px; height: 200px; background: linear-gradient(135deg, #1e293b, #0f172a); border-radius: 20px; padding: 25px; border: 1px solid #4f46e5; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; }
-        .card-preview::before { content: ""; position: absolute; top: -10px; right: -10px; width: 50px; height: 50px; background: #6366f1; border-radius: 50%; opacity: 0.3; }
-        h2 { margin: 0; color: #6366f1; font-family: 'Jameel Noori Nastaleeq', serif; font-size: 28px; }
-        .cat { color: #94a3b8; font-size: 14px; }
-        .owner { font-weight: bold; font-size: 18px; margin-top: 10px; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #020617, #0f172a, #1e1b4b);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            flex: 1;
+        }
+
+        /* شاندار اور چمکدار ہوم پیج ہیڈر */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 2px solid var(--border-color);
+            margin-bottom: 30px;
+            box-shadow: var(--glow);
+        }
+
+        header h1 {
+            color: var(--primary);
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 25px rgba(0, 255, 136, 0.5);
+            letter-spacing: 1px;
+        }
+
+        header p {
+            color: #94a3b8;
+            font-size: 1.2rem;
+        }
+
+        /* مین ڈیش بورڈ گرید */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card-box {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        .card-box h3 {
+            color: var(--accent);
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            border-right: 5px solid var(--accent);
+            padding-right: 12px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px;
+            background: #1e293b;
+            color: white;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            outline: none;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary);
+            box-shadow: var(--glow);
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: #020617;
+            border: none;
+            padding: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            width: 100%;
+            margin-top: 10px;
+            transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(0,255,136,0.3);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,255,136,0.5);
+        }
+
+        /* بل لسٹ ایریا */
+        .bill-table-container {
+            max-height: 350px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid #334155;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+        }
+
+        th {
+            background: #1e293b;
+            color: var(--accent);
+            padding: 12px;
+            font-size: 0.95rem;
+            position: sticky;
+            top: 0;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.95rem;
+        }
+
+        .del-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .del-btn:hover {
+            background: #cc0000;
+        }
+
+        /* ٹوٹل اور پرنٹ سیکشن */
+        .footer-total {
+            background: rgba(2, 6, 23, 0.8);
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-total h2 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            text-shadow: 0 0 15px rgba(0,255,136,0.3);
+        }
+
+        .print-action-btn {
+            background: var(--accent);
+            color: #020617;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        .print-action-btn:hover {
+            background: #e6b800;
+            transform: scale(1.05);
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
     </style>
 </head>
 <body>
 
-<div class="app-container">
-    <div class="input-box">
-        <h2 style="color:white; font-family: sans-serif;">کارڈ کی تفصیلات</h2>
-        <input type="text" id="shop" placeholder="دکان کا نام">
-        <input type="text" id="cat" placeholder="کام کی قسم">
-        <input type="text" id="owner" placeholder="مالک کا نام">
-        <input type="text" id="phone" placeholder="فون نمبر">
-        <button onclick="updateCard()">کارڈ پرنٹ کریں</button>
+    <div class="main-wrapper">
+        
+        <!-- شاندار، فل سکرین اور چمکدار ہوم پیج ہیڈر -->
+        <header>
+            <h1>Musab Smart POS Pro</h1>
+            <p>الٹیمیٹ بلنگ اسٹوڈیو - بوتلوں، ٹافیوں، پیمپرز اور وزن والی ہر چیز کا خودکار حساب!</p>
+        </header>
+
+        <div class="dashboard">
+            
+            <!-- پہلا خانہ: پروڈکٹ اور مقدار درج کرنے کا فارم -->
+            <div class="card-box">
+                <h3>نئی پروڈکٹ شامل کریں</h3>
+                
+                <div class="input-group">
+                    <label>پروڈکٹ کا نام (مثلاً: بوتل، ٹافی، پیمپرز، چینی):</label>
+                    <input type="text" id="pName" placeholder="چیز کا نام لکھیں...">
+                </div>
+
+                <div class="input-group">
+                    <label>حساب کی قسم (Type):</label>
+                    <select id="pMode" onchange="toggleMode()">
+                        <option value="piece">تعداد / پیس کے حساب سے (بسکٹ، بوتل، ٹافی، پیمپرز)</option>
+                        <option value="weight">وزن کے حساب سے (چینی، دال - کلو / گرام)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label id="rateLabel">فی پیس ریٹ (روپے):</label>
+                    <input type="number" id="pRate" placeholder="مثلاً: 200">
+                </div>
+
+                <div class="input-group">
+                    <label id="qtyLabel">تعداد (Kitnay Piece):</label>
+                    <input type="text" id="pQty" placeholder="مثلاً: 3 (یا وزن جیسے 250 گرام / 1 پاؤ)" value="1">
+                </div>
+
+                <button class="action-btn" onclick="addItemToBill()">بل میں شامل کریں (Add to Bill)</button>
+            </div>
+
+            <!-- دوسرا خانہ: گاہک کی جاری بل لسٹ اور کل ٹوٹل -->
+            <div class="card-box" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3>گاہک کی جاری رسید (Current Invoice)</h3>
+                    
+                    <div class="bill-table-container">
+                        <table id="billTable">
+                            <thead>
+                                <tr>
+                                    <th>پروڈکٹ</th>
+                                    <th>ریٹ</th>
+                                    <th>مقدار / تعداد</th>
+                                    <th>کل قیمت</th>
+                                    <th>حذف</th>
+                                </tr>
+                            </thead>
+                            <tbody id="billBody">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; color: #64748b; padding: 30px;">ابھی تک کوئی پروڈکٹ شامل نہیں کی گئی۔</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- آخری گرینڈ ٹوٹل باکس -->
+                <div class="footer-total">
+                    <div>
+                        <span style="color: #94a3b8; font-size: 0.9rem; display: block;">کل بل (Grand Total):</span>
+                        <h2 id="grandTotalDisplay">0.00 روپے</h2>
+                    </div>
+                    <button class="print-action-btn" onclick="window.print()">پرنٹ / محفوظ کریں</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <footer class="site-footer">
+            <p>&copy; 2026 Musab Smart POS Pro. All Rights Reserved. | Professional Retail Billing Solution</p>
+        </footer>
+
     </div>
 
-    <div class="card-preview">
-        <div>
-            <h2 id="outShop">آپ کی دکان</h2>
-            <div class="cat" id="outCat">کام کی قسم</div>
-        </div>
-        <div>
-            <div class="owner" id="outOwner">مالک کا نام</div>
-            <div style="font-size: 12px; color: #6366f1;" id="outPhone">0300-0000000</div>
-        </div>
-    </div>
-</div>
+    <script>
+        let cart = [];
 
-<script>
-    function updateCard() {
-        document.getElementById('outShop').innerText = document.getElementById('shop').value;
-        document.getElementById('outCat').innerText = document.getElementById('cat').value;
-        document.getElementById('outOwner').innerText = document.getElementById('owner').value;
-        document.getElementById('outPhone').innerText = document.getElementById('phone').value;
-    }
-</script>
+        function toggleMode() {
+            let mode = document.getElementById('pMode').value;
+            let rateLabel = document.getElementById('rateLabel');
+            let qtyLabel = document.getElementById('qtyLabel');
+            
+            if(mode === 'piece') {
+                rateLabel.innerText = "فی پیس ریٹ (روپے):";
+                qtyLabel.innerText = "تعداد (Kitnay Piece): যথা 3";
+            } else {
+                rateLabel.innerText = "فی کلو ریٹ (روپے):";
+                qtyLabel.innerText = "وزن (گرام یا کلو یا پاؤ):";
+            }
+        }
+
+        function addItemToBill() {
+            let name = document.getElementById('pName').value.trim();
+            let mode = document.getElementById('pMode').value;
+            let rate = parseFloat(document.getElementById('pRate').value);
+            let qtyInput = document.getElementById('pQty').value.trim();
+
+            if(name === "" || isNaN(rate) || qtyInput === "") {
+                alert("براہ کرم تمام خانے درست طریقے سے پُر کریں!");
+                return;
+            }
+
+            let calculatedTotal = 0;
+            let qtyText = "";
+
+            if(mode === 'piece') {
+                // پیس یا تعداد کے حساب سے (مثلاً 3 بوتلیں اور ایک بوتل 200 روپے کی)
+                let qtyNum = parseFloat(qtyInput);
+                if(isNaN(qtyNum) || qtyNum <= 0) {
+                    alert("تعداد درست درج کریں!");
+                    return;
+                }
+                calculatedTotal = rate * qtyNum;
+                qtyText = qtyNum + " عدد (Pieces)";
+            } else {
+                // وزن کے حساب سے (چینی، دال وغیرہ)
+                let weightInKg = 0;
+                let lowerInput = qtyInput.toLowerCase();
+
+                if(lowerInput.includes('پاؤ')) {
+                    weightInKg = 0.25;
+                    qtyText = "ایک پاؤ (250 گرام)";
+                } else if(lowerInput.includes('آدھا') || lowerInput.includes('ادھا')) {
+                    weightInKg = 0.5;
+                    qtyText = "آدھا کلو (500 گرام)";
+                } else {
+                    let num = parseFloat(qtyInput);
+                    if(isNaN(num)) {
+                        alert("وزن کا اندراج درست نہیں ہے!");
+                        return;
+                    }
+                    if(num > 10) {
+                        weightInKg = num / 1000;
+                        qtyText = num + " گرام";
+                    } else {
+                        weightInKg = num;
+                        qtyText = num + " کلو";
+                    }
+                }
+                calculatedTotal = rate * weightInKg;
+            }
+
+            // کارٹ میں ڈیٹا محفوظ کرنا
+            cart.push({
+                name: name,
+                rate: rate,
+                qtyText: qtyText,
+                total: calculatedTotal
+            });
+
+            // ان پٹس صاف کرنا
+            document.getElementById('pName').value = "";
+            document.getElementById('pRate').value = "";
+            document.getElementById('pQty').value = "1";
+
+            renderCart();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            renderCart();
+        }
+
+        function renderCart() {
+            let tbody = document.getElementById('billBody');
+            let grandTotalDisplay = document.getElementById('grandTotalDisplay');
+
+            if(cart.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #64748b; padding: 30px;">ابھی تک کوئی پروڈکٹ شامل نہیں کی گئی۔</td></tr>`;
+                grandTotalDisplay.innerText = "0.00 روپے";
+                return;
+            }
+
+            let html = "";
+            let grandTotal = 0;
+
+            cart.forEach((item, index) => {
+                grandTotal += item.total;
+                html += `<tr>
+                            <td style="font-weight: bold; color: #f8fafc;">${item.name}</td>
+                            <td>${item.rate} روپے</td>
+                            <td>${item.qtyText}</td>
+                            <td style="color: var(--primary); font-weight: bold;">${item.total.toFixed(2)} روپے</td>
+                            <td><button class="del-btn" onclick="removeItem(${index})">حذف</button></td>
+                         </tr>`;
+            });
+
+            tbody.innerHTML = html;
+            grandTotalDisplay.innerText = grandTotal.toFixed(2) + " روپے";
+        }
+    </script>
 
 </body>
 </html>
