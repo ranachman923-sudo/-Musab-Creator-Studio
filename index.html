@@ -6,14 +6,14 @@
     <title id="appTitle">OmniPOS Pro Ultimate PK.com</title>
     <style>
         :root {
-            --primary: #00f2fe;
-            --secondary: #0f172a;
-            --accent: #4facfe;
-            --bg-grad: linear-gradient(135deg, #090d16, #1e1b4b, #020617);
-            --card-bg: rgba(15, 23, 42, 0.96);
+            --primary: #00e1ff;
+            --secondary: #050b14;
+            --accent: #3b82f6;
+            --bg-grad: linear-gradient(135deg, #020617, #0f172a, #1e1b4b);
+            --card-bg: rgba(11, 19, 38, 0.98);
             --text-color: #f8fafc;
-            --border-color: rgba(255, 255, 255, 0.2);
-            --input-bg: #1e293b;
+            --border-color: rgba(0, 225, 255, 0.35);
+            --input-bg: #111c33;
         }
 
         .light-mode {
@@ -21,9 +21,9 @@
             --secondary: #f1f5f9;
             --accent: #0284c7;
             --bg-grad: linear-gradient(135deg, #f8fafc, #e2e8f0, #cbd5e1);
-            --card-bg: rgba(255, 255, 255, 0.96);
+            --card-bg: rgba(255, 255, 255, 0.98);
             --text-color: #0f172a;
-            --border-color: rgba(0, 0, 0, 0.2);
+            --border-color: rgba(2, 132, 199, 0.35);
             --input-bg: #ffffff;
         }
 
@@ -35,80 +35,88 @@
             background: rgba(2, 6, 23, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999;
         }
         .login-card {
-            background: #0f172a; border: 2px solid var(--primary); padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
+            background: #0b1326; border: 2px solid var(--primary); padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 0 35px rgba(0, 225, 255, 0.4);
         }
         .login-card h2 { color: var(--primary); margin-bottom: 15px; }
 
         .main-app-container { display: none; max-width: 1400px; margin: 0 auto; }
 
         header {
-            text-align: center; padding: 30px 15px; background-size: cover; background-position: center;
+            text-align: center; padding: 35px 15px; background-size: cover; background-position: center;
             background-color: var(--card-bg); border-radius: 20px; border: 2px solid var(--border-color);
-            margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); position: relative; overflow: hidden;
+            margin-bottom: 20px; box-shadow: 0 10px 35px rgba(0,0,0,0.5); position: relative; overflow: hidden;
         }
         header::before {
             content: ""; position: absolute; top:0; left:0; width:100%; height:100%;
-            background: rgba(9, 13, 22, 0.65); z-index: 1; /* مدھم پن کم کیا تاکہ بیک گراؤنڈ واضح دکھے */
+            background: rgba(5, 11, 20, 0.45); z-index: 1; /* بیک گراؤنڈ تصویر کو انتہائی واضح اور تیز رکھنے کے لیے مدھم پن کم کیا گیا ہے */
         }
-        .light-mode header::before { background: rgba(255, 255, 255, 0.65); }
+        .light-mode header::before { background: rgba(255, 255, 255, 0.45); }
         .header-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; }
         
-        .app-logo {
-            width: 85px; height: 85px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; box-shadow: 0 0 20px rgba(0, 242, 254, 0.6); cursor: pointer; background: #000;
+        .app-logo-wrapper {
+            width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--primary); overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 0 25px rgba(0, 225, 255, 0.7); background: #000;
         }
-        header h1 { color: var(--primary); font-size: 1.9rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .app-logo {
+            width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;
+        }
+        header h1 { color: var(--primary); font-size: 2rem; text-shadow: 0 2px 6px rgba(0,0,0,0.7); font-weight: 800; }
 
         .top-controls {
-            position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border-color);
+            position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 15px; padding-top: 12px; border-top: 1px solid var(--border-color);
         }
         .icon-btn, select.icon-btn {
-            background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 7px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: bold; outline: none;
+            background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: bold; outline: none;
         }
-        .icon-btn:hover { border-color: var(--primary); }
+        .icon-btn:hover { border-color: var(--primary); box-shadow: 0 0 10px rgba(0,225,255,0.3); }
 
         .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         @media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } }
 
         .panel {
-            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin-bottom: 20px; max-height: 800px; overflow-y: auto;
+            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin-bottom: 20px; max-height: 800px; overflow-y: auto;
         }
         .panel h3 {
-            color: var(--accent); font-size: 1.1rem; margin-bottom: 12px; border-right: 4px solid var(--accent); padding-right: 8px; display: flex; justify-content: space-between; align-items: center;
+            color: var(--primary); font-size: 1.15rem; margin-bottom: 12px; border-right: 4px solid var(--primary); padding-right: 8px; display: flex; justify-content: space-between; align-items: center; font-weight: 700;
         }
 
         .input-group { margin-bottom: 12px; }
-        .input-group label { display: block; margin-bottom: 4px; font-size: 0.9rem; opacity: 0.9; }
+        .input-group label { display: block; margin-bottom: 4px; font-size: 0.9rem; opacity: 0.95; font-weight: 600; }
         input, select, textarea { width: 100%; padding: 10px; background: var(--input-bg); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 8px; outline: none; font-size: 0.95rem; }
-        input:focus { border-color: var(--primary); }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 8px rgba(0,225,255,0.4); }
 
         .btn {
-            background: linear-gradient(135deg, #00f2fe, #4facfe); color: #020617; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.95rem; width: 100%; transition: 0.3s;
+            background: linear-gradient(135deg, #00e1ff, #3b82f6); color: #020617; border: none; padding: 11px 15px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 1rem; width: 100%; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,225,255,0.3);
         }
-        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+        .btn:hover { transform: translateY(-2px); opacity: 0.95; box-shadow: 0 6px 20px rgba(0,225,255,0.5); }
 
         .bulk-rows-container { max-height: 180px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px; margin-bottom: 10px; }
         .bulk-row { display: flex; gap: 8px; margin-bottom: 8px; }
 
         .table-responsive { max-height: 180px; overflow-y: auto; margin-bottom: 12px; border: 1px solid var(--border-color); border-radius: 8px; }
         table { width: 100%; border-collapse: collapse; text-align: right; }
-        th { background: var(--input-bg); color: var(--accent); padding: 8px; font-size: 0.85rem; position: sticky; top: 0; }
+        th { background: var(--input-bg); color: var(--primary); padding: 8px; font-size: 0.85rem; position: sticky; top: 0; font-weight: 700; }
         td { padding: 8px; border-bottom: 1px solid var(--border-color); font-size: 0.85rem; }
 
-        .del-btn { background: #ff4444; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
+        .del-btn { background: #ef4444; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; font-weight: bold; }
 
         .total-box { background: var(--input-bg); border: 2px solid var(--primary); border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-        .total-box h2 { color: var(--primary); font-size: 1.2rem; }
+        .total-box h2 { color: var(--primary); font-size: 1.3rem; font-weight: 800; }
 
         .action-btns-group { display: flex; gap: 6px; flex-wrap: wrap; }
-        .print-btn { background: var(--accent); color: #020617; padding: 6px 10px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 0.8rem; }
-        .whatsapp-btn { background: #25d366; color: white; padding: 6px 10px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 0.8rem; }
-        .copy-btn { background: #8b5cf6; color: white; padding: 6px 10px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 0.8rem; }
+        .print-btn { background: #3b82f6; color: white; padding: 6px 12px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 0.8rem; }
+        .whatsapp-btn { background: #10b981; color: white; padding: 6px 12px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 0.8rem; }
+        .copy-btn { background: #8b5cf6; color: white; padding: 6px 12px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 0.8rem; }
 
         .secret-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
-        .secret-content { background: var(--card-bg); border: 2px solid var(--accent); padding: 20px; border-radius: 15px; width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; }
+        .secret-content { background: var(--card-bg); border: 2px solid var(--primary); padding: 20px; border-radius: 15px; width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; }
 
-        footer { text-align: center; padding: 15px; margin-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.9rem; opacity: 0.85; }
+        footer { text-align: center; padding: 15px; margin-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.9rem; opacity: 0.9; }
         
+        /* گوگل ٹرانسলেট وجٹ کی خوبصورت سیٹنگ */
+        .goog-te-gadget { font-family: inherit !important; color: transparent !important; }
+        .goog-te-gadget span a { display: none !important; }
+        .goog-te-combo { background: var(--input-bg) !important; color: var(--text-color) !important; border: 1px solid var(--border-color) !important; padding: 6px 10px !important; border-radius: 8px !important; outline: none !important; font-weight: bold; }
+
         .print-invoice-header { display: none; }
         @media print {
             body { background: white !important; color: black !important; padding: 0; }
@@ -127,7 +135,7 @@
     <div id="loginOverlay">
         <div class="login-card">
             <h2>OmniPOS Pro PK.com</h2>
-            <p style="margin-bottom: 15px; font-size: 0.9rem; opacity: 0.8;">آپنا یا دکان کا نام درج کریں:</p>
+            <p style="margin-bottom: 15px; font-size: 0.9rem; opacity: 0.9;">آپنا یا دکان کا نام درج کریں:</p>
             <input type="text" id="loginNameInput" placeholder="نام لکھیں" style="margin-bottom: 15px;">
             <button class="btn" onclick="loginUser()">سسٹم میں داخل ہوں</button>
         </div>
@@ -140,13 +148,15 @@
         <header id="mainHeaderElement">
             <div class="header-content">
                 <input type="file" id="logoUploadInput" accept="image/*" style="display: none;" onchange="prepareLogoCrop(event)">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=150&h=150&fit=crop" alt="Logo" class="app-logo" id="headerLogoImg" onclick="document.getElementById('logoUploadInput').click()" title="گول لوگو سیٹ کرنے کے لیے کلک کریں">
+                <div class="app-logo-wrapper" onclick="document.getElementById('logoUploadInput').click()" title="گول لوگو سیٹ کرنے کے لیے کلک کریں">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=150&h=150&fit=crop" alt="Logo" class="app-logo" id="headerLogoImg">
+                </div>
                 
                 <div>
                     <h1 id="mainHeading">OmniPOS Pro Ultimate PK.com</h1>
-                    <p style="font-size:0.85rem; opacity:0.9;">
+                    <p style="font-size:0.9rem; opacity:0.95;">
                         آپریٹر: <span id="displayShopkeeper" style="font-weight:bold;"></span> 
-                        <button onclick="editShopkeeperName()" style="background:none; border:none; color:var(--primary); cursor:pointer; text-decoration:underline; font-size:0.8rem; margin-right:5px;">[نام تبدیل کریں]</button> 
+                        <button onclick="editShopkeeperName()" style="background:none; border:none; color:var(--primary); cursor:pointer; text-decoration:underline; font-size:0.85rem; margin-right:5px; font-weight:bold;">[نام تبدیل کریں]</button> 
                         | پلیٹ فارم: PK.com
                     </p>
                 </div>
@@ -158,8 +168,12 @@
                 
                 <button class="icon-btn" onclick="copyWebsiteLink()" style="background: linear-gradient(135deg, #8b5cf6, #ec4899); color: white; border: none;">🔗 ویب سائٹ لنک کاپی کریں</button>
 
-                <!-- دنیا بھر کی زبانیں تبدیل کرنے کا آپشن (Google Translate Dropdown) -->
-                <div id="google_translate_element" style="display:inline-block;"></div>
+                <!-- دنیا بھر کی زبانیں سرچ اور تبدیل کرنے کا باکس -->
+                <div style="display:inline-flex; align-items:center; gap:5px; background:var(--input-bg); border:1px solid var(--border-color); padding:3px 8px; border-radius:8px;">
+                    <span style="font-size:0.8rem; font-weight:bold;">🌍 زبان:</span>
+                    <input type="text" id="langSearchInput" placeholder="زبان سرچ کریں..." onkeyup="filterLanguageDropdown()" style="width:110px; padding:4px; font-size:0.75rem; background:transparent; border:none; color:var(--text-color);">
+                    <div id="google_translate_element" style="display:inline-block;"></div>
+                </div>
 
                 <button class="icon-btn" onclick="toggleDarkMode()">🌓 تھیم</button>
                 <button class="icon-btn" onclick="openLedgerModal()">📒 ادھار کھاتا</button>
@@ -279,64 +293,75 @@
 
     </div>
 
-    <!-- تصویر سیٹ کرنے / ایڈجسٹ کرنے کا ماڈل -->
+    <!-- تصویر سیٹ کرنے / ایڈجسٹ کرنے کا نیا ماڈل (زوم اور موو کنٹرول کے ساتھ) -->
     <div class="secret-modal" id="imageCropModal">
         <div class="secret-content" style="text-align: center;">
-            <h3 id="cropModalTitle" style="color: var(--accent); margin-bottom: 10px;">تصویر سیٹ کریں</h3>
-            <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 15px;">تصویر کو اپنی مرضی کے مطابق زوم یا ایڈجسٹ کریں:</p>
-            <div style="margin-bottom: 15px; display: flex; justify-content: center;">
-                <img id="previewCropImg" src="" style="max-width: 100%; max-height: 250px; border: 2px solid var(--border-color); border-radius: 10px; object-fit: contain;">
+            <h3 id="cropModalTitle" style="color: var(--primary); margin-bottom: 10px;">تصویر سیٹ کریں</h3>
+            <p style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 15px;">تصویر کو زوم کریں یا اوپر/نیچے اور دائیں/بائیں سیٹ کریں:</p>
+            
+            <div style="width: 220px; height: 220px; margin: 0 auto 15px auto; border: 2px dashed var(--primary); border-radius: 15px; overflow: hidden; position: relative; background: #000; display: flex; justify-content: center; align-items: center;">
+                <img id="previewCropImg" src="" style="position: absolute; transform-origin: center; cursor: grab;">
             </div>
-            <div class="input-group" style="display: flex; gap: 10px; align-items: center; justify-content: center;">
-                <label style="margin: 0;">زوم ایڈجسٹ:</label>
-                <input type="range" id="zoomRangeInput" min="0.5" max="2" step="0.1" value="1" oninput="adjustImageZoom(this.value)">
+
+            <div class="input-group" style="display: flex; gap: 10px; align-items: center; justify-content: center; margin-bottom: 10px;">
+                <label style="margin: 0; font-size:0.85rem;">زوم (Zoom):</label>
+                <input type="range" id="zoomRangeInput" min="0.5" max="3" step="0.1" value="1" oninput="updateImageTransform()" style="width: 150px;">
             </div>
-            <div style="display: flex; gap: 10px; margin-top: 15px;">
+
+            <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; flex-wrap: wrap;">
+                <button class="icon-btn" onclick="moveImage(0, -15)">⬆️ اوپر</button>
+                <button class="icon-btn" onclick="moveImage(0, 15)">⬇️ نیچے</button>
+                <button class="icon-btn" onclick="moveImage(-15, 0)">⬅️ بائیں</button>
+                <button class="icon-btn" onclick="moveImage(15, 0)">➡️ دائیں</button>
+                <button class="icon-btn" onclick="resetImagePosition()" style="background:#ef4444; color:white;">🔄 ری سیٹ</button>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
                 <button class="btn" onclick="saveCroppedImage()" style="background: #10b981; color: white;">اوکے (محفوظ کریں)</button>
                 <button class="btn" onclick="closeImageCropModal()" style="background: #ef4444; color: white;">منسوخ کریں</button>
             </div>
         </div>
     </div>
 
-    <!-- ماڈلز -->
+    <!-- دیگر ماڈلز -->
     <div class="secret-modal" id="ledgerModal">
         <div class="secret-content">
-            <h3 style="color: var(--accent); margin-bottom: 10px;">📒 گاہکوں کا ادھار کھاتا</h3>
+            <h3 style="color: var(--primary); margin-bottom: 10px;">📒 گاہکوں کا ادھار کھاتا</h3>
             <div id="ledgerListContainer" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;"></div>
-            <button class="btn" onclick="closeLedgerModal()" style="background: var(--accent); color: #020617;">بند کریں</button>
+            <button class="btn" onclick="closeLedgerModal()" style="background: var(--primary); color: #020617;">بند کریں</button>
         </div>
     </div>
 
     <div class="secret-modal" id="reportsModal">
         <div class="secret-content">
-            <h3 style="color: var(--accent); margin-bottom: 10px;">📊 روزانہ کی سیل اور خالص منافع رپورٹ</h3>
+            <h3 style="color: var(--primary); margin-bottom: 10px;">📊 روزانہ کی سیل اور خالص منافع رپورٹ</h3>
             <div id="reportsContent" style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 15px;"></div>
-            <button class="btn" onclick="closeReportsModal()" style="background: var(--accent); color: #020617;">بند کریں</button>
+            <button class="btn" onclick="closeReportsModal()" style="background: var(--primary); color: #020617;">بند کریں</button>
         </div>
     </div>
 
     <div class="secret-modal" id="expenseModal">
         <div class="secret-content">
-            <h3 style="color: var(--accent); margin-bottom: 10px;">💸 دکان کے روزمرہ اخراجات</h3>
+            <h3 style="color: var(--primary); margin-bottom: 10px;">💸 دکان کے روزمرہ اخراجات</h3>
             <div class="bulk-rows-container" id="expenseRowsContainer" style="margin-bottom: 12px;"></div>
             <div style="display: flex; gap: 8px; margin-bottom: 15px;">
                 <button class="icon-btn" onclick="addExpenseRow()" style="flex: 1; background: var(--input-bg);">＋ مزید خانہ جوڑیں</button>
                 <button class="btn" onclick="saveBulkExpenses()" style="flex: 1;">تمام اخراجات محفوظ کریں</button>
             </div>
             <div id="expenseListContainer" style="max-height: 150px; overflow-y: auto; margin-bottom: 15px;"></div>
-            <button class="btn" onclick="closeExpenseModal()" style="background: var(--accent); color: #020617;">بند کریں</button>
+            <button class="btn" onclick="closeExpenseModal()" style="background: var(--primary); color: #020617;">بند کریں</button>
         </div>
     </div>
 
     <div class="secret-modal" id="historyModal">
         <div class="secret-content">
-            <h3 style="color: var(--accent); margin-bottom: 10px;">🧾 تاریخی ریکارڈ (تمام محفوظ رسیدیں)</h3>
+            <h3 style="color: var(--primary); margin-bottom: 10px;">🧾 تاریخی ریکارڈ (تمام محفوظ رسیدیں)</h3>
             <div id="historyListContainer" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;"></div>
-            <button class="btn" onclick="closeHistoryModal()" style="background: var(--accent); color: #020617;">بند کریں</button>
+            <button class="btn" onclick="closeHistoryModal()" style="background: var(--primary); color: #020617;">بند کریں</button>
         </div>
     </div>
 
-    <!-- گوگل ٹرانسলেট سکرپٹ (دنیا بھر کی زبانوں کے لیے) -->
+    <!-- گوگل ٹرانسলেট اسکرپٹ -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({pageLanguage: 'ur', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
@@ -353,7 +378,12 @@
         let loggedInUser = localStorage.getItem('omni_pos_username') || "";
         let customLogoBase64 = localStorage.getItem('omni_pos_custom_logo') || "";
         let customBannerBase64 = localStorage.getItem('omni_pos_custom_banner') || "";
-        let activeCropType = ""; // 'logo' یا 'banner'
+        let activeCropType = ""; 
+
+        // تصویر ایڈجسٹمنٹ ویری ایبلز
+        let imgScale = 1;
+        let imgPosX = 0;
+        let imgPosY = 0;
 
         window.onload = function() {
             if(loggedInUser) {
@@ -394,12 +424,26 @@
             let websiteUrl = window.location.href;
             navigator.clipboard.writeText(websiteUrl).then(() => {
                 alert("🌐 ویب سائٹ کا لنک کامیابی سے کاپی ہو گیا ہے!\n\n" + websiteUrl);
-            }).catch(err => {
-                alert("لنک کاپی کرنے میں خرابی پیش آئی!");
-            });
+            }).catch(err => { alert("لنک کاپی کرنے میں خرابی پیش آئی!"); });
         }
 
-        // تصویر کراپنگ / ایڈجسٹمنٹ کے فنکشنز
+        // زبان سرچ کرنے کا فنکشن (Google Translate Dropdown filter)
+        function filterLanguageDropdown() {
+            let query = document.getElementById('langSearchInput').value.toLowerCase();
+            let selectBox = document.querySelector('.goog-te-combo');
+            if(selectBox) {
+                for(let i = 0; i < selectBox.options.length; i++) {
+                    let txt = selectBox.options[i].text.toLowerCase();
+                    if(txt.includes(query)) {
+                        selectBox.selectedIndex = i;
+                        selectBox.dispatchEvent(new Event('change'));
+                        break;
+                    }
+                }
+            }
+        }
+
+        // تصویر کراپنگ اور موونگ فنکشنز
         function prepareLogoCrop(event) {
             let file = event.target.files[0];
             if(file) {
@@ -409,8 +453,7 @@
                     document.getElementById('cropModalTitle').innerText = "گول لوگو سیٹ کریں";
                     let img = document.getElementById('previewCropImg');
                     img.src = e.target.result;
-                    img.style.transform = "scale(1)";
-                    document.getElementById('zoomRangeInput').value = 1;
+                    resetImagePosition();
                     document.getElementById('imageCropModal').style.display = 'flex';
                 }
                 reader.readAsDataURL(file);
@@ -426,17 +469,31 @@
                     document.getElementById('cropModalTitle').innerText = "کور بینر سیٹ کریں";
                     let img = document.getElementById('previewCropImg');
                     img.src = e.target.result;
-                    img.style.transform = "scale(1)";
-                    document.getElementById('zoomRangeInput').value = 1;
+                    resetImagePosition();
                     document.getElementById('imageCropModal').style.display = 'flex';
                 }
                 reader.readAsDataURL(file);
             }
         }
 
-        function adjustImageZoom(val) {
+        function resetImagePosition() {
+            imgScale = 1;
+            imgPosX = 0;
+            imgPosY = 0;
+            document.getElementById('zoomRangeInput').value = 1;
+            updateImageTransform();
+        }
+
+        function moveImage(dx, dy) {
+            imgPosX += dx;
+            imgPosY += dy;
+            updateImageTransform();
+        }
+
+        function updateImageTransform() {
+            imgScale = parseFloat(document.getElementById('zoomRangeInput').value);
             let img = document.getElementById('previewCropImg');
-            img.style.transform = `scale(${val})`;
+            img.style.transform = `translate(${imgPosX}px, ${imgPosY}px) scale(${imgScale})`;
         }
 
         function saveCroppedImage() {
@@ -599,7 +656,7 @@
                             <td style="font-weight:bold; color:var(--primary);">${item.name}</td>
                             <td>${item.rate}</td>
                             <td>${item.qtyText}</td>
-                            <td style="font-weight:bold; color:var(--accent);">${item.total.toFixed(2)}</td>
+                            <td style="font-weight:bold; color:var(--primary);">${item.total.toFixed(2)}</td>
                             <td><button class="del-btn" onclick="removeBillItem(${index})">حذف</button></td>
                          </tr>`;
             });
@@ -740,7 +797,6 @@
         }
         function closeReportsModal() { document.getElementById('reportsModal').style.display = 'none'; }
 
-        // اخراجات کے لیے ملٹیپل روز (Rows) والے فنکشنز
         function openExpenseModal() {
             renderExpenses();
             initExpenseRows();
