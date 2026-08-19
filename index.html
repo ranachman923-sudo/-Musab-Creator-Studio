@@ -3,15 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Musab Smart POS Pro - الٹیمیٹ بلنگ سسٹم</title>
+    <title>مصعب بن عمیر رضی اللہ عنہ POS Pro</title>
     <style>
         :root {
             --primary: #00ff88;
             --secondary: #0f172a;
             --accent: #ffcc00;
-            --glow: 0 0 20px rgba(0, 255, 136, 0.3);
-            --card-bg: rgba(15, 23, 42, 0.9);
+            --bg-grad: linear-gradient(135deg, #020617, #0f172a, #1e1b4b);
+            --card-bg: rgba(15, 23, 42, 0.95);
+            --text-color: #f8fafc;
             --border-color: rgba(255, 255, 255, 0.15);
+            --input-bg: #1e293b;
+        }
+
+        .light-mode {
+            --primary: #059669;
+            --secondary: #f1f5f9;
+            --accent: #d97706;
+            --bg-grad: linear-gradient(135deg, #f8fafc, #e2e8f0, #cbd5e1);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-color: #0f172a;
+            --border-color: rgba(0, 0, 0, 0.15);
+            --input-bg: #ffffff;
         }
 
         * {
@@ -19,135 +32,226 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background 0.3s, color 0.3s;
         }
 
         body {
-            background: linear-gradient(135deg, #020617, #0f172a, #1e1b4b);
-            color: #f8fafc;
+            background: var(--bg-grad);
+            color: var(--text-color);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
             padding: 20px;
         }
 
-        .main-wrapper {
-            width: 100%;
-            max-width: 1300px;
-            margin: 0 auto;
-            flex: 1;
+        /* لاگ ان اسکرین */
+        #loginOverlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(2, 6, 23, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
         }
 
-        /* شاندار اور چمکدار ہوم پیج ہیڈر */
+        .login-card {
+            background: #0f172a;
+            border: 2px solid var(--primary);
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .login-card h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .main-app-container {
+            display: none;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
         header {
             text-align: center;
-            padding: 40px 20px;
+            padding: 25px;
             background: var(--card-bg);
-            backdrop-filter: blur(15px);
-            border-radius: 25px;
+            border-radius: 20px;
             border: 2px solid var(--border-color);
-            margin-bottom: 30px;
-            box-shadow: var(--glow);
+            margin-bottom: 25px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            position: relative;
         }
 
         header h1 {
             color: var(--primary);
-            font-size: 3rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 25px rgba(0, 255, 136, 0.5);
-            letter-spacing: 1px;
+            font-size: 2.2rem;
+            margin-bottom: 5px;
         }
 
-        header p {
-            color: #94a3b8;
-            font-size: 1.2rem;
+        .top-controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
         }
 
-        /* مین ڈیش بورڈ گرید */
-        .dashboard {
+        .icon-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .dashboard-grid {
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
+            grid-template-columns: 1fr 1fr;
             gap: 25px;
         }
 
         @media (max-width: 900px) {
-            .dashboard {
+            .dashboard-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        .card-box {
+        .panel {
             background: var(--card-bg);
-            backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 25px;
+            max-height: 650px;
+            overflow-y: auto;
         }
 
-        .card-box h3 {
+        .panel h3 {
             color: var(--accent);
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            border-right: 5px solid var(--accent);
-            padding-right: 12px;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            border-right: 4px solid var(--accent);
+            padding-right: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .input-group {
-            margin-bottom: 18px;
+            margin-bottom: 15px;
         }
 
         .input-group label {
             display: block;
-            color: #cbd5e1;
-            margin-bottom: 8px;
-            font-size: 1rem;
-            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+            opacity: 0.9;
         }
 
         input, select {
             width: 100%;
-            padding: 14px;
-            background: #1e293b;
-            color: white;
-            border: 1px solid #334155;
-            border-radius: 10px;
+            padding: 12px;
+            background: var(--input-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             outline: none;
             font-size: 1rem;
-            transition: 0.3s;
         }
 
-        input:focus, select:focus {
+        input:focus {
             border-color: var(--primary);
-            box-shadow: var(--glow);
         }
 
-        .action-btn {
+        .btn {
             background: linear-gradient(135deg, #00ff88, #00cc6a);
             color: #020617;
             border: none;
-            padding: 16px;
-            border-radius: 10px;
+            padding: 12px 20px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1rem;
             width: 100%;
-            margin-top: 10px;
             transition: 0.3s;
-            box-shadow: 0 5px 20px rgba(0,255,136,0.3);
         }
 
-        .action-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,255,136,0.5);
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
         }
 
-        /* بل لسٹ ایریا */
-        .bill-table-container {
-            max-height: 350px;
+        /* اسٹاک ڈبے */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 10px;
+            max-height: 220px;
             overflow-y: auto;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            border: 1px solid #334155;
+            margin-top: 10px;
+            padding: 5px;
+        }
+
+        .mini-box {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .mini-box:hover {
+            border-color: var(--primary);
+        }
+
+        .mini-box h4 {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .mini-box p {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* ماڈلز (خفیہ ڈبے) */
+        .secret-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .secret-content {
+            background: var(--card-bg);
+            border: 2px solid var(--accent);
+            padding: 25px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 550px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* بل ٹیبل */
+        .table-responsive {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
         }
 
         table {
@@ -157,279 +261,433 @@
         }
 
         th {
-            background: #1e293b;
+            background: var(--input-bg);
             color: var(--accent);
-            padding: 12px;
-            font-size: 0.95rem;
+            padding: 10px;
+            font-size: 0.9rem;
             position: sticky;
             top: 0;
         }
 
         td {
-            padding: 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.95rem;
+            padding: 10px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
         }
 
         .del-btn {
             background: #ff4444;
             color: white;
             border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
+            padding: 5px 10px;
+            border-radius: 5px;
             cursor: pointer;
-            font-weight: bold;
         }
 
-        .del-btn:hover {
-            background: #cc0000;
-        }
-
-        /* ٹوٹل اور پرنٹ سیکشن */
-        .footer-total {
-            background: rgba(2, 6, 23, 0.8);
+        .total-box {
+            background: var(--input-bg);
             border: 2px solid var(--primary);
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .footer-total h2 {
+        .total-box h2 {
             color: var(--primary);
-            font-size: 2.2rem;
-            text-shadow: 0 0 15px rgba(0,255,136,0.3);
+            font-size: 1.5rem;
         }
 
-        .print-action-btn {
+        .print-btn {
             background: var(--accent);
             color: #020617;
-            border: none;
-            padding: 14px 25px;
-            border-radius: 10px;
-            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 8px;
             font-weight: bold;
-            font-size: 1.1rem;
-            transition: 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
-        .print-action-btn:hover {
-            background: #e6b800;
-            transform: scale(1.05);
-        }
-
-        footer.site-footer {
-            text-align: center;
-            padding: 25px;
-            color: #64748b;
-            font-size: 0.95rem;
-            margin-top: 30px;
-            border-top: 1px solid var(--border-color);
+        /* پرنٹ اسٹائل */
+        .print-invoice-header { display: none; }
+        @media print {
+            body { background: white !important; color: black !important; padding: 0; }
+            .dashboard-grid, header, .panel:not(:last-child), .print-btn, .del-btn, .input-group, button { display: none !important; }
+            .panel:last-child { background: white !important; border: none !important; padding: 0 !important; width: 100% !important; max-height: none !important; }
+            .print-invoice-header { display: block !important; text-align: center; margin-bottom: 20px; border-bottom: 2px dashed #333; padding-bottom: 15px; }
+            table, th, td { border: 1px solid #333 !important; color: black !important; }
+            th { background: #eee !important; }
+            .total-box { background: #fff !important; border: 2px solid #000 !important; color: black !important; }
         }
     </style>
 </head>
 <body>
 
-    <div class="main-wrapper">
+    <!-- نام سے لاگ ان کرنے کی اسکرین -->
+    <div id="loginOverlay">
+        <div class="login-card">
+            <h2>مصعب بن عمیر POS</h2>
+            <p style="margin-bottom: 15px; font-size: 0.9rem; opacity: 0.8;">سسٹم استعمال کرنے کے لیے اپنا نام درج کریں:</p>
+            <input type="text" id="loginNameInput" placeholder="اپنا نام لکھیں (مثلاً: رانا چمن)" style="margin-bottom: 15px;">
+            <button class="btn" onclick="loginUser()">سسٹم میں داخل ہوں</button>
+        </div>
+    </div>
+
+    <!-- اصل ایپ کا ڈیش بورڈ -->
+    <div class="main-app-container" id="mainAppContainer">
         
-        <!-- شاندار، فل سکرین اور چمکدار ہوم پیج ہیڈر -->
         <header>
-            <h1>Musab Smart POS Pro</h1>
-            <p>الٹیمیٹ بلنگ اسٹوڈیو - بوتلوں، ٹافیوں، پیمپرز اور وزن والی ہر چیز کا خودکار حساب!</p>
+            <div class="top-controls">
+                <button class="icon-btn" onclick="toggleDarkMode()" title="ڈارک/لائٹ موڈ">🌓 تھیم</button>
+                <button class="icon-btn" onclick="installAppPrompt()" title="ایپ انسٹال کریں">📥 انسٹال</button>
+                <button class="icon-btn" onclick="openHistoryModal()" title="پرانی رسیدوں کا محفوظ ریکارڈ (تاریخی ریکارڈ)">🧾 ہسٹری</button>
+                <button class="icon-btn" onclick="openSecretModal()" title="خفیہ ویو لاگ (آنکھ کا نشان)">👁️</button>
+            </div>
+            <h1>مصعب بن عمیر رضی اللہ عنہ POS پرو</h1>
+            <p>اسٹاک سرچ، آٹو ریٹ اور محفوظ بلنگ سسٹم | دکاندار: <span id="displayShopkeeper"></span></p>
         </header>
 
-        <div class="dashboard">
+        <div class="dashboard-grid">
             
-            <!-- پہلا خانہ: پروڈکٹ اور مقدار درج کرنے کا فارم -->
-            <div class="card-box">
-                <h3>نئی پروڈکٹ شامل کریں</h3>
-                
+            <!-- بائیں سائیڈ: پروڈکٹ انوینٹری، سرچ بار اور ٹوٹل کاؤন্ট -->
+            <div class="panel">
+                <h3>نئی پروڈکٹ اور اسٹاک مینجمنٹ</h3>
                 <div class="input-group">
-                    <label>پروڈکٹ کا نام (مثلاً: بوتل، ٹافی، پیمپرز، چینی):</label>
-                    <input type="text" id="pName" placeholder="چیز کا نام لکھیں...">
+                    <label>پروڈکٹ کا نام:</label>
+                    <input type="text" id="saveName" placeholder="مثلاً: بوتل، چینی">
                 </div>
-
                 <div class="input-group">
-                    <label>حساب کی قسم (Type):</label>
-                    <select id="pMode" onchange="toggleMode()">
-                        <option value="piece">تعداد / پیس کے حساب سے (بسکٹ، بوتل، ٹافی، پیمپرز)</option>
-                        <option value="weight">وزن کے حساب سے (چینی، دال - کلو / گرام)</option>
-                    </select>
+                    <label>ریٹ (روپے):</label>
+                    <input type="number" id="saveRate" placeholder="ریٹ درج کریں">
                 </div>
+                <button class="btn" onclick="saveProductBox()">ڈبہ محفوظ کریں</button>
 
-                <div class="input-group">
-                    <label id="rateLabel">فی پیس ریٹ (روپے):</label>
-                    <input type="number" id="pRate" placeholder="مثلاً: 200">
+                <div style="margin-top: 25px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <h3 style="margin:0; border:none; padding:0; font-size:1rem;">کل پروڈکٹس: <span id="totalProductCount" style="color:var(--primary);">0</span></h3>
+                    </div>
+                    
+                    <!-- سرچ بار -->
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <input type="text" id="searchStock" placeholder="🔍 نام لکھ کر سرچ کریں (کیا کیا چیزیں ہیں)..." onkeyup="filterStock()">
+                    </div>
+
+                    <div id="inventorySection">
+                        <div class="products-grid" id="productsGridContainer">
+                            <p style="text-align: center; grid-column: span 2; padding: 15px; opacity: 0.6;">کوئی پروڈکٹ محفوظ نہیں ہے۔</p>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="input-group">
-                    <label id="qtyLabel">تعداد (Kitnay Piece):</label>
-                    <input type="text" id="pQty" placeholder="مثلاً: 3 (یا وزن جیسے 250 گرام / 1 پاؤ)" value="1">
-                </div>
-
-                <button class="action-btn" onclick="addItemToBill()">بل میں شامل کریں (Add to Bill)</button>
             </div>
 
-            <!-- دوسرا خانہ: گاہک کی جاری بل لسٹ اور کل ٹوٹل -->
-            <div class="card-box" style="display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                    <h3>گاہک کی جاری رسید (Current Invoice)</h3>
-                    
-                    <div class="bill-table-container">
-                        <table id="billTable">
+            <!-- دائیں سائیڈ: فروخت اور بلنگ -->
+            <div class="panel">
+                <h3>گاہک کی فروخت (آٹو ریٹ سسٹم)</h3>
+                
+                <div class="input-group">
+                    <label>گاہک کا نام:</label>
+                    <input type="text" id="customerName" placeholder="گاہک کا نام">
+                </div>
+
+                <div class="input-group">
+                    <label>پروڈکٹ کا نام لکھیں (ریٹ خود بخود آئے گا):</label>
+                    <input type="text" id="saleName" placeholder="نام لکھیں..." onkeyup="autoFetchRate()">
+                </div>
+
+                <div class="input-group">
+                    <label>ریٹ (خودکار ڈبہ):</label>
+                    <input type="number" id="saleRate" placeholder="ریٹ خود آئے گا">
+                </div>
+
+                <div class="input-group">
+                    <label>تعداد / مقدار (مثلاً: 3 یا 250 گرام):</label>
+                    <input type="text" id="saleQty" value="1" placeholder="مقدار">
+                </div>
+
+                <button class="btn" onclick="addToBill()">بل میں جمع کریں (Add)</button>
+
+                <!-- بل لسٹ -->
+                <div style="margin-top: 20px;">
+                    <div class="print-invoice-header" id="printHeaderInfo">
+                        <h2 id="receiptShopName">مصعب بن عمیر جنرل اسٹور</h2>
+                        <p><strong>دکاندار:</strong> <span id="receiptSeller"></span> | <strong>گاہک:</strong> <span id="receiptCustomer"></span></p>
+                        <p><strong>تاریخ و وقت:</strong> <span id="receiptDateTime"></span></p>
+                    </div>
+
+                    <h3 style="border:none; padding:0; margin-bottom:10px;">موجودہ بل</h3>
+                    <div class="table-responsive">
+                        <table>
                             <thead>
                                 <tr>
                                     <th>پروڈکٹ</th>
-                                    <th>ریٹ</th>
-                                    <th>مقدار / تعداد</th>
-                                    <th>کل قیمت</th>
+                                    <th>فی ریٹ</th>
+                                    <th>تعداد</th>
+                                    <th>کل</th>
                                     <th>حذف</th>
                                 </tr>
                             </thead>
                             <tbody id="billBody">
                                 <tr>
-                                    <td colspan="5" style="text-align: center; color: #64748b; padding: 30px;">ابھی تک کوئی پروڈکٹ شامل نہیں کی گئی۔</td>
+                                    <td colspan="5" style="text-align: center; opacity: 0.6; padding: 20px;">کوئی آئٹم شامل نہیں۔</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                </div>
 
-                <!-- آخری گرینڈ ٹوٹل باکس -->
-                <div class="footer-total">
-                    <div>
-                        <span style="color: #94a3b8; font-size: 0.9rem; display: block;">کل بل (Grand Total):</span>
-                        <h2 id="grandTotalDisplay">0.00 روپے</h2>
+                    <div class="total-box">
+                        <div>
+                            <span style="font-size: 0.85rem; opacity: 0.8;">کل واجب الادا:</span>
+                            <h2 id="grandTotalText">0.00 روپے</h2>
+                        </div>
+                        <button class="print-btn" onclick="triggerPrint()">پرنٹ / محفوظ کریں</button>
                     </div>
-                    <button class="print-action-btn" onclick="window.print()">پرنٹ / محفوظ کریں</button>
                 </div>
-
             </div>
 
         </div>
 
-        <footer class="site-footer">
-            <p>&copy; 2026 Musab Smart POS Pro. All Rights Reserved. | Professional Retail Billing Solution</p>
-        </footer>
+    </div>
 
+    <!-- خفیہ آنکھ والا ماڈل (View Log) -->
+    <div class="secret-modal" id="secretModal">
+        <div class="secret-content">
+            <h3 style="color: var(--accent); margin-bottom: 10px;">👁️ ویو لاگ ہسٹری (کس کس نے دیکھا)</h3>
+            <div id="viewLogList" style="max-height: 200px; overflow-y: auto; margin-bottom: 15px; font-size: 0.9rem;"></div>
+            <button class="btn" onclick="closeSecretModal()" style="background: var(--accent); color: #020617;">بند کریں</button>
+        </div>
+    </div>
+
+    <!-- تاریخی ریکارڈ (Invoice History Modal) -->
+    <div class="secret-modal" id="historyModal">
+        <div class="secret-content">
+            <h3 style="color: var(--accent); margin-bottom: 10px;">🧾 تاریخی ریکارڈ (تمام پرانی رسیدیں سیف ہیں)</h3>
+            <div id="historyListContainer" style="max-height: 300px; overflow-y: auto; margin-bottom: 15px; font-size: 0.9rem;"></div>
+            <button class="btn" onclick="closeHistoryModal()" style="background: var(--accent); color: #020617;">بند کریں</button>
+        </div>
     </div>
 
     <script>
-        let cart = [];
+        let savedProducts = JSON.parse(localStorage.getItem('musab_products') || '[]');
+        let currentBill = [];
+        let viewLogs = JSON.parse(localStorage.getItem('musab_view_logs') || '[]');
+        let invoiceHistory = JSON.parse(localStorage.getItem('musab_invoice_history') || '[]');
+        let loggedInUser = "";
 
-        function toggleMode() {
-            let mode = document.getElementById('pMode').value;
-            let rateLabel = document.getElementById('rateLabel');
-            let qtyLabel = document.getElementById('qtyLabel');
-            
-            if(mode === 'piece') {
-                rateLabel.innerText = "فی پیس ریٹ (روپے):";
-                qtyLabel.innerText = "تعداد (Kitnay Piece): যথা 3";
-            } else {
-                rateLabel.innerText = "فی کلو ریٹ (روپے):";
-                qtyLabel.innerText = "وزن (گرام یا کلو یا پاؤ):";
+        // صفحہ کھلتے ہی اسٹاک لوڈ کریں
+        window.onload = function() {
+            renderInventoryBoxes();
+        };
+
+        function loginUser() {
+            let name = document.getElementById('loginNameInput').value.trim();
+            if(name === "") {
+                alert("براہ کرم اپنا نام درج کریں!");
+                return;
             }
+            loggedInUser = name;
+            document.getElementById('displayShopkeeper').innerText = name;
+            document.getElementById('loginOverlay').style.display = 'none';
+            document.getElementById('mainAppContainer').style.display = 'block';
+
+            let nowTime = new Date().toLocaleString('ur-PK');
+            viewLogs.unshift({ name: name, time: nowTime });
+            localStorage.setItem('musab_view_logs', JSON.stringify(viewLogs));
         }
 
-        function addItemToBill() {
-            let name = document.getElementById('pName').value.trim();
-            let mode = document.getElementById('pMode').value;
-            let rate = parseFloat(document.getElementById('pRate').value);
-            let qtyInput = document.getElementById('pQty').value.trim();
+        function toggleDarkMode() {
+            document.body.classList.toggle('light-mode');
+        }
 
-            if(name === "" || isNaN(rate) || qtyInput === "") {
-                alert("براہ کرم تمام خانے درست طریقے سے پُر کریں!");
+        function installAppPrompt() {
+            alert("براؤزر کے مینو (3 ڈاٹس) میں جا کر 'Add to Home Screen' یا 'Install App' پر کلک کریں، ایپ آپ کے فون میں انسٹال ہو جائے گی!");
+        }
+
+        function openSecretModal() {
+            let listDiv = document.getElementById('viewLogList');
+            if(viewLogs.length === 0) {
+                listDiv.innerHTML = "<p>ابھی تک کوئی لاگ موجود نہیں۔</p>";
+            } else {
+                let html = "";
+                viewLogs.forEach(log => {
+                    html += `<div style="padding: 8px; border-bottom: 1px solid var(--border-color); display:flex; justify-content:space-between;">
+                                <span>👤 <strong>${log.name}</strong></span>
+                                <span style="font-size:0.8rem; opacity:0.7;">${log.time}</span>
+                             </div>`;
+                });
+                listDiv.innerHTML = html;
+            }
+            document.getElementById('secretModal').style.display = 'flex';
+        }
+
+        function closeSecretModal() {
+            document.getElementById('secretModal').style.display = 'none';
+        }
+
+        function openHistoryModal() {
+            let container = document.getElementById('historyListContainer');
+            if(invoiceHistory.length === 0) {
+                container.innerHTML = "<p style='opacity:0.6;'>ابھی تک کوئی پرانی رسید محفوظ نہیں ہے۔</p>";
+            } else {
+                let html = "";
+                invoiceHistory.forEach((inv, index) => {
+                    html += `<div style="background:var(--input-bg); border:1px solid var(--border-color); padding:10px; border-radius:8px; margin-bottom:10px;">
+                                <p><strong>رسید # ${invoiceHistory.length - index}</strong> | تاریخ: ${inv.date}</p>
+                                <p><strong>دکاندار:</strong> ${inv.seller} | <strong>گاہک:</strong> ${inv.customer}</p>
+                                <p style="color:var(--primary); font-weight:bold;">کل رقم: ${inv.grandTotal.toFixed(2)} روپے</p>
+                             </div>`;
+                });
+                container.innerHTML = html;
+            }
+            document.getElementById('historyModal').style.display = 'flex';
+        }
+
+        function closeHistoryModal() {
+            document.getElementById('historyModal').style.display = 'none';
+        }
+
+        function saveProductBox() {
+            let name = document.getElementById('saveName').value.trim();
+            let rate = parseFloat(document.getElementById('saveRate').value);
+
+            if(name === "" || isNaN(rate)) {
+                alert("پروڈکٹ کا نام اور ریٹ درست درج کریں!");
                 return;
             }
 
-            let calculatedTotal = 0;
-            let qtyText = "";
-
-            if(mode === 'piece') {
-                // پیس یا تعداد کے حساب سے (مثلاً 3 بوتلیں اور ایک بوتل 200 روپے کی)
-                let qtyNum = parseFloat(qtyInput);
-                if(isNaN(qtyNum) || qtyNum <= 0) {
-                    alert("تعداد درست درج کریں!");
-                    return;
-                }
-                calculatedTotal = rate * qtyNum;
-                qtyText = qtyNum + " عدد (Pieces)";
+            let existing = savedProducts.find(p => p.name.toLowerCase() === name.toLowerCase());
+            if(existing) {
+                existing.rate = rate;
             } else {
-                // وزن کے حساب سے (چینی، دال وغیرہ)
-                let weightInKg = 0;
-                let lowerInput = qtyInput.toLowerCase();
-
-                if(lowerInput.includes('پاؤ')) {
-                    weightInKg = 0.25;
-                    qtyText = "ایک پاؤ (250 گرام)";
-                } else if(lowerInput.includes('آدھا') || lowerInput.includes('ادھا')) {
-                    weightInKg = 0.5;
-                    qtyText = "آدھا کلو (500 گرام)";
-                } else {
-                    let num = parseFloat(qtyInput);
-                    if(isNaN(num)) {
-                        alert("وزن کا اندراج درست نہیں ہے!");
-                        return;
-                    }
-                    if(num > 10) {
-                        weightInKg = num / 1000;
-                        qtyText = num + " گرام";
-                    } else {
-                        weightInKg = num;
-                        qtyText = num + " کلو";
-                    }
-                }
-                calculatedTotal = rate * weightInKg;
+                savedProducts.push({ name: name, rate: rate });
             }
 
-            // کارٹ میں ڈیٹا محفوظ کرنا
-            cart.push({
-                name: name,
-                rate: rate,
-                qtyText: qtyText,
-                total: calculatedTotal
-            });
-
-            // ان پٹس صاف کرنا
-            document.getElementById('pName').value = "";
-            document.getElementById('pRate').value = "";
-            document.getElementById('pQty').value = "1";
-
-            renderCart();
+            localStorage.setItem('musab_products', JSON.stringify(savedProducts));
+            document.getElementById('saveName').value = "";
+            document.getElementById('saveRate').value = "";
+            renderInventoryBoxes();
         }
 
-        function removeItem(index) {
-            cart.splice(index, 1);
-            renderCart();
-        }
+        function renderInventoryBoxes(filter = "") {
+            let container = document.getElementById('productsGridContainer');
+            document.getElementById('totalProductCount').innerText = savedProducts.length;
 
-        function renderCart() {
-            let tbody = document.getElementById('billBody');
-            let grandTotalDisplay = document.getElementById('grandTotalDisplay');
+            let filtered = savedProducts.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
 
-            if(cart.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #64748b; padding: 30px;">ابھی تک کوئی پروڈکٹ شامل نہیں کی گئی۔</td></tr>`;
-                grandTotalDisplay.innerText = "0.00 روپے";
+            if(filtered.length === 0) {
+                container.innerHTML = `<p style="text-align: center; grid-column: span 2; padding: 15px; opacity: 0.6;">کوئی پروڈکٹ نہیں ملی۔</p>`;
                 return;
             }
 
             let html = "";
-            let grandTotal = 0;
+            filtered.forEach(prod => {
+                html += `<div class="mini-box" onclick="selectProduct('${prod.name}', ${prod.rate})">
+                            <h4>${prod.name}</h4>
+                            <p>${prod.rate} روپے</p>
+                         </div>`;
+            });
+            container.innerHTML = html;
+        }
 
-            cart.forEach((item, index) => {
+        function filterStock() {
+            let query = document.getElementById('searchStock').value;
+            renderInventoryBoxes(query);
+        }
+
+        function selectProduct(name, rate) {
+            document.getElementById('saleName').value = name;
+            document.getElementById('saleRate').value = rate;
+            document.getElementById('saleQty').focus();
+        }
+
+        function autoFetchRate() {
+            let typedName = document.getElementById('saleName').value.trim().toLowerCase();
+            let found = savedProducts.find(p => p.name.toLowerCase() === typedName);
+            if(found) {
+                document.getElementById('saleRate').value = found.rate;
+            }
+        }
+
+        function addToBill() {
+            let name = document.getElementById('saleName').value.trim();
+            let rate = parseFloat(document.getElementById('saleRate').value);
+            let qtyInput = document.getElementById('saleQty').value.trim();
+
+            if(name === "" || isNaN(rate) || qtyInput === "") {
+                alert("تمام خانے درست پُر کریں!");
+                return;
+            }
+
+            let qtyNum = parseFloat(qtyInput);
+            let calculatedTotal = isNaN(qtyNum) ? rate : rate * qtyNum;
+            let qtyText = isNaN(qtyNum) ? qtyInput : qtyNum + " عدد";
+
+            currentBill.push({ name: name, rate: rate, qtyText: qtyText, total: calculatedTotal });
+
+            document.getElementById('saleName').value = "";
+            document.getElementById('saleRate').value = "";
+            document.getElementById('saleQty').value = "1";
+            renderBill();
+        }
+
+        function removeBillItem(index) {
+            currentBill.splice(index, 1);
+            renderBill();
+        }
+
+        function renderBill() {
+            let tbody = document.getElementById('billBody');
+            let grandTotalText = document.getElementById('grandTotalText');
+
+            if(currentBill.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; opacity: 0.6; padding: 20px;">کوئی آئٹم شامل نہیں۔</td></tr>`;
+                grandTotalText.innerText = "0.00 روپے";
+                return;
+            }
+
+            let html = "", grandTotal = 0;
+            currentBill.forEach((item, index) => {
                 grandTotal += item.total;
                 html += `<tr>
-                            <td style="font-weight: bold; color: #f8fafc;">${item.name}</td>
+                            <td style="font-weight:bold; color:var(--primary);">${item.name}</td>
                             <td>${item.rate} روپے</td>
                             <td>${item.qtyText}</td>
-                            <td style="color: var(--primary); font-weight: bold;">${item.total.toFixed(2)} روپے</td>
-                            <td><button class="del-btn" onclick="removeItem(${index})">حذف</button></td>
+                            <td style="font-weight:bold; color:var(--accent);">${item.total.toFixed(2)} روپے</td>
+                            <td><button class="del-btn" onclick="removeBillItem(${index})">حذف</button></td>
                          </tr>`;
             });
 
             tbody.innerHTML = html;
-            grandTotalDisplay.innerText = grandTotal.toFixed(2) + " روپے";
+            grandTotalText.innerText = grandTotal.toFixed(2) + " روپے";
+        }
+
+        function triggerPrint() {
+            if(currentBill.length === 0) {
+                alert("بل خالی ہے!");
+                return;
+            }
+
+            let customer = document.getElementById('customerName').value.trim() || "عام گاہک";
+            let now = new Date();
+            let dateStr = now.toLocaleDateString('ur-PK') + " | " + now.toLocaleTimeString('en-US');
+
+            let grandTotal = currentBill.reduce((sum, item) => sum + item.total, 0);
+
+            // تاریخی ریکارڈ میں محفوظ کرنا
+            invoiceHistory.unshift({
+                seller: loggedInUser,
+                customer: customer,
+                date: dateStr,
+                items: [...currentBill],
+                grandTotal: grandTotal
+            });
+            localStorage.setItem('musab_invoice_history', JSON.stringify(invoiceHistory));
+
+            document.getElementById('receiptSeller').innerText = loggedInUser;
+            document.getElementById('receiptCustomer').innerText = customer;
+            document.getElementById('receiptDateTime').innerText = dateStr;
+
+            window.print();
         }
     </script>
 
