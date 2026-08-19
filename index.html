@@ -10,9 +10,9 @@
             --secondary: #0f172a;
             --accent: #4facfe;
             --bg-grad: linear-gradient(135deg, #090d16, #1e1b4b, #020617);
-            --card-bg: rgba(15, 23, 42, 0.95);
+            --card-bg: rgba(15, 23, 42, 0.96);
             --text-color: #f8fafc;
-            --border-color: rgba(255, 255, 255, 0.15);
+            --border-color: rgba(255, 255, 255, 0.2);
             --input-bg: #1e293b;
         }
 
@@ -21,9 +21,9 @@
             --secondary: #f1f5f9;
             --accent: #0284c7;
             --bg-grad: linear-gradient(135deg, #f8fafc, #e2e8f0, #cbd5e1);
-            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-bg: rgba(255, 255, 255, 0.96);
             --text-color: #0f172a;
-            --border-color: rgba(0, 0, 0, 0.15);
+            --border-color: rgba(0, 0, 0, 0.2);
             --input-bg: #ffffff;
         }
 
@@ -42,27 +42,27 @@
         .main-app-container { display: none; max-width: 1400px; margin: 0 auto; }
 
         header {
-            text-align: center; padding: 25px 15px; background-size: cover; background-position: center;
+            text-align: center; padding: 30px 15px; background-size: cover; background-position: center;
             background-color: var(--card-bg); border-radius: 20px; border: 2px solid var(--border-color);
-            margin-bottom: 20px; box-shadow: 0 0 20px rgba(0,0,0,0.3); position: relative; overflow: hidden;
+            margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); position: relative; overflow: hidden;
         }
         header::before {
             content: ""; position: absolute; top:0; left:0; width:100%; height:100%;
-            background: rgba(15, 23, 42, 0.85); z-index: 1;
+            background: rgba(9, 13, 22, 0.65); z-index: 1; /* مدھم پن کم کیا تاکہ بیک گراؤنڈ واضح دکھے */
         }
-        .light-mode header::before { background: rgba(255, 255, 255, 0.85); }
-        .header-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .light-mode header::before { background: rgba(255, 255, 255, 0.65); }
+        .header-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; }
         
         .app-logo {
-            width: 75px; height: 75px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); cursor: pointer;
+            width: 85px; height: 85px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; box-shadow: 0 0 20px rgba(0, 242, 254, 0.6); cursor: pointer; background: #000;
         }
-        header h1 { color: var(--primary); font-size: 1.8rem; }
+        header h1 { color: var(--primary); font-size: 1.9rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
 
         .top-controls {
-            position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--border-color);
+            position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border-color);
         }
         .icon-btn, select.icon-btn {
-            background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: bold; outline: none;
+            background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 7px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: bold; outline: none;
         }
         .icon-btn:hover { border-color: var(--primary); }
 
@@ -104,7 +104,7 @@
         .whatsapp-btn { background: #25d366; color: white; padding: 6px 10px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 0.8rem; }
         .copy-btn { background: #8b5cf6; color: white; padding: 6px 10px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 0.8rem; }
 
-        .secret-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; }
+        .secret-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
         .secret-content { background: var(--card-bg); border: 2px solid var(--accent); padding: 20px; border-radius: 15px; width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; }
 
         footer { text-align: center; padding: 15px; margin-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.9rem; opacity: 0.85; }
@@ -139,8 +139,8 @@
         <!-- ہیڈر -->
         <header id="mainHeaderElement">
             <div class="header-content">
-                <input type="file" id="logoUploadInput" accept="image/*" style="display: none;" onchange="changeLogoImage(event)">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=150&h=150&fit=crop" alt="Logo" class="app-logo" id="headerLogoImg" onclick="document.getElementById('logoUploadInput').click()" title="گول لوگو بدلنے کے لیے کلک کریں">
+                <input type="file" id="logoUploadInput" accept="image/*" style="display: none;" onchange="prepareLogoCrop(event)">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=150&h=150&fit=crop" alt="Logo" class="app-logo" id="headerLogoImg" onclick="document.getElementById('logoUploadInput').click()" title="گول لوگو سیٹ کرنے کے لیے کلک کریں">
                 
                 <div>
                     <h1 id="mainHeading">OmniPOS Pro Ultimate PK.com</h1>
@@ -153,11 +153,13 @@
             </div>
             
             <div class="top-controls">
-                <input type="file" id="bannerUploadInput" accept="image/*" style="display: none;" onchange="changeBannerImage(event)">
-                <button class="icon-btn" onclick="document.getElementById('bannerUploadInput').click()" style="border-color: var(--primary);">🖼️ کور تصویر</button>
+                <input type="file" id="bannerUploadInput" accept="image/*" style="display: none;" onchange="prepareBannerCrop(event)">
+                <button class="icon-btn" onclick="document.getElementById('bannerUploadInput').click()" style="border-color: var(--primary);">🖼️ کور بینر سیٹ کریں</button>
                 
-                <!-- نیا ویب سائٹ لنک کاپی کرنے کا بٹن -->
                 <button class="icon-btn" onclick="copyWebsiteLink()" style="background: linear-gradient(135deg, #8b5cf6, #ec4899); color: white; border: none;">🔗 ویب سائٹ لنک کاپی کریں</button>
+
+                <!-- دنیا بھر کی زبانیں تبدیل کرنے کا آپشن (Google Translate Dropdown) -->
+                <div id="google_translate_element" style="display:inline-block;"></div>
 
                 <button class="icon-btn" onclick="toggleDarkMode()">🌓 تھیم</button>
                 <button class="icon-btn" onclick="openLedgerModal()">📒 ادھار کھاتا</button>
@@ -277,6 +279,25 @@
 
     </div>
 
+    <!-- تصویر سیٹ کرنے / ایڈجسٹ کرنے کا ماڈل -->
+    <div class="secret-modal" id="imageCropModal">
+        <div class="secret-content" style="text-align: center;">
+            <h3 id="cropModalTitle" style="color: var(--accent); margin-bottom: 10px;">تصویر سیٹ کریں</h3>
+            <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 15px;">تصویر کو اپنی مرضی کے مطابق زوم یا ایڈجسٹ کریں:</p>
+            <div style="margin-bottom: 15px; display: flex; justify-content: center;">
+                <img id="previewCropImg" src="" style="max-width: 100%; max-height: 250px; border: 2px solid var(--border-color); border-radius: 10px; object-fit: contain;">
+            </div>
+            <div class="input-group" style="display: flex; gap: 10px; align-items: center; justify-content: center;">
+                <label style="margin: 0;">زوم ایڈجسٹ:</label>
+                <input type="range" id="zoomRangeInput" min="0.5" max="2" step="0.1" value="1" oninput="adjustImageZoom(this.value)">
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <button class="btn" onclick="saveCroppedImage()" style="background: #10b981; color: white;">اوکے (محفوظ کریں)</button>
+                <button class="btn" onclick="closeImageCropModal()" style="background: #ef4444; color: white;">منسوخ کریں</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ماڈلز -->
     <div class="secret-modal" id="ledgerModal">
         <div class="secret-content">
@@ -297,9 +318,11 @@
     <div class="secret-modal" id="expenseModal">
         <div class="secret-content">
             <h3 style="color: var(--accent); margin-bottom: 10px;">💸 دکان کے روزمرہ اخراجات</h3>
-            <div class="input-group"><input type="text" id="expenseTitle" placeholder="خرچے کی تفصیل"></div>
-            <div class="input-group"><input type="number" id="expenseAmount" placeholder="رقم (روپے)"></div>
-            <button class="btn" onclick="addExpense()" style="margin-bottom: 15px;">خرچہ محفوظ کریں</button>
+            <div class="bulk-rows-container" id="expenseRowsContainer" style="margin-bottom: 12px;"></div>
+            <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+                <button class="icon-btn" onclick="addExpenseRow()" style="flex: 1; background: var(--input-bg);">＋ مزید خانہ جوڑیں</button>
+                <button class="btn" onclick="saveBulkExpenses()" style="flex: 1;">تمام اخراجات محفوظ کریں</button>
+            </div>
             <div id="expenseListContainer" style="max-height: 150px; overflow-y: auto; margin-bottom: 15px;"></div>
             <button class="btn" onclick="closeExpenseModal()" style="background: var(--accent); color: #020617;">بند کریں</button>
         </div>
@@ -313,6 +336,14 @@
         </div>
     </div>
 
+    <!-- گوگل ٹرانسলেট سکرپٹ (دنیا بھر کی زبانوں کے لیے) -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'ur', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <script>
         let savedProducts = JSON.parse(localStorage.getItem('omni_pos_products_pk') || '[]');
         let currentBill = [];
@@ -322,6 +353,7 @@
         let loggedInUser = localStorage.getItem('omni_pos_username') || "";
         let customLogoBase64 = localStorage.getItem('omni_pos_custom_logo') || "";
         let customBannerBase64 = localStorage.getItem('omni_pos_custom_banner') || "";
+        let activeCropType = ""; // 'logo' یا 'banner'
 
         window.onload = function() {
             if(loggedInUser) {
@@ -333,6 +365,7 @@
             if(customBannerBase64) { document.getElementById('mainHeaderElement').style.backgroundImage = `url(${customBannerBase64})`; }
             renderInventoryGrid();
             initBulkRows();
+            initExpenseRows();
         };
 
         function loginUser() {
@@ -357,7 +390,6 @@
 
         function toggleDarkMode() { document.body.classList.toggle('light-mode'); }
 
-        // ویب سائٹ کا لنک کاپی کرنے کا فنکشن
         function copyWebsiteLink() {
             let websiteUrl = window.location.href;
             navigator.clipboard.writeText(websiteUrl).then(() => {
@@ -367,32 +399,64 @@
             });
         }
 
-        function changeLogoImage(event) {
+        // تصویر کراپنگ / ایڈجسٹمنٹ کے فنکشنز
+        function prepareLogoCrop(event) {
             let file = event.target.files[0];
             if(file) {
                 let reader = new FileReader();
                 reader.onload = function(e) {
-                    customLogoBase64 = e.target.result;
-                    localStorage.setItem('omni_pos_custom_logo', customLogoBase64);
-                    document.getElementById('headerLogoImg').src = customLogoBase64;
-                    alert("گول لوگو تبدیل ہو گیا!");
+                    activeCropType = 'logo';
+                    document.getElementById('cropModalTitle').innerText = "گول لوگو سیٹ کریں";
+                    let img = document.getElementById('previewCropImg');
+                    img.src = e.target.result;
+                    img.style.transform = "scale(1)";
+                    document.getElementById('zoomRangeInput').value = 1;
+                    document.getElementById('imageCropModal').style.display = 'flex';
                 }
                 reader.readAsDataURL(file);
             }
         }
 
-        function changeBannerImage(event) {
+        function prepareBannerCrop(event) {
             let file = event.target.files[0];
             if(file) {
                 let reader = new FileReader();
                 reader.onload = function(e) {
-                    customBannerBase64 = e.target.result;
-                    localStorage.setItem('omni_pos_custom_banner', customBannerBase64);
-                    document.getElementById('mainHeaderElement').style.backgroundImage = `url(${customBannerBase64})`;
-                    alert("کور بینر تبدیل ہو گیا!");
+                    activeCropType = 'banner';
+                    document.getElementById('cropModalTitle').innerText = "کور بینر سیٹ کریں";
+                    let img = document.getElementById('previewCropImg');
+                    img.src = e.target.result;
+                    img.style.transform = "scale(1)";
+                    document.getElementById('zoomRangeInput').value = 1;
+                    document.getElementById('imageCropModal').style.display = 'flex';
                 }
                 reader.readAsDataURL(file);
             }
+        }
+
+        function adjustImageZoom(val) {
+            let img = document.getElementById('previewCropImg');
+            img.style.transform = `scale(${val})`;
+        }
+
+        function saveCroppedImage() {
+            let imgSrc = document.getElementById('previewCropImg').src;
+            if(activeCropType === 'logo') {
+                customLogoBase64 = imgSrc;
+                localStorage.setItem('omni_pos_custom_logo', customLogoBase64);
+                document.getElementById('headerLogoImg').src = customLogoBase64;
+                alert("گول لوگو کامیابی سے سیٹ ہو گیا!");
+            } else if(activeCropType === 'banner') {
+                customBannerBase64 = imgSrc;
+                localStorage.setItem('omni_pos_custom_banner', customBannerBase64);
+                document.getElementById('mainHeaderElement').style.backgroundImage = `url(${customBannerBase64})`;
+                alert("کور بینر کامیابی سے سیٹ ہو گیا!");
+            }
+            closeImageCropModal();
+        }
+
+        function closeImageCropModal() {
+            document.getElementById('imageCropModal').style.display = 'none';
         }
 
         function initBulkRows() {
@@ -676,23 +740,57 @@
         }
         function closeReportsModal() { document.getElementById('reportsModal').style.display = 'none'; }
 
-        function openExpenseModal() { renderExpenses(); document.getElementById('expenseModal').style.display = 'flex'; }
-        function closeExpenseModal() { document.getElementById('expenseModal').style.display = 'none'; }
-        function addExpense() {
-            let title = document.getElementById('expenseTitle').value.trim();
-            let amount = parseFloat(document.getElementById('expenseAmount').value);
-            if(title === "" || isNaN(amount)) { alert("تفصیل اور رقم درست درج کریں!"); return; }
-            expensesList.push({ title: title, amount: amount, time: new Date().toLocaleDateString() });
-            localStorage.setItem('omni_pos_expenses_pk', JSON.stringify(expensesList));
-            document.getElementById('expenseTitle').value = "";
-            document.getElementById('expenseAmount').value = "";
+        // اخراجات کے لیے ملٹیپل روز (Rows) والے فنکشنز
+        function openExpenseModal() {
             renderExpenses();
+            initExpenseRows();
+            document.getElementById('expenseModal').style.display = 'flex';
         }
+        function closeExpenseModal() { document.getElementById('expenseModal').style.display = 'none'; }
+
+        function initExpenseRows() {
+            let container = document.getElementById('expenseRowsContainer');
+            container.innerHTML = "";
+            for(let i=0; i<2; i++) { addExpenseRow(); }
+        }
+
+        function addExpenseRow() {
+            let container = document.getElementById('expenseRowsContainer');
+            let div = document.createElement('div');
+            div.className = 'bulk-row';
+            div.innerHTML = `<input type="text" class="expense-title-input" placeholder="خرچے کی تفصیل" style="flex:2;">
+                             <input type="number" class="expense-amount-input" placeholder="رقم (روپے)" style="flex:1;">`;
+            container.appendChild(div);
+        }
+
+        function saveBulkExpenses() {
+            let titles = document.querySelectorAll('.expense-title-input');
+            let amounts = document.querySelectorAll('.expense-amount-input');
+            let addedCount = 0;
+
+            for(let i=0; i<titles.length; i++) {
+                let title = titles[i].value.trim();
+                let amount = parseFloat(amounts[i].value);
+                if(title !== "" && !isNaN(amount)) {
+                    expensesList.push({ title: title, amount: amount, time: new Date().toLocaleDateString() });
+                    addedCount++;
+                }
+            }
+
+            if(addedCount > 0) {
+                localStorage.setItem('omni_pos_expenses_pk', JSON.stringify(expensesList));
+                renderExpenses();
+                initExpenseRows();
+                alert(`${addedCount} اخراجات کامیابی سے محفوظ ہو گئے!`);
+            } else {
+                alert("کم از کم ایک خرچے کی تفصیل اور رقم درست درج کریں!");
+            }
+        }
+
         function renderExpenses() {
             let container = document.getElementById('expenseListContainer');
             if(expensesList.length === 0) { container.innerHTML = "<p style='opacity:0.6;'>کوئی خرچہ درج نہیں۔</p>"; return; }
             let html = "";
-            expensesList.expensesList?.forEach?.(exp => {}); // safe guard
             expensesList.forEach(exp => {
                 html += `<div style="display:flex; justify-content:space-between; padding:6px; border-bottom:1px solid var(--border-color); font-size:0.85rem;">
                             <span>${exp.title} (${exp.time})</span><span style="color:#ef4444; font-weight:bold;">${exp.amount} روپے</span>
