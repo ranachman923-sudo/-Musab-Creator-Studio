@@ -6,24 +6,24 @@
     <title id="appTitle">OmniPOS Pro Ultimate - Rana 313</title>
     <style>
         :root {
-            --primary: #ffd700;
+            --primary: #00f2ff; /* تیز نیلا (Electric Blue) */
             --secondary: #050b14;
-            --accent: #ffae00;
-            --bg-grad: linear-gradient(135deg, #020617, #0f172a, #1e1b4b);
-            --card-bg: rgba(11, 19, 38, 0.95);
+            --accent: #00a8ff;
+            --bg-grad: linear-gradient(135deg, #000b1a, #001f3f, #020617);
+            --card-bg: rgba(0, 30, 60, 0.95);
             --text-color: #f8fafc;
-            --border-color: rgba(255, 215, 0, 0.4);
-            --input-bg: #111c33;
+            --border-color: rgba(0, 242, 255, 0.4);
+            --input-bg: #001f3f;
         }
 
         .light-mode {
-            --primary: #d97706;
+            --primary: #0056b3;
             --secondary: #f1f5f9;
-            --accent: #b45309;
+            --accent: #004085;
             --bg-grad: linear-gradient(135deg, #f8fafc, #e2e8f0, #cbd5e1);
             --card-bg: rgba(255, 255, 255, 0.95);
             --text-color: #0f172a;
-            --border-color: rgba(217, 119, 6, 0.4);
+            --border-color: rgba(0, 86, 179, 0.4);
             --input-bg: #ffffff;
         }
 
@@ -32,35 +32,37 @@
 
         #loginOverlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(2, 6, 23, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999;
+            background: rgba(0, 11, 26, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999;
         }
         .login-card {
-            background: #0b1326; border: 2px solid var(--primary); padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 0 35px rgba(255, 215, 0, 0.4);
+            background: #001f3f; border: 2px solid var(--primary); padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 0 35px rgba(0, 242, 255, 0.4);
         }
-        .login-card h2 { color: var(--primary); margin-bottom: 15px; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+        .login-card h2 { color: var(--primary); margin-bottom: 15px; text-shadow: 0 0 10px rgba(0,242,255,0.5); }
 
         .main-app-container { display: none; max-width: 1400px; margin: 0 auto; }
 
+        /* ہیڈر میں کمپیوٹر سیٹ اپ کی مکمل تصویر */
         header {
-            text-align: center; padding: 45px 15px; background-size: cover; background-position: center;
-            background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1400&h=500&fit=crop');
+            text-align: center; padding: 50px 15px; background-size: cover; background-position: center;
+            background-image: url('https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=1400&h=500&fit=crop');
             border-radius: 20px; border: 2px solid var(--border-color);
             margin-bottom: 20px; box-shadow: 0 10px 35px rgba(0,0,0,0.6); position: relative; overflow: hidden;
         }
         header::before {
             content: ""; position: absolute; top:0; left:0; width:100%; height:100%;
-            background: rgba(3, 7, 18, 0.82); z-index: 1;
+            background: rgba(0, 11, 26, 0.82); z-index: 1;
         }
         .light-mode header::before { background: rgba(255, 255, 255, 0.85); }
         .header-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; }
         
+        /* گول دائرے میں Rana 313 کا لوگو */
         .app-logo-wrapper {
-            width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--primary); overflow: hidden; position: relative; box-shadow: 0 0 25px rgba(255, 215, 0, 0.9); background: radial-gradient(circle, #1e293b, #020617); display: flex; align-items: center; justify-content: center;
+            width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--primary); overflow: hidden; position: relative; box-shadow: 0 0 25px rgba(0, 242, 255, 0.9); background: #000; display: flex; align-items: center; justify-content: center;
         }
-        .app-logo {
-            width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;
+        .rana-logo-text {
+            color: var(--primary); font-size: 1.4rem; font-weight: 900; text-align: center; line-height: 1.2; text-shadow: 0 0 10px var(--primary); z-index: 2;
         }
-        header h1 { color: var(--primary); font-size: 2.2rem; text-shadow: 0 2px 10px rgba(255,215,0,0.6); font-weight: 800; }
+        header h1 { color: var(--primary); font-size: 2.2rem; text-shadow: 0 2px 10px rgba(0,242,255,0.6); font-weight: 800; }
 
         .top-controls {
             position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--border-color);
@@ -68,7 +70,7 @@
         .icon-btn, select.icon-btn {
             background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: bold; outline: none;
         }
-        .icon-btn:hover { border-color: var(--primary); box-shadow: 0 0 10px rgba(255,215,0,0.4); }
+        .icon-btn:hover { border-color: var(--primary); box-shadow: 0 0 10px rgba(0,242,255,0.4); }
 
         .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         @media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } }
@@ -83,12 +85,12 @@
         .input-group { margin-bottom: 12px; }
         .input-group label { display: block; margin-bottom: 4px; font-size: 0.9rem; opacity: 0.95; font-weight: 600; }
         input, select, textarea { width: 100%; padding: 10px; background: var(--input-bg); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 8px; outline: none; font-size: 0.95rem; }
-        input:focus { border-color: var(--primary); box-shadow: 0 0 8px rgba(255,215,0,0.4); }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 8px rgba(0,242,255,0.4); }
 
         .btn {
-            background: linear-gradient(135deg, #ffd700, #ff8c00); color: #020617; border: none; padding: 11px 15px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 1rem; width: 100%; transition: 0.3s; box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+            background: linear-gradient(135deg, #00f2ff, #0077ff); color: #000; border: none; padding: 11px 15px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 1rem; width: 100%; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,242,255,0.3);
         }
-        .btn:hover { transform: translateY(-2px); opacity: 0.95; box-shadow: 0 6px 20px rgba(255,215,0,0.5); }
+        .btn:hover { transform: translateY(-2px); opacity: 0.95; box-shadow: 0 6px 20px rgba(0,242,255,0.5); }
 
         .bulk-rows-container { max-height: 180px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px; margin-bottom: 10px; }
         .bulk-row { display: flex; gap: 8px; margin-bottom: 8px; }
@@ -148,9 +150,9 @@
         <!-- ہیڈر -->
         <header id="mainHeaderElement">
             <div class="header-content">
-                <div class="app-logo-wrapper" title="Rana 313 گولڈن لوگو">
-                    <!-- رانا 313 چمکدار گولڈن شیلڈ/بیج لوگو جو سرکل میں مکمل فٹ ہے -->
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&h=200&fit=crop" alt="Rana 313 Logo" class="app-logo">
+                <!-- گول دائرے میں Rana 313 لوگو -->
+                <div class="app-logo-wrapper" title="Rana 313 لوگو">
+                    <div class="rana-logo-text">RANA<br>313</div>
                 </div>
                 
                 <div>
@@ -177,7 +179,6 @@
                 <button class="icon-btn" onclick="openReportsModal()">📊 رپورٹس</button>
                 <button class="icon-btn" onclick="openExpenseModal()">💸 اخراجات</button>
                 <button class="icon-btn" onclick="openHistoryModal()">🧾 ہسٹری</button>
-                <!-- خفیہ ویورز ٹریکنگ بٹن (آنکھ کا نشان) -->
                 <button class="icon-btn" onclick="openSecretViewersModal()" title="خفیہ ویورز لسٹ" style="border-color: var(--primary); color: var(--primary);">👁️</button>
             </div>
         </header>
@@ -199,7 +200,7 @@
                         <h3 style="border:none; padding:0; font-size:0.95rem; margin:0;">کل رجسٹرڈ اشیاء: <span id="totalProductCount" style="color:var(--primary);">0</span></h3>
                     </div>
                     <div class="input-group">
-                        <input type="text" id="searchStock" placeholder="🔍 سرچ کریں (دیکھیں کون سی چیز سیو ہے)..." onkeyup="filterStockGrid()">
+                        <input type="text" id="searchStock" placeholder="🔍 سرچ کریں..." onkeyup="filterStockGrid()">
                     </div>
                     <div id="productsGridContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; max-height: 180px; overflow-y: auto;"></div>
                 </div>
@@ -286,7 +287,7 @@
 
         </div>
 
-        <!-- فوٹر جہاں ڈویلپر اور برانڈ کا نام واپس شامل کر دیا گیا ہے -->
+        <!-- فوٹر -->
         <footer>
             <p>سسٹم ڈیزائن و تحریر: <span>رانا چمن / رانا افتخار احمد</span> | تمام حقوق محفوظ ہیں © 2026</p>
             <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 3px;">رانا 313 ڈیجیٹل سلوشنز — Rana 313 POS Ultimate</p>
@@ -299,7 +300,7 @@
         <div class="secret-content">
             <h3 style="color: var(--primary); margin-bottom: 10px;">📒 گاہکوں کا ادھار کھاتا</h3>
             <div id="ledgerListContainer" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;"></div>
-            <button class="btn" onclick="closeLedgerModal()" style="background: var(--primary); color: #020617;">بند کریں</button>
+            <button class="btn" onclick="closeLedgerModal()" style="background: var(--primary); color: #000;">بند کریں</button>
         </div>
     </div>
 
@@ -307,7 +308,7 @@
         <div class="secret-content">
             <h3 style="color: var(--primary); margin-bottom: 10px;">📊 روزانہ کی سیل اور خالص منافع رپورٹ</h3>
             <div id="reportsContent" style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 15px;"></div>
-            <button class="btn" onclick="closeReportsModal()" style="background: var(--primary); color: #020617;">بند کریں</button>
+            <button class="btn" onclick="closeReportsModal()" style="background: var(--primary); color: #000;">بند کریں</button>
         </div>
     </div>
 
@@ -320,7 +321,7 @@
                 <button class="btn" onclick="saveBulkExpenses()" style="flex: 1;">تمام اخراجات محفوظ کریں</button>
             </div>
             <div id="expenseListContainer" style="max-height: 150px; overflow-y: auto; margin-bottom: 15px;"></div>
-            <button class="btn" onclick="closeExpenseModal()" style="background: var(--primary); color: #020617;">بند کریں</button>
+            <button class="btn" onclick="closeExpenseModal()" style="background: var(--primary); color: #000;">بند کریں</button>
         </div>
     </div>
 
@@ -328,21 +329,20 @@
         <div class="secret-content">
             <h3 style="color: var(--primary); margin-bottom: 10px;">🧾 تاریخی ریکارڈ (تمام محفوظ رسیدیں)</h3>
             <div id="historyListContainer" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;"></div>
-            <button class="btn" onclick="closeHistoryModal()" style="background: var(--primary); color: #020617;">بند کریں</button>
+            <button class="btn" onclick="closeHistoryModal()" style="background: var(--primary); color: #000;">بند کریں</button>
         </div>
     </div>
 
-    <!-- خفیہ ویورز ٹریکنگ ماڈل -->
     <div class="secret-modal" id="secretViewersModal">
         <div class="secret-content">
-            <h3 style="color: var(--primary); margin-bottom: 10px;">👁️ خفیہ ویورز ریکارڈ (کس کس نے دیکھا)</h3>
+            <h3 style="color: var(--primary); margin-bottom: 10px;">👁️ خفیہ ویورز ریکارڈ</h3>
             <div id="secretPasswordBox">
                 <p style="margin-bottom: 10px; font-size: 0.9rem;">یہ خفیہ علاقہ ہے۔ دیکھنے کے لیے کوڈ درج کریں:</p>
                 <input type="password" id="secretCodeInput" placeholder="کوڈ لکھیں (رانا 313)..." style="margin-bottom: 10px;">
                 <button class="btn" onclick="verifySecretCode()">تصدیق کریں</button>
             </div>
             <div id="secretViewersListContainer" style="display: none; max-height: 250px; overflow-y: auto; margin-bottom: 15px;"></div>
-            <button class="btn" onclick="closeSecretViewersModal()" style="background: var(--primary); color: #020617; margin-top: 10px;">بند کریں</button>
+            <button class="btn" onclick="closeSecretViewersModal()" style="background: var(--primary); color: #000; margin-top: 10px;">بند کریں</button>
         </div>
     </div>
 
@@ -396,13 +396,7 @@
             let dateStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
             let timeStr = now.toLocaleTimeString();
 
-            viewersList.unshift({
-                name: userName,
-                day: dayName,
-                date: dateStr,
-                time: timeStr
-            });
-
+            viewersList.unshift({ name: userName, day: dayName, date: dateStr, time: timeStr });
             if(viewersList.length > 50) viewersList.pop();
             localStorage.setItem('rana_313_viewers_log', JSON.stringify(viewersList));
         }
@@ -455,7 +449,7 @@
         function copyWebsiteLink() {
             let websiteUrl = window.location.href;
             navigator.clipboard.writeText(websiteUrl).then(() => {
-                alert("🌐 ویب سائٹ کا لنک کامیابی سے کاپی ہو گیا ہے!\n\nاب جس کو بھی یہ لنک بھیجیں گے، وہ اپنا نام خود درج کرے گا اور اس کا ریکارڈ محفوظ ہو جائے گا:\n" + websiteUrl);
+                alert("🌐 ویب سائٹ کا لنک کاپی ہو گیا ہے!\n\n" + websiteUrl);
             }).catch(err => { alert("لنک کاپی کرنے میں خرابی پیش آئی!"); });
         }
 
@@ -521,7 +515,7 @@
                 localStorage.setItem('omni_pos_products_pk', JSON.stringify(savedProducts));
                 renderInventoryGrid();
                 initBulkRows();
-                alert(`${addedCount} پروڈکٹس محفوظ ہو گئیں! کل آئٹمز: ${savedProducts.length}`);
+                alert(`${addedCount} پروڈکٹس محفوظ ہو گئیں!`);
             } else {
                 alert("کم از کم ایک پروڈکٹ کا نام اور درست ریٹ درج کریں!");
             }
@@ -696,7 +690,7 @@
             let textToCopy = generateBillTextPayload();
             navigator.clipboard.writeText(textToCopy).then(() => {
                 alert("بل کا متن کاپی ہو گیا ہے!");
-            }).catch(err => { alert("خرابی پیش آئی!"); });
+            });
         }
 
         function saveAndSendWhatsApp() {
@@ -795,7 +789,7 @@
                 localStorage.setItem('omni_pos_expenses_pk', JSON.stringify(expensesList));
                 renderExpenses();
                 initExpenseRows();
-                alert(`${addedCount} اخراجات کامیابی سے محفوظ ہو گئے!`);
+                alert(`${addedCount} اخراجات محفوظ ہو گئے!`);
             } else {
                 alert("کم از کم ایک خرچے کی تفصیل اور رقم درست درج کریں!");
             }
