@@ -42,20 +42,20 @@
         .main-app-container { display: none; max-width: 1400px; margin: 0 auto; }
 
         header {
-            text-align: center; padding: 45px 15px; background-size: cover; background-position: center;
-            background-image: url('https://images.unsplash.com/photo-1556742049-0a67d553c2c5?w=1400&h=600&fit=crop');
+            text-align: center; padding: 50px 15px; background-size: cover; background-position: center;
+            background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?w=1400&h=600&fit=crop');
             border-radius: 20px; border: 2px solid var(--border-color);
             margin-bottom: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.7); position: relative; overflow: hidden;
         }
         header::before {
             content: ""; position: absolute; top:0; left:0; width:100%; height:100%;
-            background: linear-gradient(135deg, rgba(0, 11, 26, 0.90), rgba(0, 31, 63, 0.85)); z-index: 1;
+            background: linear-gradient(135deg, rgba(0, 11, 26, 0.88), rgba(0, 31, 63, 0.82)); z-index: 1;
         }
         .light-mode header::before { background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(241, 245, 249, 0.88)); }
         .header-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; }
         
         .app-logo-wrapper {
-            width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--primary); 
+            width: 115px; height: 115px; border-radius: 50%; border: 3px solid var(--primary); 
             background: radial-gradient(circle, #001f3f 0%, #000814 100%);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             box-shadow: 0 0 25px rgba(0, 242, 255, 0.8), inset 0 0 15px rgba(0, 242, 255, 0.5);
@@ -65,8 +65,8 @@
             0% { box-shadow: 0 0 20px rgba(0, 242, 255, 0.6); }
             100% { box-shadow: 0 0 30px rgba(0, 242, 255, 0.9), inset 0 0 10px rgba(0, 242, 255, 0.8); }
         }
-        .logo-brand-title { color: #fff; font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
-        .logo-main-num { color: var(--primary); font-size: 1.8rem; font-weight: 900; line-height: 1; text-shadow: 0 0 10px var(--primary); }
+        .logo-brand-title { color: #fff; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+        .logo-main-num { color: var(--primary); font-size: 2rem; font-weight: 900; line-height: 1; text-shadow: 0 0 10px var(--primary); }
 
         header h1 { color: var(--primary); font-size: 2.2rem; text-shadow: 0 2px 12px rgba(0,242,255,0.6); font-weight: 800; }
 
@@ -123,24 +123,13 @@
         .whatsapp-btn { background: #10b981; color: white; padding: 6px 12px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 0.8rem; }
         .copy-btn { background: #8b5cf6; color: white; padding: 6px 12px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 0.8rem; }
 
-        /* گوگل ایڈ باکس کی خصوصی سٹائلنگ */
         .ad-box-wrapper {
-            background: var(--input-bg);
-            border: 2px dashed var(--primary);
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-            margin-top: 15px;
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.15);
+            background: var(--input-bg); border: 2px dashed var(--primary); border-radius: 12px; padding: 15px; text-align: center; margin-top: 15px; box-shadow: 0 0 15px rgba(0, 242, 255, 0.15);
         }
-        .ad-box-wrapper h4 {
-            color: var(--primary);
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-        }
+        .ad-box-wrapper h4 { color: var(--primary); font-size: 0.9rem; margin-bottom: 8px; }
 
         .secret-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
-        .secret-content { background: var(--card-bg); border: 2px solid var(--primary); padding: 20px; border-radius: 15px; width: 90%; max-width: 700px; max-height: 85vh; overflow-y: auto; }
+        .secret-content { background: var(--card-bg); border: 2px solid var(--primary); padding: 20px; border-radius: 15px; width: 90%; max-width: 750px; max-height: 85vh; overflow-y: auto; }
 
         .inventory-grid-box { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-top: 10px; max-height: 350px; overflow-y: auto; }
         .inv-card { background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; text-align: center; }
@@ -235,22 +224,12 @@
                     <div id="productsGridContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; max-height: 180px; overflow-y: auto;"></div>
                 </div>
 
-                <!-- 🌟 یہاں آپ کا مخصوص گوگل ایڈ ڈبہ شامل کر دیا گیا ہے 🌟 -->
                 <div class="ad-box-wrapper">
                     <h4>📢 ڈیجیٹل اشتہار (Google AdSense Ad Slot)</h4>
                     <p style="font-size: 0.75rem; opacity: 0.8; margin-bottom: 8px;">یہاں صرف ایک محدود ڈبے کے اندر ایڈز چلیں گے، پوری سکرین پر نہیں۔</p>
-                    
-                    <!-- نیچے اپنے گوگل ایڈ سینس کا کوڈ پیسٹ کریں -->
                     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXX" crossorigin="anonymous"></script>
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-XXXXXXXXX"
-                         data-ad-slot="XXXXXXXXX"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXX" data-ad-slot="XXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                 </div>
             </div>
 
@@ -342,7 +321,7 @@
 
     </div>
 
-    <!-- پروڈکٹ گیلری ڈبہ (Modal) -->
+    <!-- Modals -->
     <div class="secret-modal" id="inventoryGalleryModal">
         <div class="secret-content">
             <h3 style="color: var(--primary); margin-bottom: 5px;">📦 پروڈکٹ گیلری (ڈیٹا مینیجر)</h3>
@@ -351,7 +330,7 @@
                 <input type="text" id="gallerySearchInput" placeholder="گیلری میں سرچ کریں..." onkeyup="renderInventoryGalleryItems()">
             </div>
             <div id="inventoryGalleryContainer" class="inventory-grid-box"></div>
-            <button class="btn" onclick="closeInventoryGalleryModal()" style="background: var(--primary); color: #000; margin-top: 15px;">بند کریں (ڈبہ بند کریں)</button>
+            <button class="btn" onclick="closeInventoryGalleryModal()" style="background: var(--primary); color: #000; margin-top: 15px;">بند کریں</button>
         </div>
     </div>
 
@@ -387,7 +366,7 @@
     <div class="secret-modal" id="historyModal">
         <div class="secret-content">
             <h3 style="color: var(--primary); margin-bottom: 10px;">🧾 تاریخی ریکارڈ (تمام محفوظ رسیدیں)</h3>
-            <div id="historyListContainer" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;"></div>
+            <div id="historyListContainer" style="max-height: 350px; overflow-y: auto; margin-bottom: 15px;"></div>
             <button class="btn" onclick="closeHistoryModal()" style="background: var(--primary); color: #000;">بند کریں</button>
         </div>
     </div>
@@ -623,7 +602,7 @@
 
             let totalCount = savedProducts.length;
             let stockSum = savedProducts.reduce((sum, p) => sum + (parseFloat(p.stock) || 0), 0);
-            document.getElementById('inventoryStatsText').innerText = `کل محفوظ اشیاء کی تعداد: ${totalCount} | کل دستیاب اسٹاک مقدار: ${stockSum}`;
+            document.getElementById('inventoryStatsText').innerText = `کل محفوظ اشیاء: ${totalCount} | کل اسٹاک: ${stockSum}`;
 
             if(filtered.length === 0) {
                 container.innerHTML = `<p style="text-align: center; grid-column: span 3; opacity: 0.6; padding: 20px;">کوئی پروڈکٹ نہیں ملی۔</p>`;
@@ -631,15 +610,15 @@
             }
 
             let html = "";
-            filtered.forEach((prod, index) => {
+            filtered.forEach((prod) => {
                 let imgTag = prod.image ? `<img src="${prod.image}" alt="Item">` : `<div style="width:100%; height:75px; background:#111; display:flex; align-items:center; justify-content:center; font-size:0.7rem; color:#888; border-radius:6px; margin-bottom:5px;">تصویر نہیں</div>`;
                 html += `<div class="inv-card">
                             ${imgTag}
                             <h4 style="color:var(--primary); font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${prod.name}">${prod.name}</h4>
                             <p style="font-size:0.75rem; font-weight:bold; margin: 4px 0;">ریٹ: ${prod.rate} | اسٹاک: ${prod.stock}</p>
                             <div style="display: flex; justify-content: center; gap: 4px; margin-top: 6px;">
-                                <button class="edit-btn" onclick="updateProductRate('${prod.name}')">✏️ ریٹ بدلو</button>
-                                <button class="del-btn" onclick="deleteProductFromData('${prod.name}')">🗑️ ختم کرو</button>
+                                <button class="edit-btn" onclick="updateProductRate('${prod.name}')">✏️ ریٹ</button>
+                                <button class="del-btn" onclick="deleteProductFromData('${prod.name}')">🗑️ ختم</button>
                             </div>
                          </div>`;
             });
@@ -647,20 +626,19 @@
         }
 
         function deleteProductFromData(prodName) {
-            if(confirm(`کیا آپ واقعی "${prodName}" کو ڈیٹا سے ہمیشہ کے لیے ختم کرنا چاہتے ہیں؟`)) {
+            if(confirm(`کیا آپ واقعی "${prodName}" کو ختم کرنا چاہتے ہیں؟`)) {
                 savedProducts = savedProducts.filter(p => p.name.toLowerCase() !== prodName.toLowerCase());
                 localStorage.setItem('omni_pos_products_pk', JSON.stringify(savedProducts));
                 renderInventoryGrid();
                 renderInventoryGalleryItems();
-                alert("پروڈکٹ ڈیٹا سے کامیابی سے ختم کر دی گئی ہے!");
+                alert("پروڈکٹ ختم کر دی گئی ہے!");
             }
         }
 
         function updateProductRate(prodName) {
             let prod = savedProducts.find(p => p.name.toLowerCase() === prodName.toLowerCase());
             if(!prod) return;
-
-            let newRateInput = prompt(`"${prod.name}" کا نیا ریٹ درج کریں (موجودہ ریٹ: ${prod.rate}):`, prod.rate);
+            let newRateInput = prompt(`"${prod.name}" کا نیا ریٹ درج کریں:`, prod.rate);
             if(newRateInput !== null) {
                 let newRate = parseFloat(newRateInput);
                 if(!isNaN(newRate)) {
@@ -668,9 +646,7 @@
                     localStorage.setItem('omni_pos_products_pk', JSON.stringify(savedProducts));
                     renderInventoryGrid();
                     renderInventoryGalleryItems();
-                    alert("پروڈکٹ کا ریٹ کامیابی سے اپ ڈیٹ ہو گیا ہے!");
-                } else {
-                    alert("براہ کرم درست نمبر درج کریں!");
+                    alert("ریٹ اپ ڈیٹ ہو گیا ہے!");
                 }
             }
         }
@@ -678,18 +654,9 @@
         function showProductSuggestions() {
             let typed = document.getElementById('saleName').value.trim().toLowerCase();
             let dropdown = document.getElementById('saleSuggestionsDropdown');
-
-            if(typed === "") {
-                dropdown.style.display = 'none';
-                return;
-            }
-
+            if(typed === "") { dropdown.style.display = 'none'; return; }
             let matched = savedProducts.filter(p => p.name.toLowerCase().includes(typed));
-
-            if(matched.length === 0) {
-                dropdown.style.display = 'none';
-                return;
-            }
+            if(matched.length === 0) { dropdown.style.display = 'none'; return; }
 
             let html = "";
             matched.forEach(prod => {
@@ -698,7 +665,6 @@
                             <span style="color:var(--primary);">ریٹ: ${prod.rate}</span>
                          </div>`;
             });
-
             dropdown.innerHTML = html;
             dropdown.style.display = 'block';
         }
@@ -764,7 +730,7 @@
             let grandTotalText = document.getElementById('grandTotalText');
             
             if(currentBill.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; opacity: 0.6; padding: 15px;">کوئی آئٹم شامل نہیں۔ آپ جتنی چاہیں چیزیں ایڈ کر سکتے ہیں۔</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; opacity: 0.6; padding: 15px;">کوئی آئٹم شامل نہیں۔</td></tr>`;
                 grandTotalText.innerText = "0.00 روپے";
                 return;
             }
@@ -967,7 +933,7 @@
             let container = document.getElementById('expenseListContainer');
             if(expensesList.length === 0) { container.innerHTML = "<p style='opacity:0.6;'>کوئی خرچہ درج نہیں۔</p>"; return; }
             let html = "";
-            expensesList.exp.forEach(exp => {
+            expensesList.forEach(exp => {
                 html += `<div style="display:flex; justify-content:space-between; padding:6px; border-bottom:1px solid var(--border-color); font-size:0.85rem;">
                             <span>${exp.title} (${exp.time})</span><span style="color:#ef4444; font-weight:bold;">${exp.amount} روپے</span>
                          </div>`;
@@ -977,14 +943,32 @@
 
         function openHistoryModal() {
             let container = document.getElementById('historyListContainer');
-            if(invoiceHistory.length === 0) { container.innerHTML = "<p style='opacity:0.6;'>کوئی رسید محفوظ نہیں۔</p>"; return; }
+            if(invoiceHistory.length === 0) { 
+                container.innerHTML = "<p style='opacity:0.6; text-align:center;'>کوئی رسید محفوظ نہیں۔</p>"; 
+                document.getElementById('historyModal').style.display = 'flex';
+                return; 
+            }
+            
             let html = "";
             invoiceHistory.forEach((inv, index) => {
-                html += `<div style="background:var(--input-bg); border:1px solid var(--border-color); padding:10px; border-radius:8px; margin-bottom:10px;">
-                            <p><strong>رسید # ${invoiceHistory.length - index}</strong> (${inv.type === 'credit' ? 'ادھار کھاتہ' : 'نقد'})</p>
-                            <p>تاریخ: ${inv.date}</p>
-                            <p>آپریٹر: ${inv.seller} | گاہک: ${inv.customer}</p>
-                            <p style="color:var(--primary); font-weight:bold;">کل رقم: ${inv.grandTotal.toFixed(2)} روپے</p>
+                let itemsHtml = "";
+                if(inv.items && inv.items.length > 0) {
+                    inv.items.forEach(it => {
+                        itemsHtml += `<div style="background:var(--input-bg); border:1px solid var(--border-color); padding:4px 8px; border-radius:6px; margin:3px 0; display:flex; justify-content:space-between; font-size:0.8rem;">
+                                        <span>🛒 ${it.name} (${it.qtyText})</span>
+                                        <span style="color:var(--primary);">ریٹ: ${it.rate} | کل: ${it.total.toFixed(2)}</span>
+                                      </div>`;
+                    });
+                }
+
+                html += `<div style="background:rgba(0,11,26,0.6); border:1px solid var(--border-color); padding:12px; border-radius:10px; margin-bottom:12px;">
+                            <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-color); padding-bottom:5px; margin-bottom:6px;">
+                                <span style="font-weight:bold; color:var(--primary);">🧾 رسید # ${invoiceHistory.length - index} (${inv.type === 'credit' ? 'ادھار کھاتہ' : 'نقد'})</span>
+                                <span style="font-size:0.8rem; opacity:0.8;">📅 ${inv.date}</span>
+                            </div>
+                            <p style="font-size:0.85rem; margin-bottom:4px;"><strong>👤 گاہک:</strong> ${inv.customer} | <strong>👨‍💼 آپریٹر:</strong> ${inv.seller}</p>
+                            <div style="margin: 6px 0;"><strong style="font-size:0.8rem; opacity:0.9;">لی گئی اشیاء:</strong> ${itemsHtml}</div>
+                            <div style="text-align:left; margin-top:6px; font-weight:bold; color:var(--primary);">کل بل: ${inv.grandTotal.toFixed(2)} روپے</div>
                          </div>`;
             });
             container.innerHTML = html;
