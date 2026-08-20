@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="appTitle">OmniPOS Pro Ultimate PK.com</title>
+    <title id="appTitle">OmniPOS Pro Ultimate - Rana 313</title>
     <style>
         :root {
-            --primary: #00e1ff;
+            --primary: #ffd700;
             --secondary: #050b14;
-            --accent: #3b82f6;
+            --accent: #ffae00;
             --bg-grad: linear-gradient(135deg, #020617, #0f172a, #1e1b4b);
             --card-bg: rgba(11, 19, 38, 0.95);
             --text-color: #f8fafc;
-            --border-color: rgba(0, 225, 255, 0.35);
+            --border-color: rgba(255, 215, 0, 0.4);
             --input-bg: #111c33;
         }
 
         .light-mode {
-            --primary: #0284c7;
+            --primary: #d97706;
             --secondary: #f1f5f9;
-            --accent: #0284c7;
+            --accent: #b45309;
             --bg-grad: linear-gradient(135deg, #f8fafc, #e2e8f0, #cbd5e1);
             --card-bg: rgba(255, 255, 255, 0.95);
             --text-color: #0f172a;
-            --border-color: rgba(2, 132, 199, 0.35);
+            --border-color: rgba(217, 119, 6, 0.4);
             --input-bg: #ffffff;
         }
 
@@ -35,32 +35,32 @@
             background: rgba(2, 6, 23, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999;
         }
         .login-card {
-            background: #0b1326; border: 2px solid var(--primary); padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 0 35px rgba(0, 225, 255, 0.4);
+            background: #0b1326; border: 2px solid var(--primary); padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 0 35px rgba(255, 215, 0, 0.4);
         }
-        .login-card h2 { color: var(--primary); margin-bottom: 15px; }
+        .login-card h2 { color: var(--primary); margin-bottom: 15px; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
 
         .main-app-container { display: none; max-width: 1400px; margin: 0 auto; }
 
         header {
             text-align: center; padding: 45px 15px; background-size: cover; background-position: center;
-            background-image: url('https://images.unsplash.com/photo-1556740758-90de374c12ad?w=1400&h=500&fit=crop');
+            background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&h=500&fit=crop');
             border-radius: 20px; border: 2px solid var(--border-color);
             margin-bottom: 20px; box-shadow: 0 10px 35px rgba(0,0,0,0.6); position: relative; overflow: hidden;
         }
         header::before {
             content: ""; position: absolute; top:0; left:0; width:100%; height:100%;
-            background: rgba(3, 7, 18, 0.78); z-index: 1;
+            background: rgba(3, 7, 18, 0.82); z-index: 1;
         }
-        .light-mode header::before { background: rgba(255, 255, 255, 0.82); }
+        .light-mode header::before { background: rgba(255, 255, 255, 0.85); }
         .header-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; }
         
         .app-logo-wrapper {
-            width: 95px; height: 95px; border-radius: 50%; border: 3px solid var(--primary); overflow: hidden; position: relative; box-shadow: 0 0 25px rgba(0, 225, 255, 0.8); background: #0b1326;
+            width: 105px; height: 105px; border-radius: 50%; border: 3px solid var(--primary); overflow: hidden; position: relative; box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); background: #0b1326; display: flex; align-items: center; justify-content: center;
         }
         .app-logo {
             width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;
         }
-        header h1 { color: var(--primary); font-size: 2.2rem; text-shadow: 0 2px 8px rgba(0,0,0,0.8); font-weight: 800; }
+        header h1 { color: var(--primary); font-size: 2.2rem; text-shadow: 0 2px 10px rgba(255,215,0,0.6); font-weight: 800; }
 
         .top-controls {
             position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--border-color);
@@ -68,7 +68,7 @@
         .icon-btn, select.icon-btn {
             background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: bold; outline: none;
         }
-        .icon-btn:hover { border-color: var(--primary); box-shadow: 0 0 10px rgba(0,225,255,0.3); }
+        .icon-btn:hover { border-color: var(--primary); box-shadow: 0 0 10px rgba(255,215,0,0.4); }
 
         .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         @media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } }
@@ -83,12 +83,12 @@
         .input-group { margin-bottom: 12px; }
         .input-group label { display: block; margin-bottom: 4px; font-size: 0.9rem; opacity: 0.95; font-weight: 600; }
         input, select, textarea { width: 100%; padding: 10px; background: var(--input-bg); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 8px; outline: none; font-size: 0.95rem; }
-        input:focus { border-color: var(--primary); box-shadow: 0 0 8px rgba(0,225,255,0.4); }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 8px rgba(255,215,0,0.4); }
 
         .btn {
-            background: linear-gradient(135deg, #00e1ff, #3b82f6); color: #020617; border: none; padding: 11px 15px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 1rem; width: 100%; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,225,255,0.3);
+            background: linear-gradient(135deg, #ffd700, #ff8c00); color: #020617; border: none; padding: 11px 15px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 1rem; width: 100%; transition: 0.3s; box-shadow: 0 4px 15px rgba(255,215,0,0.3);
         }
-        .btn:hover { transform: translateY(-2px); opacity: 0.95; box-shadow: 0 6px 20px rgba(0,225,255,0.5); }
+        .btn:hover { transform: translateY(-2px); opacity: 0.95; box-shadow: 0 6px 20px rgba(255,215,0,0.5); }
 
         .bulk-rows-container { max-height: 180px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px; margin-bottom: 10px; }
         .bulk-row { display: flex; gap: 8px; margin-bottom: 8px; }
@@ -131,11 +131,11 @@
 </head>
 <body>
 
-    <!-- لاگ ان اسکرین (ہر نئے یوزر کے لیے الگ نام مانگے گی) -->
+    <!-- لاگ ان اسکرین -->
     <div id="loginOverlay">
         <div class="login-card">
-            <h2>OmniPOS Pro PK.com</h2>
-            <p style="margin-bottom: 15px; font-size: 0.9rem; opacity: 0.9;">براہ کرم اپنا یا اپنی دکان کا نام درج کریں:</p>
+            <h2>Rana 313 POS</h2>
+            <p style="margin-bottom: 15px; font-size: 0.9rem; opacity: 0.9;">براہ کرم اپنا یا دکان کا نام درج کریں:</p>
             <input type="text" id="loginNameInput" placeholder="یہاں نام لکھیں..." style="margin-bottom: 15px;">
             <button class="btn" onclick="loginUser()">سسٹم میں داخل ہوں</button>
         </div>
@@ -147,16 +147,17 @@
         <!-- ہیڈر -->
         <header id="mainHeaderElement">
             <div class="header-content">
-                <div class="app-logo-wrapper" title="POS Professional Logo">
-                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=150&h=150&fit=crop" alt="Logo" class="app-logo" id="headerLogoImg">
+                <div class="app-logo-wrapper" title="Rana 313 Golden Logo">
+                    <!-- چمکدار گولڈن شیلڈ/بیج لوگو جو سرکل میں مکمل فٹ ہے -->
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&h=200&fit=crop" alt="Rana 313 Logo" class="app-logo">
                 </div>
                 
                 <div>
-                    <h1 id="mainHeading">OmniPOS Pro Ultimate PK.com</h1>
+                    <h1 id="mainHeading">Rana 313 POS Ultimate</h1>
                     <p style="font-size:0.9rem; opacity:0.95;">
-                        آپریٹر / دکان: <span id="displayShopkeeper" style="font-weight:bold;"></span> 
+                        آپریٹر / دکان: <span id="displayShopkeeper" style="font-weight:bold; color:var(--primary);"></span> 
                         <button onclick="editShopkeeperName()" style="background:none; border:none; color:var(--primary); cursor:pointer; text-decoration:underline; font-size:0.85rem; margin-right:5px; font-weight:bold;">[نام تبدیل کریں]</button> 
-                        | پلیٹ فارم: PK.com
+                        | برانڈ: Rana 313
                     </p>
                 </div>
             </div>
@@ -175,6 +176,8 @@
                 <button class="icon-btn" onclick="openReportsModal()">📊 رپورٹس</button>
                 <button class="icon-btn" onclick="openExpenseModal()">💸 اخراجات</button>
                 <button class="icon-btn" onclick="openHistoryModal()">🧾 ہسٹری</button>
+                <!-- خفیہ ویورز ٹریکنگ بٹن (آنکھ کا نشان) -->
+                <button class="icon-btn" onclick="openSecretViewersModal()" title="خفیہ ویورز لسٹ" style="border-color: var(--primary); color: var(--primary);">👁️</button>
             </div>
         </header>
 
@@ -243,8 +246,8 @@
                 <!-- بل لسٹ -->
                 <div style="margin-top: 15px;">
                     <div class="print-invoice-header" id="printHeaderInfo">
-                        <h2 id="receiptShopName">OmniPOS Pro PK.com</h2>
-                        <p><strong>آپریٹر:</strong> <span id="receiptSeller"></span> | <strong>پلیٹ فارم:</strong> PK.com</p>
+                        <h2 id="receiptShopName">Rana 313 POS</h2>
+                        <p><strong>آپریٹر:</strong> <span id="receiptSeller"></span> | <strong>برانڈ:</strong> Rana 313</p>
                         <p><strong>گاہک:</strong> <span id="receiptCustomer"></span> | <strong>تاریخ:</strong> <span id="receiptDateTime"></span></p>
                     </div>
 
@@ -283,7 +286,7 @@
         </div>
 
         <footer>
-            <p>سسٹم پلیٹ فارم: <strong>OmniPOS Pro Ultimate PK.com</strong> © 2026</p>
+            <p>سسٹم ڈیزائن و تحریر: <strong>رانا چمن / رانا افتخار احمد</strong> | Rana 313 POS © 2026</p>
         </footer>
 
     </div>
@@ -326,6 +329,20 @@
         </div>
     </div>
 
+    <!-- خفیہ ویورز ٹریکنگ ماڈل -->
+    <div class="secret-modal" id="secretViewersModal">
+        <div class="secret-content">
+            <h3 style="color: var(--primary); margin-bottom: 10px;">👁️ خفیہ ویورز ریکارڈ (کس کس نے دیکھا)</h3>
+            <div id="secretPasswordBox">
+                <p style="margin-bottom: 10px; font-size: 0.9rem;">یہ خفیہ علاقہ ہے۔ دیکھنے کے لیے کوڈ درج کریں:</p>
+                <input type="password" id="secretCodeInput" placeholder="کوڈ لکھیں (رانا 313)..." style="margin-bottom: 10px;">
+                <button class="btn" onclick="verifySecretCode()">تصدیق کریں</button>
+            </div>
+            <div id="secretViewersListContainer" style="display: none; max-height: 250px; overflow-y: auto; margin-bottom: 15px;"></div>
+            <button class="btn" onclick="closeSecretViewersModal()" style="background: var(--primary); color: #020617; margin-top: 10px;">بند کریں</button>
+        </div>
+    </div>
+
     <!-- گوگل ٹرانسলেট اسکرپٹ -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
@@ -343,11 +360,12 @@
         let loggedInUser = localStorage.getItem('omni_pos_username') || "";
 
         window.onload = function() {
-            // اگر یوزر کا نام پہلے سے سیو نہیں ہے تو لاگ ان اسکرین دکھاؤ، ورنہ ڈیش بورڈ کھولو
             if(loggedInUser && loggedInUser.trim() !== "") {
                 document.getElementById('displayShopkeeper').innerText = loggedInUser;
                 document.getElementById('loginOverlay').style.display = 'none';
                 document.getElementById('mainAppContainer').style.display = 'block';
+                // ٹریکنگ کے لیے وزٹ لاگ ریکارڈ کریں
+                logWebsiteVisitor(loggedInUser);
             } else {
                 document.getElementById('loginOverlay').style.display = 'flex';
                 document.getElementById('mainAppContainer').style.display = 'none';
@@ -365,6 +383,62 @@
             document.getElementById('displayShopkeeper').innerText = loggedInUser;
             document.getElementById('loginOverlay').style.display = 'none';
             document.getElementById('mainAppContainer').style.display = 'block';
+            logWebsiteVisitor(loggedInUser);
+        }
+
+        // ویب سائٹ ویورز ٹریکنگ فنکشن
+        function logWebsiteVisitor(userName) {
+            let viewersList = JSON.parse(localStorage.getItem('rana_313_viewers_log') || '[]');
+            let now = new Date();
+            let daysNames = ['اتوار', 'پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'ہفتہ'];
+            let dayName = daysNames[now.getDay()];
+            let dateStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
+            let timeStr = now.toLocaleTimeString();
+
+            // چیک کریں کہ کیا اسی سیشن میں یا نام سے آج کا ریکارڈ موجود ہے تو اپ ڈیٹ یا نیا درج کریں
+            viewersList.unshift({
+                name: userName,
+                day: dayName,
+                date: dateStr,
+                time: timeStr
+            });
+
+            // زیادہ سے زیادہ 50 ریکارڈز محفوظ رکھیں
+            if(viewersList.length > 50) viewersList.pop();
+            localStorage.setItem('rana_313_viewers_log', JSON.stringify(viewersList));
+        }
+
+        function openSecretViewersModal() {
+            document.getElementById('secretCodeInput').value = "";
+            document.getElementById('secretPasswordBox').style.display = 'block';
+            document.getElementById('secretViewersListContainer').style.display = 'none';
+            document.getElementById('secretViewersModal').style.display = 'flex';
+        }
+        function closeSecretViewersModal() { document.getElementById('secretViewersModal').style.display = 'none'; }
+
+        function verifySecretCode() {
+            let code = document.getElementById('secretCodeInput').value.trim();
+            if(code === "رانا 313" || code === "rana 313") {
+                document.getElementById('secretPasswordBox').style.display = 'none';
+                let container = document.getElementById('secretViewersListContainer');
+                let viewersList = JSON.parse(localStorage.getItem('rana_313_viewers_log') || '[]');
+                
+                if(viewersList.length === 0) {
+                    container.innerHTML = "<p style='opacity:0.6;'>ابھی تک کوئی وزٹر ریکارڈ موجود نہیں۔</p>";
+                } else {
+                    let html = "";
+                    viewersList.forEach((v, idx) => {
+                        html += `<div style="background:var(--input-bg); border:1px solid var(--border-color); padding:8px; border-radius:8px; margin-bottom:8px; font-size:0.85rem;">
+                                    <p><strong>👤 نام / آپریٹر:</strong> <span style="color:var(--primary);">${v.name}</span></p>
+                                    <p>📅 دن: ${v.day} | تاریخ: ${v.date} | ⏰ وقت: ${v.time}</p>
+                                 </div>`;
+                    });
+                    container.innerHTML = html;
+                }
+                container.style.display = 'block';
+            } else {
+                alert("غلط کوڈ! درست خفیہ کوڈ (رانا 313) درج کریں۔");
+            }
         }
 
         function editShopkeeperName() {
@@ -382,7 +456,7 @@
         function copyWebsiteLink() {
             let websiteUrl = window.location.href;
             navigator.clipboard.writeText(websiteUrl).then(() => {
-                alert("🌐 ویب سائٹ کا لنک کامیابی سے کاپی ہو گیا ہے!\n\nاب جس کو بھی یہ لنک بھیجیں گے، وہ اپنا نام خود درج کرے گا:\n" + websiteUrl);
+                alert("🌐 ویب سائٹ کا لنک کامیابی سے کاپی ہو گیا ہے!\n\nاب جس کو بھی یہ لنک بھیجیں گے، وہ اپنا نام خود درج کرے گا اور اس کا ریکارڈ محفوظ ہو جائے گا:\n" + websiteUrl);
             }).catch(err => { alert("لنک کاپی کرنے میں خرابی پیش آئی!"); });
         }
 
@@ -556,7 +630,7 @@
             let dateStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()} | ${now.toLocaleTimeString()}`;
             let grandTotal = currentBill.reduce((sum, item) => sum + item.total, 0);
 
-            let msg = `*--- OmniPOS Pro PK.com ---*\n`;
+            let msg = `*--- Rana 313 POS ---*\n`;
             msg += `آپریٹر: ${loggedInUser}\n`;
             msg += `تاریخ: ${dateStr}\n`;
             msg += `گاہک: ${customer}\n\n`;
@@ -564,7 +638,7 @@
             currentBill.forEach((item, idx) => {
                 msg += `${idx+1}. ${item.name} (${item.rate} x ${item.qtyText}) = *${item.total.toFixed(2)} روپے*\n`;
             });
-            msg += `\n*کل رقم: ${grandTotal.toFixed(2)} روپے*\nشکریہ! PK.com 🙏`;
+            msg += `\n*کل رقم: ${grandTotal.toFixed(2)} روپے*\nشکریہ! Rana 313 🙏`;
             return msg;
         }
 
@@ -661,7 +735,7 @@
         function sendLedgerWhatsApp(custName) {
             let data = customerLedgers[custName];
             if(!data || !data.phone) { alert("واٹس ایپ نمبر درج نہیں ہے!"); return; }
-            let msg = `*--- کسٹمر ادھار کھاتا (PK.com) ---*\nگاہک: ${custName}\n*کل بقایا ادھار: ${data.balance.toFixed(2)} روپے*\nشکریہ! 🙏`;
+            let msg = `*--- کسٹمر ادھار کھاتا (Rana 313) ---*\nگاہک: ${custName}\n*کل بقایا ادھار: ${data.balance.toFixed(2)} روپے*\nشکریہ! 🙏`;
             window.open(`https://api.whatsapp.com/send?phone=${data.phone}&text=${encodeURIComponent(msg)}`, '_blank');
         }
 
