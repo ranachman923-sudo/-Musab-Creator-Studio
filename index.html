@@ -42,25 +42,33 @@
         .main-app-container { display: none; max-width: 1400px; margin: 0 auto; }
 
         header {
-            text-align: center; padding: 50px 15px; background-size: cover; background-position: center;
-            background-image: url('https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=1400&h=500&fit=crop');
+            text-align: center; padding: 45px 15px; background-size: cover; background-position: center;
+            background-image: url('https://images.unsplash.com/photo-1556742049-0a67d553c2c5?w=1400&h=600&fit=crop');
             border-radius: 20px; border: 2px solid var(--border-color);
-            margin-bottom: 20px; box-shadow: 0 10px 35px rgba(0,0,0,0.6); position: relative; overflow: hidden;
+            margin-bottom: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.7); position: relative; overflow: hidden;
         }
         header::before {
             content: ""; position: absolute; top:0; left:0; width:100%; height:100%;
-            background: rgba(0, 11, 26, 0.82); z-index: 1;
+            background: linear-gradient(135deg, rgba(0, 11, 26, 0.90), rgba(0, 31, 63, 0.85)); z-index: 1;
         }
-        .light-mode header::before { background: rgba(255, 255, 255, 0.85); }
-        .header-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .light-mode header::before { background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(241, 245, 249, 0.88)); }
+        .header-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; }
         
         .app-logo-wrapper {
-            width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--primary); overflow: hidden; position: relative; box-shadow: 0 0 25px rgba(0, 242, 255, 0.9); background: #000; display: flex; align-items: center; justify-content: center;
+            width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--primary); 
+            background: radial-gradient(circle, #001f3f 0%, #000814 100%);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.8), inset 0 0 15px rgba(0, 242, 255, 0.5);
+            position: relative; animation: pulseLogo 3s infinite alternate;
         }
-        .rana-logo-text {
-            color: var(--primary); font-size: 1.4rem; font-weight: 900; text-align: center; line-height: 1.2; text-shadow: 0 0 10px var(--primary); z-index: 2;
+        @keyframes pulseLogo {
+            0% { box-shadow: 0 0 20px rgba(0, 242, 255, 0.6); }
+            100% { box-shadow: 0 0 30px rgba(0, 242, 255, 0.9), inset 0 0 10px rgba(0, 242, 255, 0.8); }
         }
-        header h1 { color: var(--primary); font-size: 2.2rem; text-shadow: 0 2px 10px rgba(0,242,255,0.6); font-weight: 800; }
+        .logo-brand-title { color: #fff; font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+        .logo-main-num { color: var(--primary); font-size: 1.8rem; font-weight: 900; line-height: 1; text-shadow: 0 0 10px var(--primary); }
+
+        header h1 { color: var(--primary); font-size: 2.2rem; text-shadow: 0 2px 12px rgba(0,242,255,0.6); font-weight: 800; }
 
         .top-controls {
             position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--border-color);
@@ -115,6 +123,22 @@
         .whatsapp-btn { background: #10b981; color: white; padding: 6px 12px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 0.8rem; }
         .copy-btn { background: #8b5cf6; color: white; padding: 6px 12px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 0.8rem; }
 
+        /* گوگل ایڈ باکس کی خصوصی سٹائلنگ */
+        .ad-box-wrapper {
+            background: var(--input-bg);
+            border: 2px dashed var(--primary);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            margin-top: 15px;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.15);
+        }
+        .ad-box-wrapper h4 {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
         .secret-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
         .secret-content { background: var(--card-bg); border: 2px solid var(--primary); padding: 20px; border-radius: 15px; width: 90%; max-width: 700px; max-height: 85vh; overflow-y: auto; }
 
@@ -132,7 +156,7 @@
         .print-invoice-header { display: none; }
         @media print {
             body { background: white !important; color: black !important; padding: 0; }
-            .dashboard-grid, header, .panel:not(:last-child), .action-btns-group, .del-btn, .edit-btn, .input-group, button, footer { display: none !important; }
+            .dashboard-grid, header, .panel:not(:last-child), .action-btns-group, .del-btn, .edit-btn, .input-group, button, footer, .ad-box-wrapper { display: none !important; }
             .panel:last-child { background: white !important; border: none !important; padding: 0 !important; width: 100% !important; max-height: none !important; }
             .print-invoice-header { display: block !important; text-align: center; margin-bottom: 15px; border-bottom: 2px dashed #333; padding-bottom: 10px; }
             table, th, td { border: 1px solid #333 !important; color: black !important; }
@@ -156,8 +180,9 @@
         
         <header id="mainHeaderElement">
             <div class="header-content">
-                <div class="app-logo-wrapper" title="Rana 313 لوگو">
-                    <div class="rana-logo-text">RANA<br>313</div>
+                <div class="app-logo-wrapper" title="Rana 313 آفیشل لوگو">
+                    <span class="logo-brand-title">RANA</span>
+                    <span class="logo-main-num">313</span>
                 </div>
                 
                 <div>
@@ -209,10 +234,28 @@
                     </div>
                     <div id="productsGridContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; max-height: 180px; overflow-y: auto;"></div>
                 </div>
+
+                <!-- 🌟 یہاں آپ کا مخصوص گوگل ایڈ ڈبہ شامل کر دیا گیا ہے 🌟 -->
+                <div class="ad-box-wrapper">
+                    <h4>📢 ڈیجیٹل اشتہار (Google AdSense Ad Slot)</h4>
+                    <p style="font-size: 0.75rem; opacity: 0.8; margin-bottom: 8px;">یہاں صرف ایک محدود ڈبے کے اندر ایڈز چلیں گے، پوری سکرین پر نہیں۔</p>
+                    
+                    <!-- نیچے اپنے گوگل ایڈ سینس کا کوڈ پیسٹ کریں -->
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXX" crossorigin="anonymous"></script>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-XXXXXXXXX"
+                         data-ad-slot="XXXXXXXXX"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
             </div>
 
             <div class="panel">
-                <h3>فروخت، بلنگ اور کھاتا سسٹم</h3>
+                <h3>فروخت، بلنگ اور ملٹیپل آئٹمز سسٹم</h3>
                 
                 <div class="input-group">
                     <label>رسید کی قسم:</label>
@@ -233,22 +276,23 @@
                 </div>
 
                 <div class="input-group">
-                    <label>پروڈکٹ کا نام لکھیں:</label>
-                    <input type="text" id="saleName" placeholder="مثلاً: چائے یا بوتل..." onkeyup="showProductSuggestions()" autocomplete="off">
+                    <label>پروڈکٹ کا نام لکھیں (بوتل، بسکٹ وغیرہ):</label>
+                    <input type="text" id="saleName" placeholder="مثلاً: بسکٹ یا بوتل..." onkeyup="showProductSuggestions()" autocomplete="off">
                     <div id="saleSuggestionsDropdown" class="suggestions-dropdown"></div>
                 </div>
 
-                <div class="input-group">
-                    <label>سیل ریٹ:</label>
-                    <input type="number" id="saleRate" placeholder="ریٹ خود آئے گا">
+                <div style="display: flex; gap: 8px;">
+                    <div class="input-group" style="flex: 1;">
+                        <label>سیل ریٹ:</label>
+                        <input type="number" id="saleRate" placeholder="ریٹ خود آئے گا">
+                    </div>
+                    <div class="input-group" style="flex: 1;">
+                        <label>مقدار / تعداد (Qty):</label>
+                        <input type="text" id="saleQty" value="1" placeholder="مقدار">
+                    </div>
                 </div>
 
-                <div class="input-group">
-                    <label>مقدار / تعداد (Quantity):</label>
-                    <input type="text" id="saleQty" value="1" placeholder="مقدار">
-                </div>
-
-                <button class="btn" onclick="addToBill()">بل میں جمع کریں (Add)</button>
+                <button class="btn" onclick="addToBill()">بل میں مزید آئٹم جمع کریں (Add Item)</button>
 
                 <div style="margin-top: 15px;">
                     <div class="print-invoice-header" id="printHeaderInfo">
@@ -257,7 +301,7 @@
                         <p><strong>گاہک:</strong> <span id="receiptCustomer"></span> | <strong>تاریخ:</strong> <span id="receiptDateTime"></span></p>
                     </div>
 
-                    <h3 style="border:none; padding:0; margin-bottom:8px;">موجودہ بل</h3>
+                    <h3 style="border:none; padding:0; margin-bottom:8px;">موجودہ بل (تمام اشیاء)</h3>
                     <div class="table-responsive">
                         <table>
                             <thead>
@@ -270,7 +314,7 @@
                                 </tr>
                             </thead>
                             <tbody id="billBody">
-                                <tr><td colspan="5" style="text-align: center; opacity: 0.6; padding: 15px;">کوئی آئٹم شامل نہیں۔</td></tr>
+                                <tr><td colspan="5" style="text-align: center; opacity: 0.6; padding: 15px;">کوئی آئٹم شامل نہیں۔ آپ جتنی چاہیں چیزیں ایڈ کر سکتے ہیں۔</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -298,7 +342,7 @@
 
     </div>
 
-    <!-- پروڈکٹ گیلری ڈبہ (Modal) جس میں ریٹ زیادہ/کم کرنے اور ڈیٹا سے ڈیلیٹ کرنے کے بٹن موجود ہیں -->
+    <!-- پروڈکٹ گیلری ڈبہ (Modal) -->
     <div class="secret-modal" id="inventoryGalleryModal">
         <div class="secret-content">
             <h3 style="color: var(--primary); margin-bottom: 5px;">📦 پروڈکٹ گیلری (ڈیٹا مینیجر)</h3>
@@ -564,7 +608,6 @@
             renderInventoryGrid(query);
         }
 
-        // --- گیلری ڈبہ (Modal) کے فنکشنز جس میں ریٹ اپڈیٹ اور ڈیلیٹ کے بٹن ہیں ---
         function openInventoryGalleryModal() {
             renderInventoryGalleryItems();
             document.getElementById('inventoryGalleryModal').style.display = 'flex';
@@ -603,7 +646,6 @@
             container.innerHTML = html;
         }
 
-        // ڈیٹا سے آئٹم کو مکمل ختم کرنے کا فنکشن
         function deleteProductFromData(prodName) {
             if(confirm(`کیا آپ واقعی "${prodName}" کو ڈیٹا سے ہمیشہ کے لیے ختم کرنا چاہتے ہیں؟`)) {
                 savedProducts = savedProducts.filter(p => p.name.toLowerCase() !== prodName.toLowerCase());
@@ -614,7 +656,6 @@
             }
         }
 
-        // ریٹ کم یا زیادہ کرنے کا فنکشن (اپ ڈیٹ)
         function updateProductRate(prodName) {
             let prod = savedProducts.find(p => p.name.toLowerCase() === prodName.toLowerCase());
             if(!prod) return;
@@ -704,9 +745,12 @@
             }
 
             currentBill.push({ name: name, rate: rate, cost: costPrice, qtyText: qtyNum + " عدد", total: calculatedTotal });
+            
             document.getElementById('saleName').value = "";
             document.getElementById('saleRate').value = "";
             document.getElementById('saleQty').value = "1";
+            document.getElementById('saleName').focus();
+            
             renderBill();
         }
 
@@ -720,7 +764,7 @@
             let grandTotalText = document.getElementById('grandTotalText');
             
             if(currentBill.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; opacity: 0.6; padding: 15px;">کوئی آئٹم شامل نہیں۔</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; opacity: 0.6; padding: 15px;">کوئی آئٹم شامل نہیں۔ آپ جتنی چاہیں چیزیں ایڈ کر سکتے ہیں۔</td></tr>`;
                 grandTotalText.innerText = "0.00 روپے";
                 return;
             }
@@ -923,7 +967,7 @@
             let container = document.getElementById('expenseListContainer');
             if(expensesList.length === 0) { container.innerHTML = "<p style='opacity:0.6;'>کوئی خرچہ درج نہیں۔</p>"; return; }
             let html = "";
-            expensesList.forEach(exp => {
+            expensesList.exp.forEach(exp => {
                 html += `<div style="display:flex; justify-content:space-between; padding:6px; border-bottom:1px solid var(--border-color); font-size:0.85rem;">
                             <span>${exp.title} (${exp.time})</span><span style="color:#ef4444; font-weight:bold;">${exp.amount} روپے</span>
                          </div>`;
