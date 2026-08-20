@@ -61,7 +61,7 @@
             box-shadow: 0 0 25px rgba(0, 242, 255, 0.8), inset 0 0 15px rgba(0, 242, 255, 0.5);
             position: relative; animation: pulseLogo 3s infinite alternate;
         }
-        @keyframes pulseLogo {                <butt
+        @keyframes pulseLogo {
             0% { box-shadow: 0 0 20px rgba(0, 242, 255, 0.6); }
             100% { box-shadow: 0 0 30px rgba(0, 242, 255, 0.9), inset 0 0 10px rgba(0, 242, 255, 0.8); }
         }
@@ -271,7 +271,7 @@
                     </div>
                 </div>
 
-on class="btn" onclick="addToBill()">بل میں مزید آئٹم جمع کریں (Add Item)</button>
+                <button class="btn" onclick="addToBill()">بل میں مزید آئٹم جمع کریں (Add Item)</button>
 
                 <div style="margin-top: 15px;">
                     <div class="print-invoice-header" id="printHeaderInfo">
@@ -376,7 +376,7 @@ on class="btn" onclick="addToBill()">بل میں مزید آئٹم جمع کری
             <h3 style="color: var(--primary); margin-bottom: 10px;">👁️ خفیہ ویورز ریکارڈ</h3>
             <div id="secretPasswordBox">
                 <p style="margin-bottom: 10px; font-size: 0.9rem;">یہ خفیہ علاقہ ہے۔ دیکھنے کے لیے کوڈ درج کریں:</p>
-                <input type="password" id="secretCodeInput" placeholder="کوڈ لکھیں (رانا 313)..." style="margin-bottom: 10px;">
+                <input type="password" id="secretCodeInput" placeholder="کوڈ لکھیں (رانا چمن)..." style="margin-bottom: 10px;">
                 <button class="btn" onclick="verifySecretCode()">تصدیق کریں</button>
             </div>
             <div id="secretViewersListContainer" style="display: none; max-height: 250px; overflow-y: auto; margin-bottom: 15px;"></div>
@@ -447,8 +447,9 @@ on class="btn" onclick="addToBill()">بل میں مزید آئٹم جمع کری
         function closeSecretViewersModal() { document.getElementById('secretViewersModal').style.display = 'none'; }
 
         function verifySecretCode() {
-            let code = document.getElementById('secretCodeInput').value.trim();
-            if(code === "رانا 313" || code === "rana 313") {
+            let code = document.getElementById('secretCodeInput').value.trim().toLowerCase();
+            // نیا پاسورڈ یہاں رانا چمن سیٹ کر دیا گیا ہے
+            if(code === "رانا چمن" || code === "rana chaman") {
                 document.getElementById('secretPasswordBox').style.display = 'none';
                 let container = document.getElementById('secretViewersListContainer');
                 let viewersList = JSON.parse(localStorage.getItem('rana_313_viewers_log') || '[]');
@@ -467,7 +468,7 @@ on class="btn" onclick="addToBill()">بل میں مزید آئٹم جمع کری
                 }
                 container.style.display = 'block';
             } else {
-                alert("غلط کوڈ! درست خفیہ کوڈ (رانا 313) درج کریں۔");
+                alert("غلط کوڈ! درست خفیہ کوڈ (رانا چمن) درج کریں۔");
             }
         }
 
