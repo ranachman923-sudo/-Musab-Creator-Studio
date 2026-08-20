@@ -10,7 +10,7 @@
             --secondary: #050b14;
             --accent: #3b82f6;
             --bg-grad: linear-gradient(135deg, #020617, #0f172a, #1e1b4b);
-            --card-bg: rgba(11, 19, 38, 0.98);
+            --card-bg: rgba(11, 19, 38, 0.95);
             --text-color: #f8fafc;
             --border-color: rgba(0, 225, 255, 0.35);
             --input-bg: #111c33;
@@ -21,7 +21,7 @@
             --secondary: #f1f5f9;
             --accent: #0284c7;
             --bg-grad: linear-gradient(135deg, #f8fafc, #e2e8f0, #cbd5e1);
-            --card-bg: rgba(255, 255, 255, 0.98);
+            --card-bg: rgba(255, 255, 255, 0.95);
             --text-color: #0f172a;
             --border-color: rgba(2, 132, 199, 0.35);
             --input-bg: #ffffff;
@@ -42,28 +42,28 @@
         .main-app-container { display: none; max-width: 1400px; margin: 0 auto; }
 
         header {
-            text-align: center; padding: 35px 15px; background-size: cover; background-position: center;
-            background-image: url('https://images.unsplash.com/photo-1556742049-0a67d553c253?w=1200&h=400&fit=crop');
-            background-color: var(--card-bg); border-radius: 20px; border: 2px solid var(--border-color);
-            margin-bottom: 20px; box-shadow: 0 10px 35px rgba(0,0,0,0.5); position: relative; overflow: hidden;
+            text-align: center; padding: 45px 15px; background-size: cover; background-position: center;
+            background-image: url('https://images.unsplash.com/photo-1556740758-90de374c12ad?w=1400&h=500&fit=crop');
+            border-radius: 20px; border: 2px solid var(--border-color);
+            margin-bottom: 20px; box-shadow: 0 10px 35px rgba(0,0,0,0.6); position: relative; overflow: hidden;
         }
         header::before {
             content: ""; position: absolute; top:0; left:0; width:100%; height:100%;
-            background: rgba(5, 11, 20, 0.65); z-index: 1;
+            background: rgba(3, 7, 18, 0.78); z-index: 1;
         }
-        .light-mode header::before { background: rgba(255, 255, 255, 0.65); }
-        .header-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .light-mode header::before { background: rgba(255, 255, 255, 0.82); }
+        .header-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; }
         
         .app-logo-wrapper {
-            width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--primary); overflow: hidden; position: relative; box-shadow: 0 0 25px rgba(0, 225, 255, 0.7); background: #000;
+            width: 95px; height: 95px; border-radius: 50%; border: 3px solid var(--primary); overflow: hidden; position: relative; box-shadow: 0 0 25px rgba(0, 225, 255, 0.8); background: #0b1326;
         }
         .app-logo {
             width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;
         }
-        header h1 { color: var(--primary); font-size: 2rem; text-shadow: 0 2px 6px rgba(0,0,0,0.7); font-weight: 800; }
+        header h1 { color: var(--primary); font-size: 2.2rem; text-shadow: 0 2px 8px rgba(0,0,0,0.8); font-weight: 800; }
 
         .top-controls {
-            position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 15px; padding-top: 12px; border-top: 1px solid var(--border-color);
+            position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--border-color);
         }
         .icon-btn, select.icon-btn {
             background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: bold; outline: none;
@@ -131,12 +131,12 @@
 </head>
 <body>
 
-    <!-- لاگ ان اسکرین -->
+    <!-- لاگ ان اسکرین (ہر نئے یوزر کے لیے الگ نام مانگے گی) -->
     <div id="loginOverlay">
         <div class="login-card">
             <h2>OmniPOS Pro PK.com</h2>
-            <p style="margin-bottom: 15px; font-size: 0.9rem; opacity: 0.9;">آپنا یا دکان کا نام درج کریں:</p>
-            <input type="text" id="loginNameInput" placeholder="نام لکھیں" style="margin-bottom: 15px;">
+            <p style="margin-bottom: 15px; font-size: 0.9rem; opacity: 0.9;">براہ کرم اپنا یا اپنی دکان کا نام درج کریں:</p>
+            <input type="text" id="loginNameInput" placeholder="یہاں نام لکھیں..." style="margin-bottom: 15px;">
             <button class="btn" onclick="loginUser()">سسٹم میں داخل ہوں</button>
         </div>
     </div>
@@ -147,14 +147,14 @@
         <!-- ہیڈر -->
         <header id="mainHeaderElement">
             <div class="header-content">
-                <div class="app-logo-wrapper" title="Rana POS Logo">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&h=150&fit=crop" alt="Logo" class="app-logo" id="headerLogoImg">
+                <div class="app-logo-wrapper" title="POS Professional Logo">
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=150&h=150&fit=crop" alt="Logo" class="app-logo" id="headerLogoImg">
                 </div>
                 
                 <div>
                     <h1 id="mainHeading">OmniPOS Pro Ultimate PK.com</h1>
                     <p style="font-size:0.9rem; opacity:0.95;">
-                        آپریٹر: <span id="displayShopkeeper" style="font-weight:bold;"></span> 
+                        آپریٹر / دکان: <span id="displayShopkeeper" style="font-weight:bold;"></span> 
                         <button onclick="editShopkeeperName()" style="background:none; border:none; color:var(--primary); cursor:pointer; text-decoration:underline; font-size:0.85rem; margin-right:5px; font-weight:bold;">[نام تبدیل کریں]</button> 
                         | پلیٹ فارم: PK.com
                     </p>
@@ -283,7 +283,7 @@
         </div>
 
         <footer>
-            <p>تمہید اور ڈیزائن بذریعہ: <strong>رانا چمن (رانا افتخار احمد)</strong> | OmniPOS Pro Ultimate PK.com © 2026</p>
+            <p>سسٹم پلیٹ فارم: <strong>OmniPOS Pro Ultimate PK.com</strong> © 2026</p>
         </footer>
 
     </div>
@@ -343,10 +343,14 @@
         let loggedInUser = localStorage.getItem('omni_pos_username') || "";
 
         window.onload = function() {
-            if(loggedInUser) {
+            // اگر یوزر کا نام پہلے سے سیو نہیں ہے تو لاگ ان اسکرین دکھاؤ، ورنہ ڈیش بورڈ کھولو
+            if(loggedInUser && loggedInUser.trim() !== "") {
                 document.getElementById('displayShopkeeper').innerText = loggedInUser;
                 document.getElementById('loginOverlay').style.display = 'none';
                 document.getElementById('mainAppContainer').style.display = 'block';
+            } else {
+                document.getElementById('loginOverlay').style.display = 'flex';
+                document.getElementById('mainAppContainer').style.display = 'none';
             }
             renderInventoryGrid();
             initBulkRows();
@@ -355,7 +359,7 @@
 
         function loginUser() {
             let name = document.getElementById('loginNameInput').value.trim();
-            if(name === "") { alert("براہ کرم نام درج کریں!"); return; }
+            if(name === "") { alert("براہ کرم اپنا یا دکان کا نام درج کریں!"); return; }
             loggedInUser = name;
             localStorage.setItem('omni_pos_username', loggedInUser);
             document.getElementById('displayShopkeeper').innerText = loggedInUser;
@@ -364,7 +368,7 @@
         }
 
         function editShopkeeperName() {
-            let newName = prompt("نیا نام درج کریں:", loggedInUser);
+            let newName = prompt("نیا نام یا دکان کا نام درج کریں:", loggedInUser);
             if(newName && newName.trim() !== "") {
                 loggedInUser = newName.trim();
                 localStorage.setItem('omni_pos_username', loggedInUser);
@@ -378,7 +382,7 @@
         function copyWebsiteLink() {
             let websiteUrl = window.location.href;
             navigator.clipboard.writeText(websiteUrl).then(() => {
-                alert("🌐 ویب سائٹ کا لنک کامیابی سے کاپی ہو گیا ہے!\n\n" + websiteUrl);
+                alert("🌐 ویب سائٹ کا لنک کامیابی سے کاپی ہو گیا ہے!\n\nاب جس کو بھی یہ لنک بھیجیں گے، وہ اپنا نام خود درج کرے گا:\n" + websiteUrl);
             }).catch(err => { alert("لنک کاپی کرنے میں خرابی پیش آئی!"); });
         }
 
