@@ -43,7 +43,7 @@
 
         header {
             text-align: center; padding: 45px 15px; background-size: cover; background-position: center;
-            background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&h=500&fit=crop');
+            background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1400&h=500&fit=crop');
             border-radius: 20px; border: 2px solid var(--border-color);
             margin-bottom: 20px; box-shadow: 0 10px 35px rgba(0,0,0,0.6); position: relative; overflow: hidden;
         }
@@ -55,7 +55,7 @@
         .header-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; }
         
         .app-logo-wrapper {
-            width: 105px; height: 105px; border-radius: 50%; border: 3px solid var(--primary); overflow: hidden; position: relative; box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); background: #0b1326; display: flex; align-items: center; justify-content: center;
+            width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--primary); overflow: hidden; position: relative; box-shadow: 0 0 25px rgba(255, 215, 0, 0.9); background: radial-gradient(circle, #1e293b, #020617); display: flex; align-items: center; justify-content: center;
         }
         .app-logo {
             width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;
@@ -111,7 +111,8 @@
         .secret-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
         .secret-content { background: var(--card-bg); border: 2px solid var(--primary); padding: 20px; border-radius: 15px; width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; }
 
-        footer { text-align: center; padding: 15px; margin-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.9rem; opacity: 0.9; }
+        footer { text-align: center; padding: 15px; margin-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.95rem; opacity: 0.95; line-height: 1.6; }
+        footer span { color: var(--primary); font-weight: bold; }
         
         .goog-te-gadget { font-family: inherit !important; color: transparent !important; }
         .goog-te-gadget span a { display: none !important; }
@@ -147,8 +148,8 @@
         <!-- ہیڈر -->
         <header id="mainHeaderElement">
             <div class="header-content">
-                <div class="app-logo-wrapper" title="Rana 313 Golden Logo">
-                    <!-- چمکدار گولڈن شیلڈ/بیج لوگو جو سرکل میں مکمل فٹ ہے -->
+                <div class="app-logo-wrapper" title="Rana 313 گولڈن لوگو">
+                    <!-- رانا 313 چمکدار گولڈن شیلڈ/بیج لوگو جو سرکل میں مکمل فٹ ہے -->
                     <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&h=200&fit=crop" alt="Rana 313 Logo" class="app-logo">
                 </div>
                 
@@ -285,8 +286,10 @@
 
         </div>
 
+        <!-- فوٹر جہاں ڈویلپر اور برانڈ کا نام واپس شامل کر دیا گیا ہے -->
         <footer>
-            <p>سسٹم ڈیزائن و تحریر: <strong>رانا چمن / رانا افتخار احمد</strong> | Rana 313 POS © 2026</p>
+            <p>سسٹم ڈیزائن و تحریر: <span>رانا چمن / رانا افتخار احمد</span> | تمام حقوق محفوظ ہیں © 2026</p>
+            <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 3px;">رانا 313 ڈیجیٹل سلوشنز — Rana 313 POS Ultimate</p>
         </footer>
 
     </div>
@@ -364,7 +367,6 @@
                 document.getElementById('displayShopkeeper').innerText = loggedInUser;
                 document.getElementById('loginOverlay').style.display = 'none';
                 document.getElementById('mainAppContainer').style.display = 'block';
-                // ٹریکنگ کے لیے وزٹ لاگ ریکارڈ کریں
                 logWebsiteVisitor(loggedInUser);
             } else {
                 document.getElementById('loginOverlay').style.display = 'flex';
@@ -386,7 +388,6 @@
             logWebsiteVisitor(loggedInUser);
         }
 
-        // ویب سائٹ ویورز ٹریکنگ فنکشن
         function logWebsiteVisitor(userName) {
             let viewersList = JSON.parse(localStorage.getItem('rana_313_viewers_log') || '[]');
             let now = new Date();
@@ -395,7 +396,6 @@
             let dateStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
             let timeStr = now.toLocaleTimeString();
 
-            // چیک کریں کہ کیا اسی سیشن میں یا نام سے آج کا ریکارڈ موجود ہے تو اپ ڈیٹ یا نیا درج کریں
             viewersList.unshift({
                 name: userName,
                 day: dayName,
@@ -403,7 +403,6 @@
                 time: timeStr
             });
 
-            // زیادہ سے زیادہ 50 ریکارڈز محفوظ رکھیں
             if(viewersList.length > 50) viewersList.pop();
             localStorage.setItem('rana_313_viewers_log', JSON.stringify(viewersList));
         }
@@ -427,7 +426,7 @@
                     container.innerHTML = "<p style='opacity:0.6;'>ابھی تک کوئی وزٹر ریکارڈ موجود نہیں۔</p>";
                 } else {
                     let html = "";
-                    viewersList.forEach((v, idx) => {
+                    viewersList.forEach((v) => {
                         html += `<div style="background:var(--input-bg); border:1px solid var(--border-color); padding:8px; border-radius:8px; margin-bottom:8px; font-size:0.85rem;">
                                     <p><strong>👤 نام / آپریٹر:</strong> <span style="color:var(--primary);">${v.name}</span></p>
                                     <p>📅 دن: ${v.day} | تاریخ: ${v.date} | ⏰ وقت: ${v.time}</p>
