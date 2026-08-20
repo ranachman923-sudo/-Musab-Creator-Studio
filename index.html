@@ -43,18 +43,19 @@
 
         header {
             text-align: center; padding: 35px 15px; background-size: cover; background-position: center;
+            background-image: url('https://images.unsplash.com/photo-1556742049-0a67d553c253?w=1200&h=400&fit=crop');
             background-color: var(--card-bg); border-radius: 20px; border: 2px solid var(--border-color);
             margin-bottom: 20px; box-shadow: 0 10px 35px rgba(0,0,0,0.5); position: relative; overflow: hidden;
         }
         header::before {
             content: ""; position: absolute; top:0; left:0; width:100%; height:100%;
-            background: rgba(5, 11, 20, 0.45); z-index: 1; /* بیک گراؤنڈ تصویر کو انتہائی واضح اور تیز رکھنے کے لیے مدھم پن کم کیا گیا ہے */
+            background: rgba(5, 11, 20, 0.65); z-index: 1;
         }
-        .light-mode header::before { background: rgba(255, 255, 255, 0.45); }
+        .light-mode header::before { background: rgba(255, 255, 255, 0.65); }
         .header-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; }
         
         .app-logo-wrapper {
-            width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--primary); overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 0 25px rgba(0, 225, 255, 0.7); background: #000;
+            width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--primary); overflow: hidden; position: relative; box-shadow: 0 0 25px rgba(0, 225, 255, 0.7); background: #000;
         }
         .app-logo {
             width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;
@@ -112,7 +113,6 @@
 
         footer { text-align: center; padding: 15px; margin-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.9rem; opacity: 0.9; }
         
-        /* گوگل ٹرانسলেট وجٹ کی خوبصورت سیٹنگ */
         .goog-te-gadget { font-family: inherit !important; color: transparent !important; }
         .goog-te-gadget span a { display: none !important; }
         .goog-te-combo { background: var(--input-bg) !important; color: var(--text-color) !important; border: 1px solid var(--border-color) !important; padding: 6px 10px !important; border-radius: 8px !important; outline: none !important; font-weight: bold; }
@@ -147,9 +147,8 @@
         <!-- ہیڈر -->
         <header id="mainHeaderElement">
             <div class="header-content">
-                <input type="file" id="logoUploadInput" accept="image/*" style="display: none;" onchange="prepareLogoCrop(event)">
-                <div class="app-logo-wrapper" onclick="document.getElementById('logoUploadInput').click()" title="گول لوگو سیٹ کرنے کے لیے کلک کریں">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=150&h=150&fit=crop" alt="Logo" class="app-logo" id="headerLogoImg">
+                <div class="app-logo-wrapper" title="Rana POS Logo">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&h=150&fit=crop" alt="Logo" class="app-logo" id="headerLogoImg">
                 </div>
                 
                 <div>
@@ -163,12 +162,8 @@
             </div>
             
             <div class="top-controls">
-                <input type="file" id="bannerUploadInput" accept="image/*" style="display: none;" onchange="prepareBannerCrop(event)">
-                <button class="icon-btn" onclick="document.getElementById('bannerUploadInput').click()" style="border-color: var(--primary);">🖼️ کور بینر سیٹ کریں</button>
-                
                 <button class="icon-btn" onclick="copyWebsiteLink()" style="background: linear-gradient(135deg, #8b5cf6, #ec4899); color: white; border: none;">🔗 ویب سائٹ لنک کاپی کریں</button>
 
-                <!-- دنیا بھر کی زبانیں سرچ اور تبدیل کرنے کا باکس -->
                 <div style="display:inline-flex; align-items:center; gap:5px; background:var(--input-bg); border:1px solid var(--border-color); padding:3px 8px; border-radius:8px;">
                     <span style="font-size:0.8rem; font-weight:bold;">🌍 زبان:</span>
                     <input type="text" id="langSearchInput" placeholder="زبان سرچ کریں..." onkeyup="filterLanguageDropdown()" style="width:110px; padding:4px; font-size:0.75rem; background:transparent; border:none; color:var(--text-color);">
@@ -293,36 +288,6 @@
 
     </div>
 
-    <!-- تصویر سیٹ کرنے / ایڈجسٹ کرنے کا نیا ماڈل (زوم اور موو کنٹرول کے ساتھ) -->
-    <div class="secret-modal" id="imageCropModal">
-        <div class="secret-content" style="text-align: center;">
-            <h3 id="cropModalTitle" style="color: var(--primary); margin-bottom: 10px;">تصویر سیٹ کریں</h3>
-            <p style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 15px;">تصویر کو زوم کریں یا اوپر/نیچے اور دائیں/بائیں سیٹ کریں:</p>
-            
-            <div style="width: 220px; height: 220px; margin: 0 auto 15px auto; border: 2px dashed var(--primary); border-radius: 15px; overflow: hidden; position: relative; background: #000; display: flex; justify-content: center; align-items: center;">
-                <img id="previewCropImg" src="" style="position: absolute; transform-origin: center; cursor: grab;">
-            </div>
-
-            <div class="input-group" style="display: flex; gap: 10px; align-items: center; justify-content: center; margin-bottom: 10px;">
-                <label style="margin: 0; font-size:0.85rem;">زوم (Zoom):</label>
-                <input type="range" id="zoomRangeInput" min="0.5" max="3" step="0.1" value="1" oninput="updateImageTransform()" style="width: 150px;">
-            </div>
-
-            <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; flex-wrap: wrap;">
-                <button class="icon-btn" onclick="moveImage(0, -15)">⬆️ اوپر</button>
-                <button class="icon-btn" onclick="moveImage(0, 15)">⬇️ نیچے</button>
-                <button class="icon-btn" onclick="moveImage(-15, 0)">⬅️ بائیں</button>
-                <button class="icon-btn" onclick="moveImage(15, 0)">➡️ دائیں</button>
-                <button class="icon-btn" onclick="resetImagePosition()" style="background:#ef4444; color:white;">🔄 ری سیٹ</button>
-            </div>
-
-            <div style="display: flex; gap: 10px;">
-                <button class="btn" onclick="saveCroppedImage()" style="background: #10b981; color: white;">اوکے (محفوظ کریں)</button>
-                <button class="btn" onclick="closeImageCropModal()" style="background: #ef4444; color: white;">منسوخ کریں</button>
-            </div>
-        </div>
-    </div>
-
     <!-- دیگر ماڈلز -->
     <div class="secret-modal" id="ledgerModal">
         <div class="secret-content">
@@ -376,14 +341,6 @@
         let invoiceHistory = JSON.parse(localStorage.getItem('omni_pos_invoice_pk') || '[]');
         let expensesList = JSON.parse(localStorage.getItem('omni_pos_expenses_pk') || '[]');
         let loggedInUser = localStorage.getItem('omni_pos_username') || "";
-        let customLogoBase64 = localStorage.getItem('omni_pos_custom_logo') || "";
-        let customBannerBase64 = localStorage.getItem('omni_pos_custom_banner') || "";
-        let activeCropType = ""; 
-
-        // تصویر ایڈجسٹمنٹ ویری ایبلز
-        let imgScale = 1;
-        let imgPosX = 0;
-        let imgPosY = 0;
 
         window.onload = function() {
             if(loggedInUser) {
@@ -391,8 +348,6 @@
                 document.getElementById('loginOverlay').style.display = 'none';
                 document.getElementById('mainAppContainer').style.display = 'block';
             }
-            if(customLogoBase64) { document.getElementById('headerLogoImg').src = customLogoBase64; }
-            if(customBannerBase64) { document.getElementById('mainHeaderElement').style.backgroundImage = `url(${customBannerBase64})`; }
             renderInventoryGrid();
             initBulkRows();
             initExpenseRows();
@@ -427,7 +382,6 @@
             }).catch(err => { alert("لنک کاپی کرنے میں خرابی پیش آئی!"); });
         }
 
-        // زبان سرچ کرنے کا فنکشن (Google Translate Dropdown filter)
         function filterLanguageDropdown() {
             let query = document.getElementById('langSearchInput').value.toLowerCase();
             let selectBox = document.querySelector('.goog-te-combo');
@@ -441,79 +395,6 @@
                     }
                 }
             }
-        }
-
-        // تصویر کراپنگ اور موونگ فنکشنز
-        function prepareLogoCrop(event) {
-            let file = event.target.files[0];
-            if(file) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    activeCropType = 'logo';
-                    document.getElementById('cropModalTitle').innerText = "گول لوگو سیٹ کریں";
-                    let img = document.getElementById('previewCropImg');
-                    img.src = e.target.result;
-                    resetImagePosition();
-                    document.getElementById('imageCropModal').style.display = 'flex';
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function prepareBannerCrop(event) {
-            let file = event.target.files[0];
-            if(file) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    activeCropType = 'banner';
-                    document.getElementById('cropModalTitle').innerText = "کور بینر سیٹ کریں";
-                    let img = document.getElementById('previewCropImg');
-                    img.src = e.target.result;
-                    resetImagePosition();
-                    document.getElementById('imageCropModal').style.display = 'flex';
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function resetImagePosition() {
-            imgScale = 1;
-            imgPosX = 0;
-            imgPosY = 0;
-            document.getElementById('zoomRangeInput').value = 1;
-            updateImageTransform();
-        }
-
-        function moveImage(dx, dy) {
-            imgPosX += dx;
-            imgPosY += dy;
-            updateImageTransform();
-        }
-
-        function updateImageTransform() {
-            imgScale = parseFloat(document.getElementById('zoomRangeInput').value);
-            let img = document.getElementById('previewCropImg');
-            img.style.transform = `translate(${imgPosX}px, ${imgPosY}px) scale(${imgScale})`;
-        }
-
-        function saveCroppedImage() {
-            let imgSrc = document.getElementById('previewCropImg').src;
-            if(activeCropType === 'logo') {
-                customLogoBase64 = imgSrc;
-                localStorage.setItem('omni_pos_custom_logo', customLogoBase64);
-                document.getElementById('headerLogoImg').src = customLogoBase64;
-                alert("گول لوگو کامیابی سے سیٹ ہو گیا!");
-            } else if(activeCropType === 'banner') {
-                customBannerBase64 = imgSrc;
-                localStorage.setItem('omni_pos_custom_banner', customBannerBase64);
-                document.getElementById('mainHeaderElement').style.backgroundImage = `url(${customBannerBase64})`;
-                alert("کور بینر کامیابی سے سیٹ ہو گیا!");
-            }
-            closeImageCropModal();
-        }
-
-        function closeImageCropModal() {
-            document.getElementById('imageCropModal').style.display = 'none';
         }
 
         function initBulkRows() {
