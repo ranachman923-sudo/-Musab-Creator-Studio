@@ -6,7 +6,7 @@
     <title id="appTitle">OmniPOS Pro Ultimate - Rana 313</title>
     <style>
         :root {
-            --primary: #00f2ff; /* تیز نیلا (Electric Blue) */
+            --primary: #00f2ff;
             --secondary: #050b14;
             --accent: #00a8ff;
             --bg-grad: linear-gradient(135deg, #000b1a, #001f3f, #020617);
@@ -41,7 +41,6 @@
 
         .main-app-container { display: none; max-width: 1400px; margin: 0 auto; }
 
-        /* ہیڈر میں کمپیوٹر سیٹ اپ کی مکمل تصویر */
         header {
             text-align: center; padding: 50px 15px; background-size: cover; background-position: center;
             background-image: url('https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=1400&h=500&fit=crop');
@@ -55,7 +54,6 @@
         .light-mode header::before { background: rgba(255, 255, 255, 0.85); }
         .header-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; }
         
-        /* گول دائرے میں Rana 313 کا لوگو */
         .app-logo-wrapper {
             width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--primary); overflow: hidden; position: relative; box-shadow: 0 0 25px rgba(0, 242, 255, 0.9); background: #000; display: flex; align-items: center; justify-content: center;
         }
@@ -76,16 +74,23 @@
         @media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } }
 
         .panel {
-            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin-bottom: 20px; max-height: 800px; overflow-y: auto;
+            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); margin-bottom: 20px; max-height: 850px; overflow-y: auto;
         }
         .panel h3 {
             color: var(--primary); font-size: 1.15rem; margin-bottom: 12px; border-right: 4px solid var(--primary); padding-right: 8px; display: flex; justify-content: space-between; align-items: center; font-weight: 700;
         }
 
-        .input-group { margin-bottom: 12px; }
+        .input-group { margin-bottom: 12px; position: relative; }
         .input-group label { display: block; margin-bottom: 4px; font-size: 0.9rem; opacity: 0.95; font-weight: 600; }
         input, select, textarea { width: 100%; padding: 10px; background: var(--input-bg); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 8px; outline: none; font-size: 0.95rem; }
         input:focus { border-color: var(--primary); box-shadow: 0 0 8px rgba(0,242,255,0.4); }
+
+        /* آٹو سجیشن لسٹ کا اسٹائل */
+        .suggestions-dropdown {
+            position: absolute; top: 100%; left: 0; right: 0; background: var(--input-bg); border: 1px solid var(--primary); border-radius: 0 0 8px 8px; max-height: 150px; overflow-y: auto; z-index: 99; display: none; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .suggestion-item { padding: 8px 12px; cursor: pointer; border-bottom: 1px solid var(--border-color); font-size: 0.85rem; display: flex; justify-content: space-between; }
+        .suggestion-item:hover { background: var(--primary); color: #000; font-weight: bold; }
 
         .btn {
             background: linear-gradient(135deg, #00f2ff, #0077ff); color: #000; border: none; padding: 11px 15px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 1rem; width: 100%; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,242,255,0.3);
@@ -93,7 +98,7 @@
         .btn:hover { transform: translateY(-2px); opacity: 0.95; box-shadow: 0 6px 20px rgba(0,242,255,0.5); }
 
         .bulk-rows-container { max-height: 180px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px; margin-bottom: 10px; }
-        .bulk-row { display: flex; gap: 8px; margin-bottom: 8px; }
+        .bulk-row { display: flex; gap: 6px; margin-bottom: 8px; }
 
         .table-responsive { max-height: 180px; overflow-y: auto; margin-bottom: 12px; border: 1px solid var(--border-color); border-radius: 8px; }
         table { width: 100%; border-collapse: collapse; text-align: right; }
@@ -111,7 +116,12 @@
         .copy-btn { background: #8b5cf6; color: white; padding: 6px 12px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 0.8rem; }
 
         .secret-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
-        .secret-content { background: var(--card-bg); border: 2px solid var(--primary); padding: 20px; border-radius: 15px; width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; }
+        .secret-content { background: var(--card-bg); border: 2px solid var(--primary); padding: 20px; border-radius: 15px; width: 90%; max-width: 650px; max-height: 85vh; overflow-y: auto; }
+
+        /* انوینٹری گیلری کارڈز */
+        .inventory-grid-box { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-top: 10px; max-height: 350px; overflow-y: auto; }
+        .inv-card { background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 8px; text-align: center; }
+        .inv-card img { width: 100%; height: 75px; object-fit: cover; border-radius: 6px; margin-bottom: 5px; background: #000; }
 
         footer { text-align: center; padding: 15px; margin-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.95rem; opacity: 0.95; line-height: 1.6; }
         footer span { color: var(--primary); font-weight: bold; }
@@ -150,7 +160,6 @@
         <!-- ہیڈر -->
         <header id="mainHeaderElement">
             <div class="header-content">
-                <!-- گول دائرے میں Rana 313 لوگو -->
                 <div class="app-logo-wrapper" title="Rana 313 لوگو">
                     <div class="rana-logo-text">RANA<br>313</div>
                 </div>
@@ -175,6 +184,7 @@
                 </div>
 
                 <button class="icon-btn" onclick="toggleDarkMode()">🌓 تھیم</button>
+                <button class="icon-btn" onclick="openInventoryGalleryModal()" style="border-color: var(--primary); color: var(--primary);">📦 پروڈکٹ گیلری (ڈبہ)</button>
                 <button class="icon-btn" onclick="openLedgerModal()">📒 ادھار کھاتا</button>
                 <button class="icon-btn" onclick="openReportsModal()">📊 رپورٹس</button>
                 <button class="icon-btn" onclick="openExpenseModal()">💸 اخراجات</button>
@@ -185,9 +195,9 @@
 
         <div class="dashboard-grid">
             
-            <!-- بائیں سائیڈ: پروڈکٹ انٹری -->
+            <!-- بائیں سائیڈ: پروڈکٹ انٹری (نام، کیٹیگری، تصویر، ریٹ، لاگت، تعداد) -->
             <div class="panel">
-                <h3>پروڈکٹ درج کریں (نام، سیل ریٹ اور لاگت)</h3>
+                <h3>پروڈکٹ درج کریں (کیٹیگری اور تصویر سمیت)</h3>
                 <div class="bulk-rows-container" id="bulkRowsContainer"></div>
 
                 <div style="display: flex; gap: 8px; margin-bottom: 12px;">
@@ -200,13 +210,13 @@
                         <h3 style="border:none; padding:0; font-size:0.95rem; margin:0;">کل رجسٹرڈ اشیاء: <span id="totalProductCount" style="color:var(--primary);">0</span></h3>
                     </div>
                     <div class="input-group">
-                        <input type="text" id="searchStock" placeholder="🔍 سرچ کریں..." onkeyup="filterStockGrid()">
+                        <input type="text" id="searchStock" placeholder="🔍 نام یا کیٹیگری سے سرچ کریں..." onkeyup="filterStockGrid()">
                     </div>
                     <div id="productsGridContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; max-height: 180px; overflow-y: auto;"></div>
                 </div>
             </div>
 
-            <!-- دائیں سائیڈ: فروخت اور بلنگ -->
+            <!-- دائیں سائیڈ: فروخت اور بلنگ (آٹو سجیشن کے ساتھ) -->
             <div class="panel">
                 <h3>فروخت، بلنگ اور کھاتا سسٹم</h3>
                 
@@ -228,9 +238,11 @@
                     <input type="text" id="customerPhone" placeholder="مثلاً: 923001234567">
                 </div>
 
+                <!-- یہاں آٹو سجیشن فیچر لگایا گیا ہے -->
                 <div class="input-group">
-                    <label>پروڈکٹ کا نام:</label>
-                    <input type="text" id="saleName" placeholder="نام لکھیں..." onkeyup="autoFetchRate()">
+                    <label>پروڈکٹ کا نام یا کیٹیگری لکھیں:</label>
+                    <input type="text" id="saleName" placeholder="مثلاً: بسکٹ یا بوتل..." onkeyup="showProductSuggestions()" autocomplete="off">
+                    <div id="saleSuggestionsDropdown" class="suggestions-dropdown"></div>
                 </div>
 
                 <div class="input-group">
@@ -293,6 +305,19 @@
             <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 3px;">رانا 313 ڈیجیٹل سلوشنز — Rana 313 POS Ultimate</p>
         </footer>
 
+    </div>
+
+    <!-- پروڈکٹ گیلری ڈبہ (Modal) -->
+    <div class="secret-modal" id="inventoryGalleryModal">
+        <div class="secret-content">
+            <h3 style="color: var(--primary); margin-bottom: 5px;">📦 تمام محفوظ شدہ پروڈکٹس اور تصویریں</h3>
+            <p id="inventoryStatsText" style="font-size: 0.85rem; opacity: 0.85; margin-bottom: 10px;"></p>
+            <div class="input-group" style="margin-bottom: 10px;">
+                <input type="text" id="gallerySearchInput" placeholder="گیلری میں سرچ کریں..." onkeyup="renderInventoryGalleryItems()">
+            </div>
+            <div id="inventoryGalleryContainer" class="inventory-grid-box"></div>
+            <button class="btn" onclick="closeInventoryGalleryModal()" style="background: var(--primary); color: #000; margin-top: 15px;">بند کریں (ڈبہ بند کریں)</button>
+        </div>
     </div>
 
     <!-- دیگر ماڈلز -->
@@ -478,15 +503,19 @@
             let container = document.getElementById('bulkRowsContainer');
             let div = document.createElement('div');
             div.className = 'bulk-row';
-            div.innerHTML = `<input type="text" class="bulk-name" placeholder="پروڈکٹ نام" style="flex:2;">
-                             <input type="number" class="bulk-rate" placeholder="سیل ریٹ" style="flex:1;">
-                             <input type="number" class="bulk-cost" placeholder="لاگت (Cost)" style="flex:1.2;">
-                             <input type="number" class="bulk-stock" placeholder="تعداد" style="flex:1;">`;
+            div.innerHTML = `<input type="text" class="bulk-name" placeholder="پروڈکٹ نام" style="flex:1.8;">
+                             <input type="text" class="bulk-cat" placeholder="کیٹیگری" style="flex:1.2;">
+                             <input type="text" class="bulk-img" placeholder="تصویر URL" style="flex:1;">
+                             <input type="number" class="bulk-rate" placeholder="ریٹ" style="flex:0.8;">
+                             <input type="number" class="bulk-cost" placeholder="لاگت" style="flex:0.8;">
+                             <input type="number" class="bulk-stock" placeholder="تعداد" style="flex:0.8;">`;
             container.appendChild(div);
         }
 
         function saveBulkProducts() {
             let names = document.querySelectorAll('.bulk-name');
+            let cats = document.querySelectorAll('.bulk-cat');
+            let imgs = document.querySelectorAll('.bulk-img');
             let rates = document.querySelectorAll('.bulk-rate');
             let costs = document.querySelectorAll('.bulk-cost');
             let stocks = document.querySelectorAll('.bulk-stock');
@@ -494,6 +523,8 @@
 
             for(let i=0; i<names.length; i++) {
                 let name = names[i].value.trim();
+                let category = cats[i].value.trim() || "جنرل";
+                let image = imgs[i].value.trim();
                 let rate = parseFloat(rates[i].value);
                 let cost = parseFloat(costs[i].value) || 0;
                 let stock = parseFloat(stocks[i].value) || 10;
@@ -501,11 +532,13 @@
                 if(name !== "" && !isNaN(rate)) {
                     let existing = savedProducts.find(p => p.name.toLowerCase() === name.toLowerCase());
                     if(existing) {
+                        existing.category = category;
+                        if(image) existing.image = image;
                         existing.rate = rate;
                         existing.cost = cost;
                         existing.stock = stock;
                     } else {
-                        savedProducts.push({ name: name, rate: rate, cost: cost, stock: stock });
+                        savedProducts.push({ name: name, category: category, image: image, rate: rate, cost: cost, stock: stock });
                     }
                     addedCount++;
                 }
@@ -515,7 +548,7 @@
                 localStorage.setItem('omni_pos_products_pk', JSON.stringify(savedProducts));
                 renderInventoryGrid();
                 initBulkRows();
-                alert(`${addedCount} پروڈکٹس محفوظ ہو گئیں!`);
+                alert(`${addedCount} پروڈکٹس کامیابی سے محفوظ ہو گئیں!`);
             } else {
                 alert("کم از کم ایک پروڈکٹ کا نام اور درست ریٹ درج کریں!");
             }
@@ -524,7 +557,7 @@
         function renderInventoryGrid(filter = "") {
             let container = document.getElementById('productsGridContainer');
             document.getElementById('totalProductCount').innerText = savedProducts.length;
-            let filtered = savedProducts.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
+            let filtered = savedProducts.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase()));
 
             if(filtered.length === 0) {
                 container.innerHTML = `<p style="text-align: center; grid-column: span 2; padding: 10px; opacity: 0.6;">کوئی پروڈکٹ نہیں۔</p>`;
@@ -535,7 +568,8 @@
             filtered.forEach(prod => {
                 html += `<div style="background:var(--input-bg); border:1px solid var(--border-color); padding:8px; border-radius:8px; text-align:center; cursor:pointer;" onclick="selectProduct('${prod.name}', ${prod.rate})">
                             <h4 style="color:var(--primary); font-size:0.85rem;">${prod.name}</h4>
-                            <p style="font-size:0.75rem; opacity:0.8;">ریٹ: ${prod.rate}</p>
+                            <p style="font-size:0.75rem; opacity:0.8;">کیٹیگری: ${prod.category}</p>
+                            <p style="font-size:0.75rem; opacity:0.8;">ریٹ: ${prod.rate} | سٹاک: ${prod.stock}</p>
                          </div>`;
             });
             container.innerHTML = html;
@@ -546,16 +580,94 @@
             renderInventoryGrid(query);
         }
 
+        // --- گیلری ڈبہ (Modal) کے فنکشنز ---
+        function openInventoryGalleryModal() {
+            renderInventoryGalleryItems();
+            document.getElementById('inventoryGalleryModal').style.display = 'flex';
+        }
+        function closeInventoryGalleryModal() {
+            document.getElementById('inventoryGalleryModal').style.display = 'none';
+        }
+
+        function renderInventoryGalleryItems() {
+            let container = document.getElementById('inventoryGalleryContainer');
+            let query = document.getElementById('gallerySearchInput').value.toLowerCase();
+            let filtered = savedProducts.filter(p => p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+
+            let totalCount = savedProducts.length;
+            let stockSum = savedProducts.reduce((sum, p) => sum + (parseFloat(p.stock) || 0), 0);
+            document.getElementById('inventoryStatsText').innerText = `کل محفوظ اشیاء کی تعداد: ${totalCount} | کل دستیاب اسٹاک مقدار: ${stockSum}`;
+
+            if(filtered.length === 0) {
+                container.innerHTML = `<p style="text-align: center; grid-column: span 3; opacity: 0.6; padding: 20px;">کوئی پروڈکٹ نہیں ملی۔</p>`;
+                return;
+            }
+
+            let html = "";
+            filtered.forEach(prod => {
+                let imgTag = prod.image ? `<img src="${prod.image}" alt="Item">` : `<div style="width:100%; height:75px; background:#111; display:flex; align-items:center; justify-content:center; font-size:0.7rem; color:#888; border-radius:6px; margin-bottom:5px;">تصویر نہیں</div>`;
+                html += `<div class="inv-card">
+                            ${imgTag}
+                            <h4 style="color:var(--primary); font-size:0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${prod.name}</h4>
+                            <p style="font-size:0.75rem; opacity:0.8;">${prod.category}</p>
+                            <p style="font-size:0.75rem; font-weight:bold;">ریٹ: ${prod.rate} | اسٹاک: ${prod.stock}</p>
+                         </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        // --- بلنگ میں آٹو سجیشن (Auto-Suggestion) سسٹم ---
+        function showProductSuggestions() {
+            let typed = document.getElementById('saleName').value.trim().toLowerCase();
+            let dropdown = document.getElementById('saleSuggestionsDropdown');
+
+            if(typed === "") {
+                dropdown.style.display = 'none';
+                return;
+            }
+
+            // نام یا کیٹیگری سے میچ کرنے والی اشیاء تلاش کریں (مثلاً بسکٹ یا بوتل لکھنے پر اس کی ساری کیٹیگری کھل جائے گی)
+            let matched = savedProducts.filter(p => 
+                p.name.toLowerCase().includes(typed) || 
+                p.category.toLowerCase().includes(typed)
+            );
+
+            if(matched.length === 0) {
+                dropdown.style.display = 'none';
+                return;
+            }
+
+            let html = "";
+            matched.forEach(prod => {
+                html += `<div class="suggestion-item" onclick="pickSuggestion('${prod.name}', ${prod.rate})">
+                            <span>🛒 ${prod.name} <small style="opacity:0.7;">(${prod.category})</small></span>
+                            <span style="color:var(--primary);">ریٹ: ${prod.rate}</span>
+                         </div>`;
+            });
+
+            dropdown.innerHTML = html;
+            dropdown.style.display = 'block';
+        }
+
+        function pickSuggestion(name, rate) {
+            document.getElementById('saleName').value = name;
+            document.getElementById('saleRate').value = rate;
+            document.getElementById('saleSuggestionsDropdown').style.display = 'none';
+            document.getElementById('saleQty').focus();
+        }
+
+        // اگر صارف باہر کلک کرے تو سجیشن بند ہو جائے
+        document.addEventListener('click', function(e) {
+            if(!e.target.closest('#saleName') && !e.target.closest('#saleSuggestionsDropdown')) {
+                let dd = document.getElementById('saleSuggestionsDropdown');
+                if(dd) dd.style.display = 'none';
+            }
+        });
+
         function selectProduct(name, rate) {
             document.getElementById('saleName').value = name;
             document.getElementById('saleRate').value = rate;
             document.getElementById('saleQty').focus();
-        }
-
-        function autoFetchRate() {
-            let typed = document.getElementById('saleName').value.trim().toLowerCase();
-            let found = savedProducts.find(p => p.name.toLowerCase() === typed);
-            if(found) { document.getElementById('saleRate').value = found.rate; }
         }
 
         function addToBill() {
